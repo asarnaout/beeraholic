@@ -19,6 +19,11 @@ class Filter extends Component {
     render(){
         return(
             <div id="Filter">
+                <h1 className="black-text bold fs-50 no-margin white-text" id="SearchHeader">
+                        <img id="BeerIcon" width={55} height={55} />
+                        <span>&nbsp;Search Our Huge Beer Inventory</span>                     
+                </h1>
+                <div className="h30"/>
                 <div className="row">
                     <div className="col-xs-2">
                         <InputText placeholder="Name" />

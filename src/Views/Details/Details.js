@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import './Details.css'
 import '../../Assets/css/common.css'
+import Filter from '../../Components/Filter'
+
 const defaultThumbnail = 'http://cdn2.insidermonkey.com/blog/wp-content/uploads/2015/07/shutterstock_113954089-400x340.jpg';
 
 class Details extends Component {
@@ -81,22 +83,30 @@ class Details extends Component {
         
         return (
                 <div id="DetailsPage">
+
+                    <div className="turquoise-bg">
+                        <div className="container">
+                            <Filter/>
+                        </div>
+                    </div>
                     <div className="container">
+                        <div className="h20"/>
                         <div className="row">
                             <div>
                                 <img src={thumbnail} className="center-item"/>
+                                <div className="h10"/>
                                 <div className="center-text">
                                     <span className="fs-40 bold">{beer.name}</span>
                                 </div>
-                                <br/>
-                                <p className="fs-20 justify-text">{beer.description}</p>
-                                <p className="fs-20">Verification Status: {beer.statusDisplay}</p>
-                                <p className="fs-20">ABV: {beer.abv}</p>
-                                <p className="fs-20">IBU: {beer.ibu}</p>
-                                <p className="fs-20">Organic: {organic}</p>
-                                <p className="fs-20">Availability: {availability}</p>
-                                <p className="fs-20">Glass: {glass}</p>
-                                <p className="fs-20">SRM: #{srm}</p>
+                                <div className="h10"/>
+                                <p className="fs-20 justify-text"><span className="bold">Description:</span> {beer.description}</p>
+                                <p className="fs-20"><span className="bold">Verification Status:</span> {beer.statusDisplay}</p>
+                                <p className="fs-20"><span className="bold">ABV:</span> {beer.abv}</p>
+                                <p className="fs-20"><span className="bold">IBU:</span> {beer.ibu}</p>
+                                <p className="fs-20"><span className="bold">Organic:</span> {organic}</p>
+                                <p className="fs-20"><span className="bold">Availability:</span> {availability}</p>
+                                <p className="fs-20"><span className="bold">Glass:</span> {glass}</p>
+                                <p className="fs-20"><span className="bold">SRM:</span> #{srm}</p>
                                 
                             </div>
                         </div>
