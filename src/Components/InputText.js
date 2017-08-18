@@ -29,7 +29,8 @@ class InputText extends Component {
 }
   
 InputText.propTypes = {
-   placeholder: PropTypes.string
+   placeholder: PropTypes.string,
+   password: PropTypes.bool
 };
 
 InputText.defaultProps = { 
