@@ -5,3 +5,10 @@ body{
 #SearchHeader{
     padding: 30px 15px;
 }
+
+#BeerIcon{
+    content:url("../../Assets/Images/beer-icon.png");
+    -webkit-filter: invert(100%);
+    filter: invert(100%);
+    margin: -10px 0 0 -10px;
+}

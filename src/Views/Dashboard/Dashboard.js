@@ -1933,7 +1933,10 @@ class Dashboard extends Component {
             <div>
                 <div className="turquoise-bg">
                     <div className="container">
-                    <h1 className="black-text bold fs-50 no-margin white-text" id="SearchHeader">Search Our Huge Beer Inventory</h1>
+                    <h1 className="black-text bold fs-50 no-margin white-text" id="SearchHeader">
+                        <img id="BeerIcon" width={55} height={55} />
+                        <span>&nbsp;Search Our Huge Beer Inventory</span>                     
+                    </h1>
                     <Filter/>
                     </div>
                     
