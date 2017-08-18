@@ -21,7 +21,7 @@ InputText.propTypes = {
 };
 
 InputText.defaultProps = { 
-  text: '',
+  placeholder: '',
   password: false
 };
   
