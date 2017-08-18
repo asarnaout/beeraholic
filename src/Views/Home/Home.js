@@ -6,18 +6,32 @@ import axios from 'axios'
 
 class HomeComponent extends Component {
 
+    constructor(props) {
+        super(props);
+        this.state = {
+            EmailAddress: '',
+            Password: ''
+        };
+    }
+
     async login() {
         var response = await axios.post('/account/login', {
-            Email: email,
-            Password: password
+            Email: this.state.EmailAddress,
+            Password: this.state.Password
           });
         console.log(response);
     }
 
+    inputEntered(key, id){
+        let newState = {};
+        newState[id] = this.state[id] + key;
+        this.setState(newState); 
+    }
+
     render() {
         return (
-            <Card header="Craving Beer?" fields={[{value: 'Email Address', password: false}, {value: 'Password', password: true}]} 
-                actionButtonValue="Login" actionButtonHandler={this.login}>
+            <Card header="Craving Beer?" fields={[{value: 'Email Address', password: false, id: "EmailAddress"}, {value: 'Password', password: true, id:"Password"}]} 
+                actionButtonValue="Login" actionButtonHandler={this.login.bind(this)} handleKeyPress={this.inputEntered.bind(this)}>
                 <div className="row">
                     <div className="col-xs-10 col-xs-offset-1 center-text">
                         <span className="fs-18">Not a member? <Link to={'/signup'}>Join Now - It's Free</Link></span>

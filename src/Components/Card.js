@@ -8,14 +8,22 @@ import Button from './Button'
 
 class Card extends Component {
 
+    constructor(props) {
+        super(props);
+    }
+
+    handleKeyPress(key, id){    
+        this.props.handleKeyPress(key, id);
+    }
+
     getFields() {
         if(this.props.fields == []) return;
         return this.props.fields.map(field => {
             return (
-                <div>
+                <div key={this.props.id}>
                     <div className="row">
                         <div className="col-xs-10 col-xs-offset-1">
-                            <InputText placeholder={field.value} password={field.password} />
+                            <InputText placeholder={field.value} password={field.password} id={field.id} handleKeyPress={this.handleKeyPress.bind(this)} />
                         </div>
                     </div>
                     <div className="h10"/>
