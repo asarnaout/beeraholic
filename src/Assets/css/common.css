@@ -14,6 +14,10 @@
     background-color: #006266;
 }
 
+.full-width{
+    width: 100%;
+}
+
 .center-item{
     margin-right: auto;
     margin-left: auto;
@@ -34,6 +38,10 @@
 
 .center-text{
     text-align: center;
+}
+
+.justify-text{
+    text-align: justify;
 }
 
 .black-text{
