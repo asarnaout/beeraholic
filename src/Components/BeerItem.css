@@ -1,0 +1,11 @@
+.beer-item{
+    border-radius: 5px;
+    margin: 20px 0;
+    background-color:#FFFFFF;
+    cursor: pointer;
+}
+
+.beer-item:hover{
+    -webkit-box-shadow: 0 0 10px 10px grey;
+    box-shadow: 0 0 10px 10px grey;
+}

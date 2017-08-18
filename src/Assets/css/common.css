@@ -6,6 +6,10 @@
     height: 20px;
 }
 
+.bold{
+    font-weight: bold;
+}
+
 .center-text{
     text-align: center;
 }
@@ -14,8 +18,20 @@
     color: #000000;
 }
 
+.white-text{
+    color: #FFFFFF;
+}
+
+.blue-text{
+    color: #1180FF;
+}
+
 .padding-5{
     padding: 5px;
+}
+
+.padding-10{
+    padding: 10px;
 }
 
 .no-margin{
@@ -32,4 +48,12 @@
 
 .fs-18{
     font-size: 18px;
+}
+
+.fs-20{
+    font-size: 20px;
+}
+
+.fs-40{
+    font-size: 40px;
 }

@@ -342,10 +342,6 @@ class Dashboard extends Component {
                         "fgMin": "1.01",
                         "fgMax": "1.018",
                         "id": 59
-                    },
-                    "labels": {
-                        "medium": "https://s3.amazonaws.com/brewerydbapi/beer/cBKBoK/upload_TEDqCp-medium.png",
-                        "large": "https://s3.amazonaws.com/brewerydbapi/beer/cBKBoK/upload_TEDqCp-large.png"
                     }
                 },
                 {
@@ -376,10 +372,6 @@ class Dashboard extends Component {
                         "fgMin": "1.01",
                         "fgMax": "1.018",
                         "id": 37
-                    },
-                    "labels": {
-                        "medium": "https://s3.amazonaws.com/brewerydbapi/beer/ZQzj1u/upload_0hoJ8r-medium.png",
-                        "large": "https://s3.amazonaws.com/brewerydbapi/beer/ZQzj1u/upload_0hoJ8r-large.png"
                     }
                 },
                 {
@@ -1936,8 +1928,8 @@ class Dashboard extends Component {
     render() {
         var items = this.getItems();
         return (
-            <div>
-                <h1 className="black-text center-text">Search Our Huge Beer Inventory</h1>
+            <div className="padding-10">
+                <h1 className="black-text center-text bold fs-40 white-text">Search Our Huge Beer Inventory</h1>
             {items}
             
             </div>
