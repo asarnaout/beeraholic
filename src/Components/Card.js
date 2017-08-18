@@ -31,7 +31,7 @@ class Card extends Component {
             <div>
                 <div className="row">
                     <div className="col-xs-10 col-xs-offset-1">
-                        <Button placeholder={this.props.actionButtonValue} />
+                        <Button placeholder={this.props.actionButtonValue} clickHandler={this.props.actionButtonHandler} />
                     </div>
                 </div>
                                 
@@ -63,13 +63,15 @@ class Card extends Component {
 Card.propTypes = {
     header: PropTypes.string,
     fields: PropTypes.array,
-    actionButtonValue: PropTypes.string
+    actionButtonValue: PropTypes.string,
+    actionButtonHandler: PropTypes.func
  };
 
  Card.defaultProps = { 
     header: '',
     fields: [],
-    actionButtonValue: ''
+    actionButtonValue: '',
+    actionButtonHandler: () => {}
  };
    
 
