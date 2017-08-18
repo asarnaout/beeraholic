@@ -14,7 +14,7 @@ class BeerItem extends Component {
     render() {
         var thumbnail = this.props.thumbnail == ''? defaultThumbnail : this.props.thumbnail;
         return(
-            <div className="padding-5 beer-item">
+            <div className="padding-5 beer-item white-bg">
                 <div className="row">
                     <div className="col-xs-12">
                         <img src={thumbnail} width={180} height={180}/>

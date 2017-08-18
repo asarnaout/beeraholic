@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import BeerItem from '../../Components/BeerItem'
+import Filter from '../../Components/Filter'
 import '../../Assets/css/common.css'
 import './Dashboard.css'
 
@@ -1931,8 +1932,8 @@ class Dashboard extends Component {
         return (
             <div className="padding-10">
                 <h1 className="black-text center-text bold fs-40 black-text">Search Our Huge Beer Inventory</h1>
-            {items}
-            
+                <Filter/>
+                {items}
             </div>
         );
     }
