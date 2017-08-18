@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import BeerItem from '../../Components/BeerItem'
 import '../../Assets/css/common.css'
+import './Dashboard.css'
 
 
 class Dashboard extends Component {
@@ -1929,7 +1930,7 @@ class Dashboard extends Component {
         var items = this.getItems();
         return (
             <div className="padding-10">
-                <h1 className="black-text center-text bold fs-40 white-text">Search Our Huge Beer Inventory</h1>
+                <h1 className="black-text center-text bold fs-40 black-text">Search Our Huge Beer Inventory</h1>
             {items}
             
             </div>
