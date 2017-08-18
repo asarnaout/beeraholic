@@ -1,3 +1,7 @@
 body{
     background-color: #eee;
 }
+
+#SearchHeader{
+    padding: 30px 15px;
+}

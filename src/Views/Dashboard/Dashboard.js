@@ -13,7 +13,7 @@ class Dashboard extends Component {
             items: [
                 {
                     "id": "tmEthz",
-                    "name": "\"Admiral\" Stache",
+                    "name": "\"Admiral\" Stache Test testing test tester",
                     "description": "Milwaukee Brewing Co’s take on a classic European style. Baltic Porters are the stronger lager fermented cousin of the classic London Porter. The higher strength and cold fermentation help to create a smooth, less fruity porter, rich in roasted malt flavors and aromas. The “Admiral” Stache has a deep brown hue with a light caramel head. Toffee and milk chocolate dominate the flavor with subtle hints of dried fruit. One month of aging in Bourbon Barrels imparted a layer of vanilla and oak.\r\n\r\nWe first developed this beer in 2007. Our first attempted batch of beer at the 2nd street location was a Baltic Porter. What we ended up with became known as “Shake Down Nut Brown”. You can guess what went wrong from there… But, so many things right! Every year that has gone by, the beer has gotten a little bit stronger, in flavor and alcohol.\r\n\r\nWe use a black malt for the dark rich color and an extra special malt for the dried fruit flavors. Baltic Porters are fermented cold with a lager yeast. That long slow maturation creates a smooth flavor profile. The anticipation of the bourbon barrel aging it the most exciting part of this brew process. We want that oak character with hints of bourbon, we use 3rd run barrels for this result. Each batch has been slightly different from the last.",
                     "abv": "7",
                     "ibu": "23",
@@ -1920,7 +1920,7 @@ class Dashboard extends Component {
     getItems(){
         return this.state.items.map((beer) => {
             var thumbnail = beer.labels == undefined? '' : beer.labels.medium;
-            return (<div className="col-xs-2">
+            return (<div className="col-xs-4">
                         <BeerItem thumbnail={thumbnail} beername={beer.name} />
                     </div>
               );
@@ -1933,13 +1933,13 @@ class Dashboard extends Component {
             <div>
                 <div className="blue-bg">
                     <div className="container">
-                    <h1 className="black-text bold fs-50 no-margin white-text padding-15" id="SearchHeader">Search Our Huge Beer Inventory</h1>
+                    <h1 className="black-text bold fs-50 no-margin white-text" id="SearchHeader">Search Our Huge Beer Inventory</h1>
                     <Filter/>
                     </div>
                     
                 </div>
                 <div className="container">
-                {items}
+                    {items}
                 </div>
             </div>
         );
