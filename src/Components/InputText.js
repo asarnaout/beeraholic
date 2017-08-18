@@ -4,10 +4,7 @@ import PropTypes from 'prop-types';
 import './InputText.css'
 
 class InputText extends Component {
-    constructor(props) {
-        super(props);
-    }
-
+  
     getInputType() {
       return this.props.password? "password" : "text";
     }
