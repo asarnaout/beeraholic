@@ -9,13 +9,18 @@ const HomeComponent = Loadable({
   loading: Loading,
 });
 
+const Dashboard = Loadable({
+  loader: () => import('./Views/Dashboard/Dashboard.js'),
+  loading: Loading,
+});
+
 class App extends Component {
   render() {
     return (
       <Router>
         <div className="App">
           
-          <Route path="/" component={HomeComponent} />
+          <Route path="/" component={Dashboard} />
         
         </div>
       </Router>
