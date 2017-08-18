@@ -1931,7 +1931,7 @@ class Dashboard extends Component {
         var items = this.getItems();
         return (
             <div>
-                <div className="blue-bg">
+                <div className="turquoise-bg">
                     <div className="container">
                     <h1 className="black-text bold fs-50 no-margin white-text" id="SearchHeader">Search Our Huge Beer Inventory</h1>
                     <Filter/>
