@@ -1,51 +1,23 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom'
 import './Home.css';
-import '../../Assets/css/common.css';
-import InputText from '../../Components/InputText'
-import Button from '../../Components/Button'
+import Card from '../../Components/Card'
 
 class HomeComponent extends Component {
 
+    login(email, password) {
+
+    }
+
     render() {
         return (
-        <div id="HomeContainer" className="col-xs-offset-4 col-xs-4">
-            <h1 className="black-text center-text no-margin">Craving Beer?</h1>
-          
-            <div className="h10"/>
-            <div className="h10"/>
-
-            <div className="row">
-                <div className="col-xs-10 col-xs-offset-1">
-                    <InputText placeholder="Email Address" />
+            <Card header="Craving Beer?" fields={[{value: 'Email Address', password: false}, {value: 'Password', password: true}]} actionButtonValue="Login">
+                <div className="row">
+                    <div className="col-xs-10 col-xs-offset-1 center-text">
+                        <span className="fs-18">Not a member? <Link to={'/signup'}>Join Now - It's Free</Link></span>
+                    </div>
                 </div>
-            </div>
-
-            <div className="h10"/>
-
-            <div className="row">
-                <div className="col-xs-10 col-xs-offset-1">
-                    <InputText placeholder="Password" password={true} />
-                </div>
-            </div>
-
-            <div className="h10"/>
-
-            <div className="row">
-                <div className="col-xs-10 col-xs-offset-1">
-                    <Button placeholder="Login" />
-                </div>
-            </div>
-
-            <div className="h10"/>
-
-            <div className="row">
-                <div className="col-xs-10 col-xs-offset-1">
-                    <span className="fs-18">Not a member? <Link to={'/signup'}>Join Now</Link></span>
-                </div>
-            </div>
-
-        </div>
+            </Card>
         );
     }
 }

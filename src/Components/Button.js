@@ -8,7 +8,7 @@ class Button extends Component {
           <input type="button" value={this.props.placeholder} className="button-comp" onClick={this.props.clickHandler} />
         );
       }
-  }
+}
     
   Button.propTypes = {
      placeholder: PropTypes.string,
