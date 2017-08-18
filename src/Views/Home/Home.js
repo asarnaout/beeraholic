@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom'
 import './Home.css';
 import Card from '../../Components/Card'
 import axios from 'axios'
+import config from '../../config.js'
 
 class HomeComponent extends Component {
 
@@ -15,11 +16,14 @@ class HomeComponent extends Component {
     }
 
     async login() {
-        var response = await axios.post('/account/login', {
-            Email: this.state.EmailAddress,
-            Password: this.state.Password
-          });
-        console.log(response);
+          axios({
+            method: 'post',
+            url: config.apiEndpoint + 'account/signup',
+            data: {
+                Email: this.state.EmailAddress,
+                Password: this.state.Password
+            }
+          });         
     }
 
     inputEntered(key, id){
