@@ -1,11 +1,12 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import './Selector.css'
 
 class Selector extends Component{
 
     getOptions(){
         return this.props.options.map((item) => {
-            return (<option value={item.id}>{item.value}</option>)
+            return (<option value={item.value}>{item.text}</option>)
         });
     }
 
@@ -13,7 +14,7 @@ class Selector extends Component{
         var options = this.getOptions();
 
         return(
-            <select>{options}</select>
+            <select className="selector fs-14">{options}</select>
         );
     }
 }

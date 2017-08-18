@@ -1930,8 +1930,8 @@ class Dashboard extends Component {
     render() {
         var items = this.getItems();
         return (
-            <div className="padding-10">
-                <h1 className="black-text center-text bold fs-40 black-text">Search Our Huge Beer Inventory</h1>
+            <div>
+                <h1 className="black-text padding-15 bold fs-50 no-margin black-text" id="SearchHeader">Search Our Huge Beer Inventory</h1>
                 <Filter/>
                 {items}
             </div>

@@ -50,6 +50,10 @@
     padding: 0;
 }
 
+.fs-14{
+    font-size: 14px;
+}
+
 .fs-16{
     font-size: 16px;
 }
@@ -64,4 +68,12 @@
 
 .fs-40{
     font-size: 40px;
+}
+
+.fs-50{
+    font-size: 50px;
+}
+
+.fs-60{
+    font-size: 60px;
 }

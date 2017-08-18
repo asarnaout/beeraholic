@@ -17,7 +17,7 @@ class BeerItem extends Component {
             <div className="padding-5 beer-item white-bg">
                 <div className="row">
                     <div className="col-xs-12">
-                        <img src={thumbnail} width={180} height={180}/>
+                        <img src={thumbnail} width={150} height={150}/>
                     </div>
                 </div>
 
@@ -25,7 +25,7 @@ class BeerItem extends Component {
 
                 <div className="row">
                     <div className="col-xs-12 center-text">
-                        <span className="blue-text fs-20">{this.props.beername.substring(0, 15)}</span>
+                        <span className="blue-text fs-20">{this.props.beername.substring(0, 10)}</span>
                     </div>
                 </div>
             
