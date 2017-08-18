@@ -17,7 +17,6 @@ class Filter extends Component {
     }
 
     render(){
-        
         return(
             <div id="Filter">
                 <div className="row">
@@ -42,7 +41,7 @@ class Filter extends Component {
                     </div>
 
                     <div className="col-xs-2">
-                        <Button placeholder="Search" />
+                        <Button placeholder="Search" background="red-bg" />
                     </div>
                     
                 </div>

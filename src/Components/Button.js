@@ -5,19 +5,21 @@ import './Button.css'
 class Button extends Component {
       render() {
         return (
-          <input type="button" value={this.props.placeholder} className="button-comp" onClick={this.props.clickHandler} />
+          <input type="button" value={this.props.placeholder} className={"button-comp " + this.props.background} onClick={this.props.clickHandler} />
         );
       }
 }
     
   Button.propTypes = {
      placeholder: PropTypes.string,
-     clickHandler: PropTypes.func
+     clickHandler: PropTypes.func,
+     background: PropTypes.string
   };
   
   Button.defaultProps = { 
     placeholder: '',
-    clickHandler: () => {}
+    clickHandler: () => {},
+    background: ''
   };
     
   export default Button;

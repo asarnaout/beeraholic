@@ -1931,9 +1931,16 @@ class Dashboard extends Component {
         var items = this.getItems();
         return (
             <div>
-                <h1 className="black-text padding-15 bold fs-50 no-margin black-text" id="SearchHeader">Search Our Huge Beer Inventory</h1>
-                <Filter/>
+                <div className="blue-bg">
+                    <div className="container">
+                    <h1 className="black-text bold fs-50 no-margin white-text padding-15" id="SearchHeader">Search Our Huge Beer Inventory</h1>
+                    <Filter/>
+                    </div>
+                    
+                </div>
+                <div className="container">
                 {items}
+                </div>
             </div>
         );
     }
