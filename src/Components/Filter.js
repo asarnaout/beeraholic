@@ -60,14 +60,15 @@ class Filter extends Component {
             url: config.breweryApiEndpoint + 'beers' + queryString,
           })).then(response => {
               let beers = typeof (response.data.data) === 'undefined'? [] : response.data.data;
+              let pages = response.data.numberOfPages;
               this.setState({items: beers});
-              this.updateParent(beers);
+              this.updateParent(beers, pages);
           }); 
     }
 
-    updateParent(beers){
+    updateParent(beers, pages){
         if(!(typeof(this.props.updateItems) === 'undefined')) {
-            this.props.updateItems(beers);
+            this.props.updateItems(beers, pages);
         }
     }
 

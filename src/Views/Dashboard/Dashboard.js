@@ -13,13 +13,14 @@ class Dashboard extends Component {
         this.state = {
             items: [],
             page: 1,
-            loading: false
+            loading: false,
+            numberOfPages : 0
         }
     }
 
-    updateItems(newItems) {
+    updateItems(newItems, pages) {
         if(newItems === this.state.items) return;
-        this.setState({items: newItems, loading: false});
+        this.setState({items: newItems, loading: false, numberOfPages: pages});
     }
         
     getItems(){
@@ -39,16 +40,46 @@ class Dashboard extends Component {
         this.forceUpdate();
     }
 
+    previousPage(){ //Nearly same logic decoupled to different methods to allow later introduction of different logic on handling the next/previous buttons
+        this.searchHandler();
+        let page = --this.state.page;
+        this.setState({page: page});
+        this.forceUpdate();
+    }
+
     searchHandler(){
         this.setState({
             loading: true
         });
     }
 
+    getNavButtons(){
+        let renderNextButton = this.state.page < this.state.numberOfPages;
+        let renderPreviousButton = this.state.page > 1;
+
+        if(renderNextButton && !renderPreviousButton) {
+            return <img src={config.navArrowCdn} onClick={this.nextPage.bind(this)} width={40} height={40} className="center-item pointer"/>; 
+        }
+
+        if(!renderNextButton && renderPreviousButton) {
+            return <img src={config.navArrowCdn} onClick={this.previousPage.bind(this)} width={40} height={40} className="center-item flip-Y pointer"/>; 
+        }
+
+        if(renderNextButton && renderPreviousButton) {
+            return (
+                <div className="center-text">
+                    <img src={config.navArrowCdn} onClick={this.previousPage.bind(this)} width={40} height={40} className="inline flip-Y pointer margin-15"/>
+                    <img src={config.navArrowCdn} onClick={this.nextPage.bind(this)} width={40} height={40} className="inline pointer margin-15"/>; 
+                </div>
+            ); 
+        }
+    }
+
     render() {
         let items = this.getItems();
         let content = this.state.loading? <div className="padding-20"><img src={config.defaultLoaderCdn} className="loading-icon center-item" height={100} width={100} /></div> : items;
-        
+        let navButtons = this.getNavButtons();
+
         return (
             <div>
                 <div className="turquoise-bg">
@@ -61,9 +92,7 @@ class Dashboard extends Component {
                 </div>
                 <div className="h10"/>
                 <div className="row">
-                    <div className="col-xs-offset-5 col-xs-2">
-                        <Button placeholder="Next Page" background="red-bg" clickHandler={this.nextPage.bind(this)}/>
-                    </div> 
+                    {navButtons}
                 </div>
                 <div className="h20"/>
             </div>
