@@ -17,7 +17,9 @@ class Dashboard extends Component {
             page: 1,
             ibu: '',
             abv: '',
-            beername: ''
+            beername: '',
+            year: '',
+            sort: ''
         }
     }
 
@@ -26,7 +28,7 @@ class Dashboard extends Component {
     }
 
     fetchDashboard(){
-        let queryString = "?key=" + config.breweryApiKey + "&p=" + this.state.page + "&name=" + this.state.beername + "&ibu=" + this.state.ibu + "&abv=" + this.state.abv
+        let queryString = "?key=" + config.breweryApiKey + "&p=" + this.state.page + "&name=" + this.state.beername + "&ibu=" + this.state.ibu + "&abv=" + this.state.abv + "&year=" + this.state.year + "&order=" + this.state.sort
         ;(axios({
             method: 'get',
             url: config.breweryApiEndpoint + 'beers' + queryString,
@@ -43,6 +45,12 @@ class Dashboard extends Component {
     onFilterInput(key, id){
         let newValue = {};
         newValue[id] = this.state[id] + key;
+        this.setState(newValue);
+    }
+
+    onSelectChange(value, id) {
+        let newValue = {};
+        newValue[id] = value;
         this.setState(newValue);
     }
 
@@ -68,7 +76,7 @@ class Dashboard extends Component {
             <div>
                 <div className="turquoise-bg">
                     <div className="container">
-                        <Filter handleKeyPress={this.onFilterInput.bind(this)} onFilter={this.fetchDashboard.bind(this)}/>
+                        <Filter handleKeyPress={this.onFilterInput.bind(this)} onFilter={this.fetchDashboard.bind(this)} handleSelectChange={this.onSelectChange.bind(this)}/>
                     </div>
                 </div>
                 <div className="container">

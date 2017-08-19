@@ -21,6 +21,10 @@ class Filter extends Component {
         this.props.handleKeyPress(key, id);
     }
 
+    handleSelectChange(key, id){    
+        this.props.handleSelectChange(key, id);
+    }
+
     render(){
         return(
             <div id="Filter">
@@ -45,11 +49,11 @@ class Filter extends Component {
                     </div>
 
                     <div className="col-xs-2">
-                        <Selector options={this.getYears()} />
+                        <Selector options={this.getYears()} id="year" handleSelectChange={this.handleSelectChange.bind(this)} />
                     </div>
 
                     <div className="col-xs-2">
-                        <Selector options={[{value: "", text:"Sort By"}, {value: "name", text:"Name"}, {value: "abv", text:"ABV"}, {value: "ibu", text:"IBU"}, {value: "createDate", text:"Creation Date"}, {value: "glasswareId", text:"Glassware"}, {value: "availableId", text:"Availability"}, {value: "styleId", text:"Style"}, {value: "isOrganic", text:"Organic"}]} />
+                        <Selector id="sort" options={[{value: "", text:"Sort By"}, {value: "name", text:"Name"}, {value: "abv", text:"ABV"}, {value: "ibu", text:"IBU"}, {value: "createDate", text:"Creation Date"}, {value: "glasswareId", text:"Glassware"}, {value: "availableId", text:"Availability"}, {value: "styleId", text:"Style"}, {value: "isOrganic", text:"Organic"}]} handleSelectChange={this.handleSelectChange.bind(this)} />
                     </div>
 
                     <div className="col-xs-2">

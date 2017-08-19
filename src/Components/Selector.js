@@ -10,11 +10,15 @@ class Selector extends Component{
         });
     }
 
+    handleSelectChange(event){
+        this.props.handleSelectChange(event.target.value, this.props.id);
+    }
+
     render() {
         var options = this.getOptions();
 
         return(
-            <select className="selector fs-14">{options}</select>
+            <select className="selector fs-14" id={this.props.id} onChange={this.handleSelectChange.bind(this)}>{options}</select>
         );
     }
 }
