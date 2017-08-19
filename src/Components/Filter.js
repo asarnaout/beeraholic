@@ -87,6 +87,7 @@ class Filter extends Component {
                         <span>&nbsp;Keep Calm And Grab A Beer</span>                     
                 </h1>
                 <div className="h30"/>
+                <div className="h15"/>
                 <div className="row">
                     <div className="col-xs-2">
                         <InputText placeholder="Name" id="beername"  handleKeyPress={this.handleKeyPress.bind(this)}/>

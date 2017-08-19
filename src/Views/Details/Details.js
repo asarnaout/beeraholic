@@ -30,7 +30,7 @@ class Details extends Component {
 
     render(){
         let beer = this.state.beer;
-        let thumbnail = beer.labels == undefined? defaultThumbnail : beer.labels.medium;
+        let thumbnail = beer.labels == undefined? defaultThumbnail : beer.labels.large;
         let organic = beer.isOrganic === "N"? "No" : "Yes";
         let availability = beer.available === undefined? 'Not Available' : beer.available.description;
         let glass = beer.glass === undefined? 'No Glassware Available' : beer.glass.name;
@@ -46,24 +46,26 @@ class Details extends Component {
                     </div>
                     <div className="container">
                         <div className="h20"/>
-                        <div className="row">
-                            <div>
-                                <img src={thumbnail} className="center-item"/>
-                                <div className="h10"/>
-                                <div className="center-text">
+                        <div>
+                                <div className ="col-xs-7">
+                                    <div className="h10"/>
                                     <span className="fs-40 bold">{beer.name}</span>
+                                    <div className="h10"/>
+                                    <p className="fs-20 justify-text"><span className="bold">Description:</span> {beer.description}</p>
+                                    <p className="fs-20"><span className="bold">Verification Status:</span> {beer.statusDisplay}</p>
+                                    <p className="fs-20"><span className="bold">ABV:</span> {beer.abv}</p>
+                                    <p className="fs-20"><span className="bold">IBU:</span> {beer.ibu}</p>
+                                    <p className="fs-20"><span className="bold">Organic:</span> {organic}</p>
+                                    <p className="fs-20"><span className="bold">Availability:</span> {availability}</p>
+                                    <p className="fs-20"><span className="bold">Glassware:</span> {glass}</p>
+                                    <p className="fs-20"><span className="bold">SRM:</span> #{srm}</p>
+                                    <p className="fs-20"><span className="bold">Created:</span> {beer.createDate}</p>
                                 </div>
-                                <div className="h10"/>
-                                <p className="fs-20 justify-text"><span className="bold">Description:</span> {beer.description}</p>
-                                <p className="fs-20"><span className="bold">Verification Status:</span> {beer.statusDisplay}</p>
-                                <p className="fs-20"><span className="bold">ABV:</span> {beer.abv}</p>
-                                <p className="fs-20"><span className="bold">IBU:</span> {beer.ibu}</p>
-                                <p className="fs-20"><span className="bold">Organic:</span> {organic}</p>
-                                <p className="fs-20"><span className="bold">Availability:</span> {availability}</p>
-                                <p className="fs-20"><span className="bold">Glassware:</span> {glass}</p>
-                                <p className="fs-20"><span className="bold">SRM:</span> #{srm}</p>
-                                <p className="fs-20"><span className="bold">Created:</span> {beer.createDate}</p>
-                            </div>
+
+                                <div className ="col-xs-5">
+                                    <img src={thumbnail} className="center-item full-width"/>
+                                </div>
+                                
                         </div>
                     </div>
                 </div>

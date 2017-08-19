@@ -1,9 +1,9 @@
 .button-comp{
     background-color: #1E90FF;
-    padding: 6px;
+    padding: 9px;
     width: 100%;
-    border-radius: 5px;
     border: none;
     color: #FFFFFF;
     font-size: 16px;
+    border-radius: 3px;
 }

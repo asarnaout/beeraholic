@@ -51,7 +51,7 @@ class Dashboard extends Component {
                 <div className="h10"/>
                 <div className="row">
                     <div className="col-xs-offset-5 col-xs-2">
-                        <Button placeholder="Next Page" clickHandler={this.nextPage.bind(this)}/>
+                        <Button placeholder="Next Page" background="red-bg" clickHandler={this.nextPage.bind(this)}/>
                     </div> 
                 </div>
                 <div className="h20"/>
