@@ -84,7 +84,7 @@ class Filter extends Component {
                         <Link to={'/dashboard'}>
                             <img id="BeerIcon" width={55} height={55} />
                         </Link>
-                        <span>&nbsp;Search Our Huge Beer Inventory</span>                     
+                        <span>&nbsp;Keep Calm And Grab A Beer</span>                     
                 </h1>
                 <div className="h30"/>
                 <div className="row">
