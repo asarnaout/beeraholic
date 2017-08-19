@@ -105,7 +105,7 @@ class Filter extends Component {
                     </div>
 
                     <div className="col-xs-2">
-                        <Selector id="sort" options={[{value: "", text:"Sort By"}, {value: "name", text:"Name"}, {value: "abv", text:"ABV"}, {value: "ibu", text:"IBU"}, {value: "createDate", text:"Creation Date"}, {value: "glasswareId", text:"Glassware"}, {value: "availableId", text:"Availability"}, {value: "styleId", text:"Style"}, {value: "isOrganic", text:"Organic"}]} handleSelectChange={this.handleSelectChange.bind(this)} />
+                        <Selector id="sort" options={[{value: "", text:"Sort By"}, {value: "name", text:"Name"}, {value: "abv", text:"ABV"}, {value: "ibu", text:"IBU"}, {value: "createDate", text:"Creation Date"}, {value: "glasswareId", text:"Glassware"}, {value: "availableId", text:"Availability"}, {value: "isOrganic", text:"Organic"}]} handleSelectChange={this.handleSelectChange.bind(this)} />
                     </div>
 
                     <div className="col-xs-2">
