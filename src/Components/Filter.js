@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import Button from './Button'
 import InputText from './InputText'
 import Selector from './Selector'
+import { Link } from 'react-router-dom'
 import '../Assets/css/common.css'
 import './Filter.css'
 
@@ -24,7 +25,9 @@ class Filter extends Component {
         return(
             <div id="Filter">
                 <h1 className="black-text bold fs-50 no-margin white-text" id="SearchHeader">
-                        <img id="BeerIcon" width={55} height={55} />
+                        <Link to={'/dashboard'}>
+                            <img id="BeerIcon" width={55} height={55} />
+                        </Link>
                         <span>&nbsp;Search Our Huge Beer Inventory</span>                     
                 </h1>
                 <div className="h30"/>
