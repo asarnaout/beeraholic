@@ -12,8 +12,8 @@ class Card extends Component {
         super(props);
     }
 
-    handleKeyPress(key, id){    
-        this.props.handleKeyPress(key, id);
+    handleKeyPress(value, id){    
+        this.props.handleKeyPress(value, id);
     }
 
     getFields() {

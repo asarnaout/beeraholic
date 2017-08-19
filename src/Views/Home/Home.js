@@ -16,7 +16,7 @@ class Home extends Component {
     }
 
     async login() {
-          axios({
+        axios({
             method: 'post',
             url: config.apiEndpoint + 'account/signup',
             data: {
@@ -26,9 +26,9 @@ class Home extends Component {
           });         
     }
 
-    inputEntered(key, id){
+    inputEntered(value, id){
         let newState = {};
-        newState[id] = this.state[id] + key;
+        newState[id] = value;
         this.setState(newState); 
     }
 

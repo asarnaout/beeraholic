@@ -46,15 +46,15 @@ class Dashboard extends Component {
                     </div>
                 </div>
                 <div className="container">
-                    {items}
-
-                    <div className="row">
-                        <div className="col-xs-offset-5 col-xs-2">
-                            <Button placeholder="Next Page" clickHandler={this.nextPage.bind(this)}/>
-                        </div> 
-                    </div>
-                    <div className="h20"/>
+                    {items}                    
                 </div>
+                <div className="h10"/>
+                <div className="row">
+                    <div className="col-xs-offset-5 col-xs-2">
+                        <Button placeholder="Next Page" clickHandler={this.nextPage.bind(this)}/>
+                    </div> 
+                </div>
+                <div className="h20"/>
             </div>
         );
     }

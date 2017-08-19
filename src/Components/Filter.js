@@ -36,13 +36,13 @@ class Filter extends Component {
         return result;
     }
 
-    handleKeyPress(key, id){    
+    handleKeyPress(value, id){    
         let newValue = {};
-        newValue[id] = this.state[id] + key;
+        newValue[id] = value;
         this.setState(newValue);
     }
 
-    handleSelectChange(value, id){    
+    handleSelectChange(value, id){ //Decoupling the same logic into separate functions in case different logic will be introduced later on handling differnt types of input
         let newValue = {};
         newValue[id] = value;
         this.setState(newValue);
@@ -52,6 +52,7 @@ class Filter extends Component {
         if(typeof(page) != 'number') {            
             page = 1;
         }
+        
         let queryString = "?key=" + config.breweryApiKey + "&p=" + page + "&name=" + this.state.beername + "&ibu=" + this.state.ibu + "&abv=" + this.state.abv + "&year=" + this.state.year + "&order=" + this.state.sort
         ;(axios({
             method: 'get',
