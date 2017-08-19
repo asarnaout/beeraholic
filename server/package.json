@@ -10,6 +10,7 @@
   "author": "Ahmed Shirin",
   "license": "ISC",
   "dependencies": {
+    "cors": "^2.8.4",
     "express": "^4.15.4",
     "path": "^0.12.7"
   }
