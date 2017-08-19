@@ -4,9 +4,6 @@ import Filter from '../../Components/Filter'
 import Button from '../../Components/Button'
 import '../../Assets/css/common.css'
 import './Dashboard.css'
-import axios from 'axios'
-import config from '../../config.js'
-
 
 class Dashboard extends Component {
 
@@ -14,46 +11,15 @@ class Dashboard extends Component {
         super(props);
         this.state = {
             items: [],
-            page: 1,
-            ibu: '',
-            abv: '',
-            beername: '',
-            year: '',
-            sort: ''
+            page: 1
         }
     }
 
-    componentWillMount(){
-        this.fetchDashboard();
+    updateItems(newItems) {
+        if(newItems === this.state.items) return;
+        this.setState({items: newItems});
     }
-
-    fetchDashboard(){
-        let queryString = "?key=" + config.breweryApiKey + "&p=" + this.state.page + "&name=" + this.state.beername + "&ibu=" + this.state.ibu + "&abv=" + this.state.abv + "&year=" + this.state.year + "&order=" + this.state.sort
-        ;(axios({
-            method: 'get',
-            url: config.breweryApiEndpoint + 'beers' + queryString,
-          })).then(response => {
-              if(typeof(response.data.data) === 'undefined'){
-                  this.setState({items: []});
-                  return;
-              }
-              let beers = response.data.data;
-              this.setState({items: beers});
-          }); 
-    }
-
-    onFilterInput(key, id){
-        let newValue = {};
-        newValue[id] = this.state[id] + key;
-        this.setState(newValue);
-    }
-
-    onSelectChange(value, id) {
-        let newValue = {};
-        newValue[id] = value;
-        this.setState(newValue);
-    }
-
+        
     getItems(){
         return this.state.items.map((beer) => {
             let thumbnail = beer.labels == undefined? '' : beer.labels.medium;
@@ -67,7 +33,7 @@ class Dashboard extends Component {
     nextPage(){
         let page = ++this.state.page;
         this.setState({page: page});
-        this.fetchDashboard();
+        this.forceUpdate();
     }
 
     render() {
@@ -76,7 +42,7 @@ class Dashboard extends Component {
             <div>
                 <div className="turquoise-bg">
                     <div className="container">
-                        <Filter handleKeyPress={this.onFilterInput.bind(this)} onFilter={this.fetchDashboard.bind(this)} handleSelectChange={this.onSelectChange.bind(this)}/>
+                        <Filter updateItems={this.updateItems.bind(this)} page={this.state.page}/>
                     </div>
                 </div>
                 <div className="container">

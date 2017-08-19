@@ -6,11 +6,30 @@ import Selector from './Selector'
 import { Link } from 'react-router-dom'
 import '../Assets/css/common.css'
 import './Filter.css'
+import axios from 'axios'
+import config from '../config.js'
 
 class Filter extends Component {
 
+    constructor(props){
+        super(props);
+        this.state = {
+            items: [],
+            page: this.props.page,
+            ibu: '',
+            abv: '',
+            beername: '',
+            year: '',
+            sort: ''
+        }
+    }
+
+    componentWillMount(){
+        this.fetchAllBeer(this.state.page);
+    }
+
     getYears(){
-        let result = [{value: -1, text: 'Year'}];
+        let result = [{value: '', text: 'Year'}];
         for(let i = 1900; i < 2017; i++) {
             result.push({value: i, text: i})
         }
@@ -18,11 +37,43 @@ class Filter extends Component {
     }
 
     handleKeyPress(key, id){    
-        this.props.handleKeyPress(key, id);
+        let newValue = {};
+        newValue[id] = this.state[id] + key;
+        this.setState(newValue);
     }
 
-    handleSelectChange(key, id){    
-        this.props.handleSelectChange(key, id);
+    handleSelectChange(value, id){    
+        let newValue = {};
+        newValue[id] = value;
+        this.setState(newValue);
+    }
+
+    fetchAllBeer(page){
+        if(typeof(page) != 'number') {            
+            page = 1;
+        }
+        let queryString = "?key=" + config.breweryApiKey + "&p=" + page + "&name=" + this.state.beername + "&ibu=" + this.state.ibu + "&abv=" + this.state.abv + "&year=" + this.state.year + "&order=" + this.state.sort
+        ;(axios({
+            method: 'get',
+            url: config.breweryApiEndpoint + 'beers' + queryString,
+          })).then(response => {
+              let beers = typeof (response.data.data) === 'undefined'? [] : response.data.data;
+              this.setState({items: beers});
+              this.updateParent(beers);
+          }); 
+    }
+
+    updateParent(beers){
+        if(!(typeof(this.props.updateItems) === 'undefined')) {
+            this.props.updateItems(beers);
+        }
+    }
+
+    componentWillReceiveProps(nextProps){
+        if(nextProps.page != this.props.page) {
+            this.setState({page: nextProps.state});
+            this.fetchAllBeer(nextProps.page);
+        }
     }
 
     render(){
@@ -57,7 +108,7 @@ class Filter extends Component {
                     </div>
 
                     <div className="col-xs-2">
-                        <Button placeholder="Search" background="red-bg" clickHandler={this.props.onFilter}/>
+                        <Button placeholder="Search" background="red-bg" clickHandler={this.fetchAllBeer.bind(this)}/>
                     </div>
                     
                 </div>
