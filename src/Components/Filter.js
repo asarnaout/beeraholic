@@ -117,27 +117,27 @@ class Filter extends Component {
                 <div className="h30"/>
                 <div className="h15"/>
                 <div className="row">
-                    <div className="col-xs-2">
+                    <div className="col-xs-12 col-md-2">
                         <InputText placeholder={beernamePlaceholder} id="beername"  handleKeyPress={this.handleKeyPress.bind(this)}/>
                     </div>
                     
-                    <div className="col-xs-2">
+                    <div className="col-xs-12 col-md-2">
                         <InputText placeholder={abvPlaceHolder} id="abv"  handleKeyPress={this.handleKeyPress.bind(this)} />
                     </div>
 
-                    <div className="col-xs-2">
+                    <div className="col-xs-12 col-md-2">
                         <InputText placeholder={ibuPlaceHolder} id="ibu"  handleKeyPress={this.handleKeyPress.bind(this)} />
                     </div>
 
-                    <div className="col-xs-2">
+                    <div className="col-xs-12 col-md-2">
                         <Selector options={this.getYears()} id="year" handleSelectChange={this.handleSelectChange.bind(this)} />
                     </div>
 
-                    <div className="col-xs-2">
+                    <div className="col-xs-12 col-md-2">
                         <Selector id="sort" options={this.getSortingCriteria()} handleSelectChange={this.handleSelectChange.bind(this)} />
                     </div>
 
-                    <div className="col-xs-2">
+                    <div className="col-xs-12 col-md-2">
                         <Link to={'/dashboard?ibu=' + this.state.ibu + "&abv=" + this.state.abv + "&beername=" + this.state.beername + "&year=" + this.state.year + "&sort="+ this.state.sort}>
                             <Button placeholder="Search" background="red-bg" clickHandler={this.fetchAllBeer.bind(this)}/>
                         </Link>

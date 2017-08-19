@@ -9,3 +9,13 @@
     filter: invert(100%);
     margin: -10px 0 0 -10px;
 }
+
+@media screen and (max-width: 991px) {
+    #SearchHeader{
+        font-size:18px;
+    }
+
+    input, select{
+        margin:10px 0;
+    }
+}

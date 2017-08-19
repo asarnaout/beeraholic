@@ -49,7 +49,7 @@ class Details extends Component {
                     <div className="container">
                         <div className="h20"/>
                         <div>
-                                <div className ="col-xs-7">
+                                <div className ="col-sm-7 col-xs-12">
                                     <div className="h10"/>
                                     <span className="fs-40 bold">{beer.name}</span>
                                     <div className="h10"/>
@@ -64,7 +64,7 @@ class Details extends Component {
                                     <p className="fs-20"><span className="bold">Created:</span> {beer.createDate}</p>
                                 </div>
 
-                                <div className ="col-xs-5">
+                                <div className ="col-sm-5 col-xs-12">
                                     <img src={thumbnail} className="center-item full-width"/>
                                 </div>
                                 
@@ -72,7 +72,7 @@ class Details extends Component {
                         <div className="h20"/>
 
                         <div className="row">
-                            <div className="col-xs-2 col-xs-offset-5">
+                            <div className="col-sm-2 col-sm-offset-5 col-xs-12">
                                 <Link to={'/dashboard'}>
                                     <Button background="red-bg" placeholder="Back" />
                                 </Link> 
