@@ -51,7 +51,19 @@ class Card extends Component {
     render() {
         let fields = this.getFields();
         let actionButton = this.getActionButton();
-        
+        let errorMessage = this.props.errorMessage == ''? <div></div> : 
+            (
+            <div>
+                <div className="row">
+                    <div className="col-xs-10 col-xs-offset-1">
+                        <span className="red-text fs-20 padding-5">
+                            {this.props.errorMessage}
+                        </span>
+                    </div>
+                </div>
+                <div className="h10"/>
+            </div>);
+
         return (
         <div className="card col-xs-offset-4 col-xs-4">
          
@@ -60,6 +72,7 @@ class Card extends Component {
             <div className="h20" />            
 
             {fields}
+            {errorMessage}
             {actionButton}         
             {this.props.children}
 

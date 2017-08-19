@@ -11,7 +11,8 @@ class Home extends Component {
         super(props);
         this.state = {
             EmailAddress: '',
-            Password: ''
+            Password: '',
+            errorMessage : ''
         };
     }
 
@@ -28,7 +29,9 @@ class Home extends Component {
         });
 
         if(result.data.success) {
-            this.props.history.push('/dashboard')
+            this.props.history.push('/dashboard');
+        } else {
+            this.setState({errorMessage: 'Invalid Login Credentials'})
         }
     }
 
@@ -41,7 +44,7 @@ class Home extends Component {
     render() {
         return (
             <Card header="Craving Beer?" fields={[{value: 'Email Address', password: false, id: "EmailAddress"}, {value: 'Password', password: true, id:"Password"}]} 
-                actionButtonValue="Login" actionButtonHandler={this.login.bind(this)} handleKeyPress={this.inputEntered.bind(this)}>
+                actionButtonValue="Login" actionButtonHandler={this.login.bind(this)} handleKeyPress={this.inputEntered.bind(this)} errorMessage={this.state.errorMessage}>
                 <div className="row">
                     <div className="col-xs-10 col-xs-offset-1 center-text">
                         <span className="fs-18">Not a member? <Link to={'/signup'}>Join Now - It's Free</Link></span>

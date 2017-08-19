@@ -12,7 +12,8 @@ class SignUp extends Component{
             FirstName: '',
             LastName: '',
             EmailAddress: '',
-            Password: ''
+            Password: '',
+            errorMessage: ''
         };
     }
 
@@ -32,6 +33,8 @@ class SignUp extends Component{
 
         if(result.data.success) {
             this.props.history.push('/dashboard')
+        } else {
+            this.setState({errorMessage: 'Email Already Exists'})
         }
     }
 
@@ -48,7 +51,7 @@ class SignUp extends Component{
                 {value: 'Last Name', password: false, id: "LastName"}, 
                 {value: 'Email Address', password: false, id: "EmailAddress"}, 
                 {value: 'Password', password: true, id:"Password"}]} 
-                actionButtonValue="Sign Up" actionButtonHandler={this.signUp.bind(this)} handleKeyPress={this.inputEntered.bind(this)}>
+                actionButtonValue="Sign Up" actionButtonHandler={this.signUp.bind(this)} handleKeyPress={this.inputEntered.bind(this)} errorMessage={this.state.errorMessage}>
             </Card>
         );
     }
