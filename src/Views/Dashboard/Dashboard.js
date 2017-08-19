@@ -78,7 +78,7 @@ class Dashboard extends Component {
     render() {
         let items = this.getItems();
         let content = this.state.loading? <div className="padding-20"><img src={config.defaultLoaderCdn} className="loading-icon center-item" height={100} width={100} /></div> : items;
-        let navButtons = this.getNavButtons();
+        let navButtons = this.state.loading? <div></div> : this.getNavButtons();
 
         return (
             <div>
