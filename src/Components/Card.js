@@ -39,7 +39,7 @@ class Card extends Component {
             <div>
                 <div className="row">
                     <div className="col-xs-10 col-xs-offset-1">
-                        <Button placeholder={this.props.actionButtonValue} clickHandler={this.props.actionButtonHandler} />
+                        <Button placeholder={this.props.actionButtonValue} clickHandler={this.props.actionButtonHandler} background="blue-bg" />
                     </div>
                 </div>
                                 

@@ -29,7 +29,7 @@ class App extends Component {
     return (
       <Router>
         <div className="App">
-          
+
           <Route path="/home" component={Home} />
           <Route path="/dashboard" component={Dashboard} />
           <Route path="/signup" component={SignUp} />
