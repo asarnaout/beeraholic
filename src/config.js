@@ -1,5 +1,5 @@
 const config = {
-    apiEndpoint: "http://localhost:61446/api/",
+    apiEndpoint: "http://localhost:7481/",
     breweryApiEndpoint: "http://api.brewerydb.com/v2/",
     breweryApiKey: "fbf1e5deafdc3351b619a984ca6fb94c",
     defaultLoaderCdn: "https://d30y9cdsu7xlg0.cloudfront.net/png/35633-200.png",

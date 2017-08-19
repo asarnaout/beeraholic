@@ -18,13 +18,13 @@ function handleRoutes(express, accountService) {
     app.post('/account/signup', async (request, response) => {
         let body = request.body;
         let result = await accountService.signUp(body);
-		response.send(result);
+		response.send({success: result});
     });
     
     app.post('/account/signin', async (request, response) => {
         let body = request.body;
         var result = await accountService.signIn(body);
-		response.send(result);
+		response.send({success: result});
 	});
 }
 

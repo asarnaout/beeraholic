@@ -16,14 +16,20 @@ class Home extends Component {
     }
 
     async login() {
-        axios({
+        var data = {
+            emailAddress: this.state.EmailAddress,
+            password: this.state.Password
+        };
+
+        var result = await axios({
             method: 'post',
-            url: config.apiEndpoint + 'account/signup',
-            data: {
-                Email: this.state.EmailAddress,
-                Password: this.state.Password
-            }
-          });         
+            url: config.apiEndpoint + 'account/signin',
+            data: data
+        });
+
+        if(result.data.success) {
+            this.props.history.push('/dashboard')
+        }
     }
 
     inputEntered(value, id){
