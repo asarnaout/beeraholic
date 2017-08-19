@@ -12,6 +12,12 @@ function handleRoutes(express) {
     app.use("/service-worker.js", express.static(__dirname + '/../build'));
     app.get('/*', function (req, res) { res.sendFile(path.join(__dirname, '/../build', 'index.html')); });
     app.listen(config.port, () => console.log('listening to connections on port: ' + config.port));
+
+    app.post('/account/signup', async (request, response) => {
+        let body = request.body;
+        
+		response.send("OK");
+	});
 }
 
 module.exports = handleRoutes;
