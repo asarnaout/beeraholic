@@ -3,6 +3,8 @@ const path = require('path');
 const config = require('./config.js');
 const bodyParser= require('body-parser');
 const favicon = require('serve-favicon');
+const url = require('url');
+const axios = require('axios');
 
 function handleRoutes(express, accountService) {
     const app = express();
@@ -14,6 +16,30 @@ function handleRoutes(express, accountService) {
     app.use("/static/css/", express.static(__dirname + '/../build/static/css'));
     app.use("/static/js/", express.static(__dirname + '/../build/static/js'));
     app.use("/service-worker.js", express.static(__dirname + '/../build'));
+
+    app.get('/beers', async function(req, res){
+        let url_parts = url.parse(req.url, true);
+        let query = url_parts.query;
+        let queryString = "?key=" + config.breweryApiKey + "&p=" + query.p + "&name=" + query.beername + "&ibu=" + query.ibu + "&abv=" + query.abv + "&year=" + query.year + "&order=" + query.sort;
+        
+        let result = await (axios({
+            method: 'get',
+            url: config.breweryApiEndpoint + 'beers' + queryString,
+          }));
+    	res.send(result.data);
+    });
+
+    app.get('/beer', async function(req, res){
+        let url_parts = url.parse(req.url, true);
+        let query = url_parts.query;
+        let beerid = query.id;
+
+        let result = await (axios({
+            method: 'get',
+            url: config.breweryApiEndpoint + 'beer/' + beerid + "?key=" + config.breweryApiKey,
+          }));
+    	res.send(result.data);
+    });
 
     app.get('/', function(req, res) {
         res.redirect('/home');
