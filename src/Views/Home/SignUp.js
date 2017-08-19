@@ -16,13 +16,28 @@ class SignUp extends Component{
         };
     }
 
-    signUp(){
+    async signUp(){
+        var data = {
+            emailAddress: this.state.EmailAddress,
+            password: this.state.Password,
+            firstName: this.state.FirstName,
+            lastName: this.state.LastName
+        };
 
+        var result = await axios({
+            method: 'post',
+            url: config.apiEndpoint + 'account/signUp',
+            data: data
+        });
+
+        if(result.data.success) {
+            this.props.history.push('/dashboard')
+        }
     }
 
-    inputEntered(key, id){
+    inputEntered(value, id){
         let newState = {};
-        newState[id] = this.state[id] + key;
+        newState[id] = value;
         this.setState(newState); 
     }
 

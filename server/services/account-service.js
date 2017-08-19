@@ -9,7 +9,6 @@ class AccountService{
 
     signUp(user) {
         user.password = helpers.hashData(user.password);
-
         return new Promise((resolve, reject) => {
             this.redisClient.getHashSetField(usersHashtableName, user.emailAddress, (err, obj) => {
                 if(obj != null) {
