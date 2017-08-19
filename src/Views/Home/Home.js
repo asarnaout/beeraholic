@@ -5,7 +5,7 @@ import Card from '../../Components/Card'
 import axios from 'axios'
 import config from '../../config.js'
 
-class HomeComponent extends Component {
+class Home extends Component {
 
     constructor(props) {
         super(props);
@@ -46,4 +46,4 @@ class HomeComponent extends Component {
     }
 }
 
-export default HomeComponent;
+export default Home;
