@@ -4,6 +4,8 @@ import './Home.css';
 import Card from '../../Components/Card'
 import axios from 'axios'
 import config from '../../config.js'
+import Background from '../../Assets/Images/bg.jpg';
+
 
 class Home extends Component {
 
@@ -14,6 +16,11 @@ class Home extends Component {
             Password: '',
             errorMessage : ''
         };
+    }
+
+    componentWillMount(){
+        document.body.style.backgroundImage = `url(${Background})`;
+        document.body.style.backgroundSize = `cover`;
     }
 
     async login() {

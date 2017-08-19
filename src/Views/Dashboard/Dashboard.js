@@ -4,7 +4,6 @@ import Filter from '../../Components/Filter'
 import Button from '../../Components/Button'
 import config from '../../config.js'
 import '../../Assets/css/common.css'
-import './Dashboard.css'
 import queryString from 'query-string';
 
 class Dashboard extends Component {
@@ -17,6 +16,10 @@ class Dashboard extends Component {
             loading: false,
             numberOfPages : 0
         }
+    }
+
+    componentWillMount(){
+        document.body.style.backgroundImage = `none`;
     }
 
     updateItems(newItems, pages) {

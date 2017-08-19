@@ -1,6 +1,6 @@
 const config = {
     port : 7481,
-    redisEndpoint: 'care-fe.cloudapp.net',
+    redisEndpoint: 'localhost',
     redisPort: 6379,
 	redisPassword: "K$PFwSSt{_3Eu/K["
 }
