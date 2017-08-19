@@ -52,6 +52,7 @@ class Filter extends Component {
         if(typeof(page) != 'number') {            
             page = 1;
         }
+        this.props.searchHandler();
         
         let queryString = "?key=" + config.breweryApiKey + "&p=" + page + "&name=" + this.state.beername + "&ibu=" + this.state.ibu + "&abv=" + this.state.abv + "&year=" + this.state.year + "&order=" + this.state.sort
         ;(axios({

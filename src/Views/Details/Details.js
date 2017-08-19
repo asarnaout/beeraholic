@@ -7,8 +7,6 @@ import config from '../../config.js'
 import Button from '../../Components/Button'
 import { Link } from 'react-router-dom'
 
-const defaultThumbnail = 'http://cdn2.insidermonkey.com/blog/wp-content/uploads/2015/07/shutterstock_113954089-400x340.jpg';
-
 class Details extends Component {
 
     constructor(props){
@@ -19,19 +17,22 @@ class Details extends Component {
     }
 
     componentWillMount(){
-        var result = (axios({
+        (axios({
             method: 'get',
             url: config.breweryApiEndpoint + 'beer/' + this.props.match.params.beerId + '?key=' + config.breweryApiKey,
           })).then(response => {
-              var beer = response.data.data;
-               this.setState({beer: beer});
-              console.log(response.data.data);
+              let beer = response.data.data;
+              this.setState({beer: beer});
           }); 
+    }
+
+    searchHandler(){
+        
     }
 
     render(){
         let beer = this.state.beer;
-        let thumbnail = beer.labels == undefined? defaultThumbnail : beer.labels.large;
+        let thumbnail = beer.labels == undefined? config.defaultDashboardIconCdn : beer.labels.large;
         let organic = beer.isOrganic === "N"? "No" : "Yes";
         let availability = beer.available === undefined? 'Not Available' : beer.available.description;
         let glass = beer.glass === undefined? 'No Glassware Available' : beer.glass.name;
@@ -42,7 +43,7 @@ class Details extends Component {
 
                     <div className="turquoise-bg">
                         <div className="container">
-                            <Filter/>
+                            <Filter searchHandler={this.searchHandler.bind(this)}/>
                         </div>
                     </div>
                     <div className="container">

@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import BeerItem from '../../Components/BeerItem'
 import Filter from '../../Components/Filter'
 import Button from '../../Components/Button'
+import config from '../../config.js'
 import '../../Assets/css/common.css'
 import './Dashboard.css'
 
@@ -11,13 +12,14 @@ class Dashboard extends Component {
         super(props);
         this.state = {
             items: [],
-            page: 1
+            page: 1,
+            loading: false
         }
     }
 
     updateItems(newItems) {
         if(newItems === this.state.items) return;
-        this.setState({items: newItems});
+        this.setState({items: newItems, loading: false});
     }
         
     getItems(){
@@ -31,22 +33,31 @@ class Dashboard extends Component {
     }
 
     nextPage(){
+        this.searchHandler();
         let page = ++this.state.page;
         this.setState({page: page});
         this.forceUpdate();
     }
 
+    searchHandler(){
+        this.setState({
+            loading: true
+        });
+    }
+
     render() {
         let items = this.getItems();
+        let content = this.state.loading? <div className="padding-20"><img src={config.defaultLoaderCdn} className="loading-icon center-item" height={100} width={100} /></div> : items;
+        
         return (
             <div>
                 <div className="turquoise-bg">
                     <div className="container">
-                        <Filter updateItems={this.updateItems.bind(this)} page={this.state.page}/>
+                        <Filter updateItems={this.updateItems.bind(this)} page={this.state.page} searchHandler={this.searchHandler.bind(this)}/>
                     </div>
                 </div>
                 <div className="container">
-                    {items}                    
+                    {content}                    
                 </div>
                 <div className="h10"/>
                 <div className="row">

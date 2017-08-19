@@ -80,6 +80,14 @@
     padding: 15px;
 }
 
+.padding-20{
+    padding: 20px;
+}
+
+.margin-15{
+    margin: 15px;
+}
+
 .no-margin{
     margin: 0;
 }
@@ -114,4 +122,16 @@
 
 .fs-60{
     font-size: 60px;
+}
+
+.loading-icon{
+    animation: spin 2s linear infinite;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    25% { transform: rotate(90deg); }
+    50% { transform: rotate(180deg); }
+    75% { transform: rotate(270deg); }
+    100% { transform: rotate(360deg); }
 }

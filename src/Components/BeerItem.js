@@ -4,12 +4,12 @@ import Button from './Button'
 import './BeerItem.css'
 import '../Assets/css/common.css'
 import { BrowserRouter as Router, Link, Route } from 'react-router-dom'
-const defaultThumbnail = 'http://cdn2.insidermonkey.com/blog/wp-content/uploads/2015/07/shutterstock_113954089-400x340.jpg';
+import config from '../config.js'
 
 class BeerItem extends Component {
 
     render() {
-        var thumbnail = this.props.thumbnail == ''? defaultThumbnail : this.props.thumbnail;
+        var thumbnail = this.props.thumbnail == ''? config.defaultDashboardIconCdn : this.props.thumbnail;
         return(
             <Link to={'/details/' + this.props.beerid}>
                 <div className="padding-5 beer-item white-bg">
@@ -48,7 +48,7 @@ BeerItem.propTypes = {
  };
  
  BeerItem.defaultProps = { 
-    thumbnail: defaultThumbnail,
+    thumbnail: config.defaultDashboardIconCdn,
     beername: ''
  };
    
