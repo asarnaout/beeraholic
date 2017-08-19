@@ -5,3 +5,15 @@
     background-color: #FFFFFF;
     border: 1px solid black;
 }
+
+@media screen and (max-width: 767px){
+    .card {
+        margin-top: 0;
+        height: 100%;
+    }
+    html, body, #root, #root>div { 
+        margin:0; 
+        padding:0; 
+        height:100%; 
+      }
+}

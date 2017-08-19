@@ -65,7 +65,7 @@ class Card extends Component {
             </div>);
 
         return (
-        <div className="card col-xs-offset-4 col-xs-4">
+        <div className="card col-lg-offset-4 col-lg-4 col-sm-6 col-sm-offset-3 col-xs-12">
          
             <h1 className="black-text center-text no-margin">{this.props.header}</h1>
           
