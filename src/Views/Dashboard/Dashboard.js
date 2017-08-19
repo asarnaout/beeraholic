@@ -1921,7 +1921,7 @@ class Dashboard extends Component {
         return this.state.items.map((beer) => {
             var thumbnail = beer.labels == undefined? '' : beer.labels.medium;
             return (<div className="col-xs-4">
-                        <BeerItem thumbnail={thumbnail} beername={beer.name} />
+                        <BeerItem thumbnail={thumbnail} beername={beer.name} beerid={beer.id} />
                     </div>
               );
         });

@@ -25,8 +25,9 @@ class App extends Component {
       <Router>
         <div className="App">
           
-          <Route path="/" component={Details} />
-        
+          <Route path="/home" component={HomeComponent} />
+          <Route path="/dashboard" component={Dashboard} />
+          <Route path="/details/:beerId" component={Details} />
         </div>
       </Router>
     );
