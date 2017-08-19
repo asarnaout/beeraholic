@@ -19,7 +19,7 @@ class Details extends Component {
     componentWillMount(){
         (axios({
             method: 'get',
-            url: config.breweryApiEndpoint + 'beer/' + this.props.match.params.beerId + '?key=' + config.breweryApiKey,
+            url: config.apiEndpoint + 'beer?id=' + this.props.match.params.beerId,
           })).then(response => {
               let beer = response.data.data;
               this.setState({beer: beer});

@@ -20,8 +20,7 @@ function handleRoutes(express, accountService) {
     app.get('/beers', async function(req, res){
         let url_parts = url.parse(req.url, true);
         let query = url_parts.query;
-        let queryString = "?key=" + config.breweryApiKey + "&p=" + query.p + "&name=" + query.beername + "&ibu=" + query.ibu + "&abv=" + query.abv + "&year=" + query.year + "&order=" + query.sort;
-        
+        let queryString = "?key=" + config.breweryApiKey + "&p=" + query.p + "&name=" + query.name + "&ibu=" + query.ibu + "&abv=" + query.abv + "&year=" + query.year + "&order=" + query.order;
         let result = await (axios({
             method: 'get',
             url: config.breweryApiEndpoint + 'beers' + queryString,
