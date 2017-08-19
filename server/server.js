@@ -1,6 +1,7 @@
 const express = require('express');
 const config = require('./config.js');
+const redisClient = new (require('./data-clients/redis-client'))(config);
+const accountService = new (require('./services/account-service'))(redisClient);
 const handleRoutes = require('./routes');
-const redisClient = require('./data-clients/redis-client');
 
-handleRoutes(express);
+handleRoutes(express, accountService);

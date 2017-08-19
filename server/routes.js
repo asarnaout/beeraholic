@@ -1,10 +1,12 @@
 const cors = require('cors');
 const path = require('path');
 const config = require('./config.js');
+const bodyParser= require('body-parser');
 
-function handleRoutes(express) {
+function handleRoutes(express, accountService) {
     const app = express();
     app.use(cors());
+	app.use(bodyParser.json());
     app.use(express.static(path.join(__dirname, 'build')));
     app.use("/static/media/", express.static(__dirname + '/../build/static/media'));
     app.use("/static/css/", express.static(__dirname + '/../build/static/css'));
@@ -15,7 +17,7 @@ function handleRoutes(express) {
 
     app.post('/account/signup', async (request, response) => {
         let body = request.body;
-        
+        accountService.signUp(body);
 		response.send("OK");
 	});
 }

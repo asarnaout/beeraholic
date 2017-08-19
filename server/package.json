@@ -10,7 +10,9 @@
   "author": "Ahmed Shirin",
   "license": "ISC",
   "dependencies": {
+    "body-parser": "^1.17.2",
     "cors": "^2.8.4",
+    "crypto-js": "^3.1.9-1",
     "express": "^4.15.4",
     "path": "^0.12.7",
     "redis": "^2.8.0"
