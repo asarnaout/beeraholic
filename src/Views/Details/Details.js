@@ -4,7 +4,8 @@ import '../../Assets/css/common.css'
 import Filter from '../../Components/Filter'
 import axios from 'axios'
 import config from '../../config.js'
-
+import Button from '../../Components/Button'
+import { Link } from 'react-router-dom'
 
 const defaultThumbnail = 'http://cdn2.insidermonkey.com/blog/wp-content/uploads/2015/07/shutterstock_113954089-400x340.jpg';
 
@@ -67,6 +68,17 @@ class Details extends Component {
                                 </div>
                                 
                         </div>
+                        <div className="h20"/>
+
+                        <div className="row">
+                            <div className="col-xs-2 col-xs-offset-5">
+                                <Link to={'/dashboard'}>
+                                    <Button background="red-bg" placeholder="Back" />
+                                </Link> 
+                            </div>                            
+                        </div>
+                        <div className="h30"/>
+                        
                     </div>
                 </div>
                 );
