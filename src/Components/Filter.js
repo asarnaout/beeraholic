@@ -16,6 +16,10 @@ class Filter extends Component {
         return result;
     }
 
+    handleKeyPress(key, id){    
+        this.props.handleKeyPress(key, id);
+    }
+
     render(){
         return(
             <div id="Filter">
@@ -26,15 +30,15 @@ class Filter extends Component {
                 <div className="h30"/>
                 <div className="row">
                     <div className="col-xs-2">
-                        <InputText placeholder="Name" />
+                        <InputText placeholder="Name" id="beername"  handleKeyPress={this.handleKeyPress.bind(this)}/>
                     </div>
                     
                     <div className="col-xs-2">
-                        <InputText placeholder="ABV" />
+                        <InputText placeholder="ABV" id="abv"  handleKeyPress={this.handleKeyPress.bind(this)} />
                     </div>
 
                     <div className="col-xs-2">
-                        <InputText placeholder="IBU" />
+                        <InputText placeholder="IBU" id="ibu"  handleKeyPress={this.handleKeyPress.bind(this)} />
                     </div>
 
                     <div className="col-xs-2">
@@ -46,7 +50,7 @@ class Filter extends Component {
                     </div>
 
                     <div className="col-xs-2">
-                        <Button placeholder="Search" background="red-bg" />
+                        <Button placeholder="Search" background="red-bg" clickHandler={this.props.onFilter}/>
                     </div>
                     
                 </div>

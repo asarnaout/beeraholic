@@ -14,7 +14,10 @@ class Dashboard extends Component {
         super(props);
         this.state = {
             items: [],
-            page: 1
+            page: 1,
+            ibu: '',
+            abv: '',
+            beername: ''
         }
     }
 
@@ -23,13 +26,24 @@ class Dashboard extends Component {
     }
 
     fetchDashboard(){
-        let result = (axios({
+        let queryString = "?key=" + config.breweryApiKey + "&p=" + this.state.page + "&name=" + this.state.beername + "&ibu=" + this.state.ibu + "&abv=" + this.state.abv
+        ;(axios({
             method: 'get',
-            url: config.breweryApiEndpoint + 'beers?p=' + this.state.page + '&key=' + config.breweryApiKey,
+            url: config.breweryApiEndpoint + 'beers' + queryString,
           })).then(response => {
+              if(typeof(response.data.data) === 'undefined'){
+                  this.setState({items: []});
+                  return;
+              }
               let beers = response.data.data;
-                this.setState({items: beers});
+              this.setState({items: beers});
           }); 
+    }
+
+    onFilterInput(key, id){
+        let newValue = {};
+        newValue[id] = this.state[id] + key;
+        this.setState(newValue);
     }
 
     getItems(){
@@ -54,7 +68,7 @@ class Dashboard extends Component {
             <div>
                 <div className="turquoise-bg">
                     <div className="container">
-                        <Filter/>
+                        <Filter handleKeyPress={this.onFilterInput.bind(this)} onFilter={this.fetchDashboard.bind(this)}/>
                     </div>
                 </div>
                 <div className="container">
