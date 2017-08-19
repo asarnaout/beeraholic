@@ -5,11 +5,12 @@ import Button from '../../Components/Button'
 import config from '../../config.js'
 import '../../Assets/css/common.css'
 import './Dashboard.css'
+import queryString from 'query-string';
 
 class Dashboard extends Component {
 
     constructor(props){
-        super(props);
+        super(props);               
         this.state = {
             items: [],
             page: 1,
@@ -76,6 +77,7 @@ class Dashboard extends Component {
     }
 
     render() {
+        let parsed = queryString.parse(this.props.location.search);
         let items = this.getItems();
         let content = this.state.loading? <div className="padding-20"><img src={config.defaultLoaderCdn} className="loading-icon center-item" height={100} width={100} /></div> : items;
         let navButtons = this.state.loading? <div></div> : this.getNavButtons();
@@ -84,7 +86,10 @@ class Dashboard extends Component {
             <div>
                 <div className="turquoise-bg">
                     <div className="container">
-                        <Filter updateItems={this.updateItems.bind(this)} page={this.state.page} searchHandler={this.searchHandler.bind(this)}/>
+                        <Filter updateItems={this.updateItems.bind(this)} page={this.state.page} 
+                        searchHandler={this.searchHandler.bind(this)}
+                        ibu={parsed.ibu} abv={parsed.abv} beername={parsed.beername} year={parsed.year} sort={parsed.sort}
+                        />
                     </div>
                 </div>
                 <div className="container">

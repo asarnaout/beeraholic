@@ -6,7 +6,7 @@ class Selector extends Component{
 
     getOptions(){
         return this.props.options.map((item) => {
-            return (<option value={item.value}>{item.text}</option>)
+            return (<option value={item.value} selected={item.selected}>{item.text}</option>)
         });
     }
 

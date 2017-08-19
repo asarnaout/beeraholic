@@ -16,11 +16,11 @@ class Filter extends Component {
         this.state = {
             items: [],
             page: this.props.page,
-            ibu: '',
-            abv: '',
-            beername: '',
-            year: '',
-            sort: ''
+            ibu: this.props.ibu === undefined? '' : this.props.ibu,
+            abv: this.props.abv === undefined? '' : this.props.abv,
+            beername: this.props.beername === undefined? '' : this.props.beername,
+            year: this.props.year === undefined? '' : this.props.year,
+            sort: this.props.sort === undefined? '' : this.props.sort
         }
     }
 
@@ -30,10 +30,32 @@ class Filter extends Component {
 
     getYears(){
         let result = [{value: '', text: 'Year'}];
-        for(let i = 1900; i < 2017; i++) {
-            result.push({value: i, text: i})
+        for(let i = 2017; i >= 1900; i--) {
+            let obj = {value: i, text: i};
+            if(i == this.state.year ) {       
+                obj.selected = true;
+            }
+            result.push(obj)
         }
         return result;
+    }
+
+    getSortingCriteria(){
+        var criteria = [{value: "", text:"Sort By"}, 
+        {value: "name", text:"Name"}, 
+        {value: "abv", text:"ABV"}, 
+        {value: "ibu", text:"IBU"}, 
+        {value: "createDate", text:"Creation Date"}, 
+        {value: "glasswareId", text:"Glassware"}, 
+        {value: "availableId", text:"Availability"}, 
+        {value: "isOrganic", text:"Organic"}];
+
+        criteria.map((item) => {
+            if(this.state.sort == item.value){
+                item.selected = true;
+            }
+        });
+        return criteria;
     }
 
     handleKeyPress(value, id){    
@@ -80,6 +102,10 @@ class Filter extends Component {
     }
 
     render(){
+        let beernamePlaceholder = this.state.beername === ''? "Name" : this.state.beername;
+        let abvPlaceHolder = this.state.abv === ''? "ABV" : this.state.abv;
+        let ibuPlaceHolder = this.state.ibu === ''? "IBU" : this.state.ibu;
+        
         return(
             <div id="Filter">
                 <h1 className="black-text bold fs-50 no-margin white-text" id="SearchHeader">
@@ -92,15 +118,15 @@ class Filter extends Component {
                 <div className="h15"/>
                 <div className="row">
                     <div className="col-xs-2">
-                        <InputText placeholder="Name" id="beername"  handleKeyPress={this.handleKeyPress.bind(this)}/>
+                        <InputText placeholder={beernamePlaceholder} id="beername"  handleKeyPress={this.handleKeyPress.bind(this)}/>
                     </div>
                     
                     <div className="col-xs-2">
-                        <InputText placeholder="ABV" id="abv"  handleKeyPress={this.handleKeyPress.bind(this)} />
+                        <InputText placeholder={abvPlaceHolder} id="abv"  handleKeyPress={this.handleKeyPress.bind(this)} />
                     </div>
 
                     <div className="col-xs-2">
-                        <InputText placeholder="IBU" id="ibu"  handleKeyPress={this.handleKeyPress.bind(this)} />
+                        <InputText placeholder={ibuPlaceHolder} id="ibu"  handleKeyPress={this.handleKeyPress.bind(this)} />
                     </div>
 
                     <div className="col-xs-2">
@@ -108,11 +134,13 @@ class Filter extends Component {
                     </div>
 
                     <div className="col-xs-2">
-                        <Selector id="sort" options={[{value: "", text:"Sort By"}, {value: "name", text:"Name"}, {value: "abv", text:"ABV"}, {value: "ibu", text:"IBU"}, {value: "createDate", text:"Creation Date"}, {value: "glasswareId", text:"Glassware"}, {value: "availableId", text:"Availability"}, {value: "isOrganic", text:"Organic"}]} handleSelectChange={this.handleSelectChange.bind(this)} />
+                        <Selector id="sort" options={this.getSortingCriteria()} handleSelectChange={this.handleSelectChange.bind(this)} />
                     </div>
 
                     <div className="col-xs-2">
-                        <Button placeholder="Search" background="red-bg" clickHandler={this.fetchAllBeer.bind(this)}/>
+                        <Link to={'/dashboard?ibu=' + this.state.ibu + "&abv=" + this.state.abv + "&beername=" + this.state.beername + "&year=" + this.state.year + "&sort="+ this.state.sort}>
+                            <Button placeholder="Search" background="red-bg" clickHandler={this.fetchAllBeer.bind(this)}/>
+                        </Link>
                     </div>
                     
                 </div>
