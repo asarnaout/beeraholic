@@ -4,7 +4,7 @@
   "description": "The node serving serving the beerhaolic application",
   "main": "server.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "mocha tests/test.js",
     "start": "node server.js"
   },
   "author": "Ahmed Shirin",
