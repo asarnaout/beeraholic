@@ -1,8 +1,10 @@
 const assert = require('assert');
 const helpers = require('../services/helpers');
 const config = require('../config');
+const axios = require('axios');
 const redisClient = new (require('../data-clients/redis-client'))(config);
 const accountService = new (require('../services/account-service'))(redisClient);
+const testingBeerId = "ZsQEJt";
 const usersHashtableName = "usr";
 const testPassword = "testhash";
 const testingUsers = [
@@ -79,6 +81,31 @@ describe('AccountService', function() {
       it('should reject the sign in attempt and return false due to providing incorrect credentials', async function() {
         let result = await accountService.signIn({emailAddress: testingUsers[0].emailAddress, password: testPassword + "!"});
         assert.equal(result, false);
+      });
+    });
+});
+
+describe('BrewryWebService', function() {
+    describe('#queryBeers()', function() {
+      it('should return one or more items', async function() {
+        let result = await (axios({
+            method: 'get',
+            url: config.breweryApiEndpoint + 'beers' + "?key=" + config.breweryApiKey,
+          }));
+          assert(result.data.data.length > 0, true);
+      });
+    });
+});
+
+
+describe('BrewryWebService', function() {
+    describe('#queryBeers()', function() {
+      it('should return the item after requesting it from the webservice', async function() {
+        let result = await (axios({
+            method: 'get',
+            url: config.breweryApiEndpoint + 'beer/' + testingBeerId + "?key=" + config.breweryApiKey,
+          }));
+          assert(result.data.data.id, testingBeerId);
       });
     });
 });

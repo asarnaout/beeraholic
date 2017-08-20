@@ -4,7 +4,7 @@
   "description": "The node serving serving the beerhaolic application",
   "main": "server.js",
   "scripts": {
-    "test": "mocha tests/test.js",
+    "test": "mocha tests/test.js --timeout 6000",
     "start": "node server.js"
   },
   "author": "Ahmed Shirin",
