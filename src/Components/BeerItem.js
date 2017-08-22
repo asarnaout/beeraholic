@@ -9,7 +9,7 @@ import config from '../config.js'
 class BeerItem extends Component {
 
     render() {
-        var thumbnail = this.props.thumbnail == ''? config.defaultDashboardIconCdn : this.props.thumbnail;
+        var thumbnail = this.props.thumbnail === ''? config.defaultDashboardIconCdn : this.props.thumbnail;
         return(
             <Link to={'/details/' + this.props.beerid}>
                 <div className="padding-5 beer-item white-bg">

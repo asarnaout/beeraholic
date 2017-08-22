@@ -6,7 +6,8 @@ import './InputText.css'
 class InputText extends Component {
   
     constructor(props){
-      super(props)
+      super(props);
+      this.updateInputValue = this.updateInputValue.bind(this);
     }
 
     getInputType() {
@@ -19,7 +20,7 @@ class InputText extends Component {
 
     render() {
       return (
-        <input type={this.getInputType()} placeholder={this.props.placeholder} className="input-text" id={this.props.id} onChange={this.updateInputValue.bind(this)} />
+        <input type={this.getInputType()} placeholder={this.props.placeholder} className="input-text" id={this.props.id} onChange={this.updateInputValue} />
       );
     }
 }

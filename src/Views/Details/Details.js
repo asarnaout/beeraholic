@@ -11,6 +11,7 @@ class Details extends Component {
 
     constructor(props){
         super(props);
+        this.searchHandler = this.searchHandler.bind(this);
         this.state ={
             beer:{}
         };
@@ -32,7 +33,7 @@ class Details extends Component {
 
     render(){
         let beer = this.state.beer;
-        let thumbnail = beer.labels == undefined? config.defaultDashboardIconCdn : beer.labels.large;
+        let thumbnail = beer.labels === undefined? config.defaultDashboardIconCdn : beer.labels.large;
         let organic = beer.isOrganic === "N"? "No" : "Yes";
         let availability = beer.available === undefined? 'Not Available' : beer.available.description;
         let glass = beer.glass === undefined? 'No Glassware Available' : beer.glass.name;
@@ -43,14 +44,13 @@ class Details extends Component {
 
                     <div className="turquoise-bg">
                         <div className="container">
-                            <Filter searchHandler={this.searchHandler.bind(this)}/>
+                            <Filter searchHandler={this.searchHandler}/>
                         </div>
                     </div>
                     <div className="container">
                         <div className="h20"/>
                         <div>
                                 <div className ="col-sm-7 col-xs-12">
-                                    <div className="h10"/>
                                     <span className="fs-40 bold">{beer.name}</span>
                                     <div className="h10"/>
                                     <p className="fs-20 justify-text"><span className="bold">Description:</span> {beer.description}</p>

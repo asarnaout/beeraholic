@@ -11,6 +11,8 @@ class Home extends Component {
 
     constructor(props) {
         super(props);
+        this.login = this.login.bind(this);
+        this.inputEntered = this.inputEntered.bind(this);
         this.state = {
             EmailAddress: '',
             Password: '',
@@ -51,7 +53,7 @@ class Home extends Component {
     render() {
         return (
             <Card header="Craving Beer?" fields={[{value: 'Email Address', password: false, id: "EmailAddress"}, {value: 'Password', password: true, id:"Password"}]} 
-                actionButtonValue="Login" actionButtonHandler={this.login.bind(this)} handleKeyPress={this.inputEntered.bind(this)} errorMessage={this.state.errorMessage}>
+                actionButtonValue="Login" actionButtonHandler={this.login} handleKeyPress={this.inputEntered} errorMessage={this.state.errorMessage}>
                 <div className="row">
                     <div className="col-xs-10 col-xs-offset-1 center-text">
                         <span className="fs-18">Not a member? <Link to={'/signup'}>Join Now - It's Free</Link></span>

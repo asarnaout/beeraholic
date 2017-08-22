@@ -9,7 +9,13 @@ import queryString from 'query-string';
 class Dashboard extends Component {
 
     constructor(props){
-        super(props);               
+        super(props);    
+        
+        this.updateItems = this.updateItems.bind(this);   
+        this.nextPage = this.nextPage.bind(this);
+        this.previousPage = this.previousPage.bind(this);
+        this.searchHandler = this.searchHandler.bind(this);
+
         this.state = {
             items: [],
             page: 1,
@@ -29,7 +35,7 @@ class Dashboard extends Component {
         
     getItems(){
         return this.state.items.map((beer) => {
-            let thumbnail = beer.labels == undefined? '' : beer.labels.medium;
+            let thumbnail = beer.labels === undefined? '' : beer.labels.medium;
             return (<div className="col-lg-4 col-sm-6 col-xs-12">
                         <BeerItem thumbnail={thumbnail} beername={beer.name} beerid={beer.id} />
                     </div>
@@ -62,18 +68,18 @@ class Dashboard extends Component {
         let renderPreviousButton = this.state.page > 1;
 
         if(renderNextButton && !renderPreviousButton) {
-            return <img src={config.navArrowCdn} onClick={this.nextPage.bind(this)} width={40} height={40} className="center-item pointer"/>; 
+            return <img src={config.navArrowCdn} onClick={this.nextPage} width={40} height={40} className="center-item pointer"/>; 
         }
 
         if(!renderNextButton && renderPreviousButton) {
-            return <img src={config.navArrowCdn} onClick={this.previousPage.bind(this)} width={40} height={40} className="center-item flip-Y pointer"/>; 
+            return <img src={config.navArrowCdn} onClick={this.previousPage} width={40} height={40} className="center-item flip-Y pointer"/>; 
         }
 
         if(renderNextButton && renderPreviousButton) {
             return (
                 <div className="center-text">
-                    <img src={config.navArrowCdn} onClick={this.previousPage.bind(this)} width={40} height={40} className="inline flip-Y pointer margin-15"/>
-                    <img src={config.navArrowCdn} onClick={this.nextPage.bind(this)} width={40} height={40} className="inline pointer margin-15"/>; 
+                    <img src={config.navArrowCdn} onClick={this.previousPage} width={40} height={40} className="inline flip-Y pointer margin-15"/>
+                    <img src={config.navArrowCdn} onClick={this.nextPage} width={40} height={40} className="inline pointer margin-15"/>; 
                 </div>
             ); 
         }
@@ -89,8 +95,8 @@ class Dashboard extends Component {
             <div>
                 <div className="turquoise-bg">
                     <div className="container">
-                        <Filter updateItems={this.updateItems.bind(this)} page={this.state.page} 
-                        searchHandler={this.searchHandler.bind(this)}
+                        <Filter updateItems={this.updateItems} page={this.state.page} 
+                        searchHandler={this.searchHandler}
                         ibu={parsed.ibu} abv={parsed.abv} beername={parsed.beername} year={parsed.year} sort={parsed.sort}
                         />
                     </div>

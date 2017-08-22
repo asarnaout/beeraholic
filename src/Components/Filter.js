@@ -13,6 +13,11 @@ class Filter extends Component {
 
     constructor(props){
         super(props);
+        
+        this.handleKeyPress = this.handleKeyPress.bind(this);
+        this.handleSelectChange = this.handleSelectChange.bind(this);
+        this.fetchAllBeer = this.fetchAllBeer.bind(this);
+
         this.state = {
             items: [],
             page: this.props.page,
@@ -32,7 +37,7 @@ class Filter extends Component {
         let result = [{value: '', text: 'Year'}];
         for(let i = 2017; i >= 1900; i--) {
             let obj = {value: i, text: i};
-            if(i == this.state.year ) {       
+            if(i === this.state.year ) {       
                 obj.selected = true;
             }
             result.push(obj)
@@ -51,7 +56,7 @@ class Filter extends Component {
         {value: "isOrganic", text:"Organic"}];
 
         criteria.map((item) => {
-            if(this.state.sort == item.value){
+            if(this.state.sort === item.value){
                 item.selected = true;
             }
         });
@@ -118,28 +123,28 @@ class Filter extends Component {
                 <div className="h15"/>
                 <div className="row">
                     <div className="col-xs-12 col-md-2">
-                        <InputText placeholder={beernamePlaceholder} id="beername"  handleKeyPress={this.handleKeyPress.bind(this)}/>
+                        <InputText placeholder={beernamePlaceholder} id="beername"  handleKeyPress={this.handleKeyPress}/>
                     </div>
                     
                     <div className="col-xs-12 col-md-2">
-                        <InputText placeholder={abvPlaceHolder} id="abv"  handleKeyPress={this.handleKeyPress.bind(this)} />
+                        <InputText placeholder={abvPlaceHolder} id="abv"  handleKeyPress={this.handleKeyPress} />
                     </div>
 
                     <div className="col-xs-12 col-md-2">
-                        <InputText placeholder={ibuPlaceHolder} id="ibu"  handleKeyPress={this.handleKeyPress.bind(this)} />
+                        <InputText placeholder={ibuPlaceHolder} id="ibu"  handleKeyPress={this.handleKeyPress} />
                     </div>
 
                     <div className="col-xs-12 col-md-2">
-                        <Selector options={this.getYears()} id="year" handleSelectChange={this.handleSelectChange.bind(this)} />
+                        <Selector options={this.getYears()} id="year" handleSelectChange={this.handleSelectChange} />
                     </div>
 
                     <div className="col-xs-12 col-md-2">
-                        <Selector id="sort" options={this.getSortingCriteria()} handleSelectChange={this.handleSelectChange.bind(this)} />
+                        <Selector id="sort" options={this.getSortingCriteria()} handleSelectChange={this.handleSelectChange} />
                     </div>
 
                     <div className="col-xs-12 col-md-2">
                         <Link to={'/dashboard?ibu=' + this.state.ibu + "&abv=" + this.state.abv + "&beername=" + this.state.beername + "&year=" + this.state.year + "&sort="+ this.state.sort}>
-                            <Button placeholder="Search" background="red-bg" clickHandler={this.fetchAllBeer.bind(this)}/>
+                            <Button placeholder="Search" background="red-bg" clickHandler={this.fetchAllBeer}/>
                         </Link>
                     </div>
                     

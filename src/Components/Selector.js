@@ -4,6 +4,11 @@ import './Selector.css'
 
 class Selector extends Component{
 
+    constructor(props){
+        super(props);
+        this.handleSelectChange = this.handleSelectChange.bind(this);
+    }
+    
     getOptions(){
         return this.props.options.map((item) => {
             return (<option value={item.value} selected={item.selected}>{item.text}</option>)
@@ -18,7 +23,7 @@ class Selector extends Component{
         var options = this.getOptions();
 
         return(
-            <select className="selector fs-14" id={this.props.id} onChange={this.handleSelectChange.bind(this)}>{options}</select>
+            <select className="selector fs-14" id={this.props.id} onChange={this.handleSelectChange}>{options}</select>
         );
     }
 }

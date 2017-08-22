@@ -8,6 +8,8 @@ class SignUp extends Component{
 
     constructor(props) {
         super(props);
+        this.signUp = this.signUp.bind(this);
+        this.inputEntered = this.inputEntered.bind(this);
         this.state = {
             FirstName: '',
             LastName: '',
@@ -51,7 +53,7 @@ class SignUp extends Component{
                 {value: 'Last Name', password: false, id: "LastName"}, 
                 {value: 'Email Address', password: false, id: "EmailAddress"}, 
                 {value: 'Password', password: true, id:"Password"}]} 
-                actionButtonValue="Sign Up" actionButtonHandler={this.signUp.bind(this)} handleKeyPress={this.inputEntered.bind(this)} errorMessage={this.state.errorMessage}>
+                actionButtonValue="Sign Up" actionButtonHandler={this.signUp} handleKeyPress={this.inputEntered} errorMessage={this.state.errorMessage}>
             </Card>
         );
     }

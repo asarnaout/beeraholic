@@ -10,6 +10,7 @@ class Card extends Component {
 
     constructor(props) {
         super(props);
+        this.handleKeyPress = this.handleKeyPress.bind(this);
     }
 
     handleKeyPress(value, id){    
@@ -17,13 +18,13 @@ class Card extends Component {
     }
 
     getFields() {
-        if(this.props.fields == []) return;
+        if(this.props.length === 0) return;
         return this.props.fields.map(field => {
             return (
                 <div key={this.props.id}>
                     <div className="row">
                         <div className="col-xs-10 col-xs-offset-1">
-                            <InputText placeholder={field.value} password={field.password} id={field.id} handleKeyPress={this.handleKeyPress.bind(this)} />
+                            <InputText placeholder={field.value} password={field.password} id={field.id} handleKeyPress={this.handleKeyPress} />
                         </div>
                     </div>
                     <div className="h10"/>
@@ -33,7 +34,7 @@ class Card extends Component {
     }
 
     getActionButton(){
-        if(this.props.actionButtonValue == '') return;
+        if(this.props.actionButtonValue === '') return;
 
         return(
             <div>
@@ -51,7 +52,7 @@ class Card extends Component {
     render() {
         let fields = this.getFields();
         let actionButton = this.getActionButton();
-        let errorMessage = this.props.errorMessage == ''? <div></div> : 
+        let errorMessage = this.props.errorMessage === ''? <div></div> : 
             (
             <div>
                 <div className="row">
