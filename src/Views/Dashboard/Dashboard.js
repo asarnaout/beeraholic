@@ -88,7 +88,8 @@ class Dashboard extends Component {
     render() {
         let parsed = queryString.parse(this.props.location.search);
         let items = this.getItems();
-        let content = this.state.loading? <div className="padding-20"><img src={config.defaultLoaderCdn} className="loading-icon center-item" height={100} width={100} /></div> : items;
+        let results = items.length === 0? (<div className="row no-margin"><div className="h30"/><span className="fs-30 col-xs-12 center-text">No Results Found, Try Changing The Search Criteria</span></div>) : items;
+        let content = this.state.loading? <div className="padding-20"><img src={config.defaultLoaderCdn} className="loading-icon center-item" height={100} width={100} /></div> : results;
         let navButtons = this.state.loading? <div></div> : this.getNavButtons();
 
         return (
