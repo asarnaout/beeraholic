@@ -3,7 +3,6 @@
     cursor: pointer;
     border: 1px solid #ccc;
     padding: 10px;
-    background-color: #fcfcfc;
 }
 
 .beer-item:hover{
@@ -19,4 +18,17 @@
 .beer-name-parent{
     white-space: nowrap;
     overflow: hidden;
+}
+
+.empty-ht{
+    position: absolute;
+    right: 25px;
+    top: 15px;
+    font-size:23px;    
+}
+
+.more{
+    top:15px;
+    right: 5px;
+    float:right;
 }

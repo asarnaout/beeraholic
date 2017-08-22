@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import config from './config'
 
 function Loading(props) {
     if (props.isLoading) {
@@ -8,7 +9,7 @@ function Loading(props) {
         return <div>Loader timed out!</div>;
       } else if (props.pastDelay) {
         // Display a loading screen after a set delay.
-        return <div>Loading...</div>;
+        return (<div className="padding-20"><img src={config.defaultLoaderCdn} className="loading-icon center-item" height={100} width={100} /></div>);
       } else {
         // Don't flash "Loading..." when we don't need to.
         return null;
