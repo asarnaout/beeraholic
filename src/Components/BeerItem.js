@@ -12,29 +12,29 @@ class BeerItem extends Component {
         var thumbnail = this.props.thumbnail === ''? config.defaultDashboardIconCdn : this.props.thumbnail;
         return(
             <Link to={'/details/' + this.props.beerid}>
-                <div className="padding-5 beer-item white-bg">
+                <div className="beer-item">
                     <div className="row">
                         <div className="col-xs-12">
-                            <img src={thumbnail} width={150} height={150} className="center-item"/>
+                            <img src={thumbnail} className="full-width"/>
                         </div>
                     </div>
 
                     <div className="h10"/>
 
                     <div className="row">
-                        <div className="col-xs-12 center-text">
-                            <span className="grey-text fs-20">{this.props.beername.substring(0, 32)}</span>
+                        <div className="col-xs-12">
+                            <div className="full-width beer-name-parent"><span className="grey-text fs-16">{this.props.beername}</span></div>
                         </div>
                     </div>
-                
+
                     <div className="h10"/>
 
                     <div className="row">
-                        <div className="col-xs-12 center-text">
-                                <span className="blue-text fs-20">More</span>
+                        <div className="col-xs-12">
+                            <div className="full-width beer-name-parent"><i className="grey-text fs-14">{this.props.beerstyle}</i></div>
                         </div>
+                    </div>
                 </div>
-            </div>
             </Link>
         );
     }

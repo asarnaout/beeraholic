@@ -1,4 +1,18 @@
 .beer-item{
     margin: 20px 0;
     cursor: pointer;
+    border: 1px solid #ccc;
+    padding: 10px;
+    background-color: #fcfcfc;
+}
+
+.beer-item img
+{   
+    height: 200px;
+    object-fit: cover;
+}
+
+.beer-name-parent{
+    white-space: nowrap;
+    overflow: hidden;
 }

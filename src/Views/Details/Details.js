@@ -37,7 +37,7 @@ class Details extends Component {
         let organic = beer.isOrganic === "N"? "No" : "Yes";
         let availability = beer.available === undefined? 'Not Available' : beer.available.description;
         let glass = beer.glass === undefined? 'No Glassware Available' : beer.glass.name;
-        let srm = beer.srm === undefined? 'No SRM Code Provided' : beer.srm.hex;
+        let srm = beer.srm === undefined? 'No SRM Code Provided' : '#' + beer.srm.hex;
         
         return (
                 <div id="DetailsPage">
@@ -60,7 +60,7 @@ class Details extends Component {
                                     <p className="fs-20"><span className="bold">Organic:</span> {organic}</p>
                                     <p className="fs-20"><span className="bold">Availability:</span> {availability}</p>
                                     <p className="fs-20"><span className="bold">Glassware:</span> {glass}</p>
-                                    <p className="fs-20"><span className="bold">SRM:</span> #{srm}</p>
+                                    <p className="fs-20"><span className="bold">SRM:</span> {srm}</p>
                                     <p className="fs-20"><span className="bold">Created:</span> {beer.createDate}</p>
                                 </div>
 

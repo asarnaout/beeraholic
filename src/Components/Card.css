@@ -7,10 +7,10 @@
 
 @media screen and (max-width: 767px){
     .card {
-        padding-top: 60px;
+        padding-top: 160px;
         margin-top: 0;
         height: 100%;
-        background-image: url('https://wallpaperscraft.com/image/beer_mug_barley_grains_ears_44319_1080x1920.jpg');
+        background-image: url('../Assets/Images/mbg.gif');
         background-size: cover;
     }
     html, body, #root, #root>div { 
