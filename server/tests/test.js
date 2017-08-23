@@ -55,8 +55,21 @@ const testingUsers = [
   "password": "123456",
   "firstName": "Mocha",
   "lastName": "Test"
+},
+{
+  "emailAddress": "testingmochaauth@mocha.com",
+  "password": "123456",
+  "firstName": "Mocha",
+  "lastName": "Test"  
 }];
 
+
+function generateRandomString() {
+  let S4 = function() {
+    return (((1+Math.random())*0x10000)|0).toString(16).substring(1);
+  };
+  return (S4()+S4() + S4() + S4()).toString();
+}
 
 describe('Helpers', function() {
     describe('#hashValue()', function() {
@@ -72,8 +85,8 @@ describe('RedisClient', function() {
           redisClient.storeHashSetField(usersHashtableName, testingUsers[0].emailAddress, JSON.stringify(testingUsers[0]));
           let result = await (new Promise((resolve, reject) => {
               redisClient.getHashSetField(usersHashtableName, testingUsers[0].emailAddress, (err, result) => {
-              resolve(JSON.parse(result));
-            })
+                resolve(JSON.parse(result));
+              })
           }));
           assert.equal(testingUsers[0].firstName, result.firstName);
       });
@@ -83,10 +96,7 @@ describe('RedisClient', function() {
 describe('AccountService', function() {
     describe('#signUp()', function() {
       it('should sign up the user and return true', async function() {
-        let S4 = function() {
-            return (((1+Math.random())*0x10000)|0).toString(16).substring(1);
-        };
-        let randomString = (S4()+S4() + S4() + S4()).toString();
+        let randomString = generateRandomString();
         testingUsers[1].emailAddress = randomString + testingUsers[1].emailAddress;
         let result = await accountService.signUp(testingUsers[1]);
         assert.equal(result.success, true);
@@ -162,7 +172,7 @@ describe('AccountService', function() {
     describe('#signIn()', function() {
       it('should sign in the user and return true', async function() {
         let result = await accountService.signIn({emailAddress: testingUsers[0].emailAddress, password: testPassword});
-        assert.equal(result, true);
+        assert.equal(result.success, true);
       });
     });
 });
@@ -171,9 +181,30 @@ describe('AccountService', function() {
     describe('#signIn()', function() {
       it('should reject the sign in attempt and return false due to providing incorrect credentials', async function() {
         let result = await accountService.signIn({emailAddress: testingUsers[0].emailAddress, password: testPassword + "!"});
-        assert.equal(result, false);
+        assert.equal(result.success, false);
       });
     });
+});
+
+describe('AccountService', function() {
+  describe('#authenticateUser()', function() {
+    it('should not authenticate the user since the provided key is not an authentic key', async function() {
+      let result = await accountService.authenticateUser(generateRandomString());
+      assert.equal(result.success, false);
+    });
+  });
+});
+
+describe('AccountService', function() {
+  describe('#authenticateUser()', function() {
+    it('should authenticate the user', async function() {
+      let randomString = generateRandomString();
+      testingUsers[8].emailAddress = randomString + testingUsers[8].emailAddress;
+      let signUpResult = await accountService.signUp(testingUsers[8]);
+      let authenticationResult = await accountService.authenticateUser(signUpResult.userKey);
+      assert.equal(authenticationResult.success, true);
+    });
+  });
 });
 
 describe('BrewryWebService', function() {
