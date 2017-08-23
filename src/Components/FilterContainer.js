@@ -1,7 +1,5 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import '../Assets/css/common.css'
-import './Filter.css'
 import axios from 'axios'
 import config from '../config.js'
 import Filter from './Filter'

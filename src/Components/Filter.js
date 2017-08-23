@@ -3,6 +3,8 @@ import { Link } from 'react-router-dom'
 import InputText from './InputText'
 import Button from './Button'
 import Selector from './Selector'
+import '../Assets/css/common.css'
+import './Filter.css'
 
 class Filter extends Component{
 
