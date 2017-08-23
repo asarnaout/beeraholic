@@ -60,7 +60,7 @@ class Card extends Component {
         let errorMessage = this.getErrorMessage();
 
         return (
-            <div className="card col-lg-offset-4 col-lg-4 col-sm-6 col-sm-offset-3 col-xs-12">
+            <div className="card col-lg-offset-4 col-lg-4 col-sm-6 col-sm-offset-3 col-xs-12" id="Card">
                 <h1 className="black-text center-text no-margin">{this.props.header}</h1>
                 <div className="h20" />            
                 {fields}

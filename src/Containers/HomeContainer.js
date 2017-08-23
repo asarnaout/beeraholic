@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import Card from '../Components/Card'
 import config from '../config.js'
-import Background from '../Assets/Images/bg.jpg'
 import JoinNow from '../Components/JoinNow'
 import AuthenticationHelpers from '../Helpers/AuthenticationHelpers'
 import axios from 'axios'
@@ -26,11 +25,6 @@ class HomeContainer extends Component {
         if(authenticated) {
             this.props.history.push('/search');
         }
-    }
-
-    componentWillMount(){
-        document.body.style.backgroundImage = `url(${Background})`;
-        document.body.style.backgroundSize = `cover`;
     }
 
     async login() {

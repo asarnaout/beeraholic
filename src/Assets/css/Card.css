@@ -9,14 +9,27 @@ input[type="text"], input[type="password"] {
     border: 1px solid rgba(0, 0, 0, 0.15);
 }
 
+@media screen and (min-width: 768px) {
+    body{
+        background-image:  url('../Images/bg.jpg');
+        background-size: cover !important;
+    }
+}
+
 @media screen and (max-width: 767px){
     .card {
         padding-top: 160px;
         margin-top: 0;
         height: 100%;
-        background-image: url('../Images/mbg.gif');
-        background-size: cover;
+        position: relative;
+        background:none;
     }
+
+    #Card{
+        background: linear-gradient(rgba(255,255,255,.6), rgba(255,255,255,.6)), url('../Images/mbg.jpg');
+        background-size: cover !important;
+    }
+
     html, body, #root, #root>div { 
         margin:0; 
         padding:0; 
