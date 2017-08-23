@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
-import './InputText.css'
+import '../Assets/css/InputText.css'
 
 class InputText extends Component {
   

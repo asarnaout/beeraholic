@@ -5,22 +5,22 @@ import Loading from './Loading.js';
 import './App.css';
 
 const Home = Loadable({
-  loader: () => import('./Views/Home/Home.js'),
+  loader: () => import('./Containers/HomeContainer.js'),
   loading: Loading,
 });
 
-const Dashboard = Loadable({
-  loader: () => import('./Views/Dashboard/Dashboard.js'),
+const Search = Loadable({
+  loader: () => import('./Containers/SearchContainer.js'),
   loading: Loading,
 });
 
 const Details = Loadable({
-  loader: () => import('./Views/Details/Details.js'),
+  loader: () => import('./Containers/DetailsContainer.js'),
   loading: Loading,
 });
 
 const SignUp = Loadable({
-  loader: () => import('./Views/Home/SignUp.js'),
+  loader: () => import('./Containers/SignUpContainer.js'),
   loading: Loading,
 });
 
@@ -31,7 +31,7 @@ class App extends Component {
         <div className="App">
 
           <Route path="/home" component={Home} />
-          <Route path="/dashboard" component={Dashboard} />
+          <Route path="/search" component={Search} />
           <Route path="/signup" component={SignUp} />
           <Route path="/details/:beerId" component={Details} />
         </div>

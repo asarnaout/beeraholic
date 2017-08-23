@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import Button from './Button'
-import './BeerItem.css'
+import '../Assets/css/BeerItem.css'
 import '../Assets/css/common.css'
 import { BrowserRouter as Router, Link, Route } from 'react-router-dom'
 import config from '../config.js'
@@ -9,7 +9,7 @@ import config from '../config.js'
 class BeerItem extends Component {
 
     render() {
-        var thumbnail = this.props.thumbnail === ''? config.defaultDashboardIconCdn : this.props.thumbnail;
+        var thumbnail = this.props.thumbnail === ''? config.defaultSearchItemIconCdn : this.props.thumbnail;
         return(
             <Link to={'/details/' + this.props.beerid}>
                 <div className="beer-item white-bg">
@@ -57,7 +57,7 @@ BeerItem.propTypes = {
  };
  
  BeerItem.defaultProps = { 
-    thumbnail: config.defaultDashboardIconCdn,
+    thumbnail: config.defaultSearchItemIconCdn,
     beername: ''
  };
    

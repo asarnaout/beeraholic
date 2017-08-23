@@ -1,13 +1,11 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom'
-import './Home.css';
-import Card from '../../Components/Card'
+import Card from '../Components/Card'
 import axios from 'axios'
-import config from '../../config.js'
-import Background from '../../Assets/Images/bg.jpg';
+import config from '../config.js'
+import Background from '../Assets/Images/bg.jpg'
+import JoinNow from '../Components/JoinNow'
 
-
-class Home extends Component {
+class HomeContainer extends Component {
 
     constructor(props) {
         super(props);
@@ -38,7 +36,7 @@ class Home extends Component {
         });
 
         if(result.data.success) {
-            this.props.history.push('/dashboard');
+            this.props.history.push('/search');
         } else {
             this.setState({errorMessage: 'Invalid Login Credentials'})
         }
@@ -54,14 +52,10 @@ class Home extends Component {
         return (
             <Card header="Craving Beer?" fields={[{value: 'Email Address', password: false, id: "EmailAddress"}, {value: 'Password', password: true, id:"Password"}]} 
                 actionButtonValue="Login" actionButtonHandler={this.login} handleKeyPress={this.inputEntered} errorMessage={this.state.errorMessage}>
-                <div className="row">
-                    <div className="col-xs-10 col-xs-offset-1 center-text">
-                        <span className="fs-18">Not a member? <Link to={'/signup'}>Join Now - It's Free</Link></span>
-                    </div>
-                </div>
+                <JoinNow/>
             </Card>
         );
     }
 }
 
-export default Home;
+export default HomeContainer;

@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import './Selector.css'
+import '../Assets/css/Selector.css'
 
 class Selector extends Component{
 

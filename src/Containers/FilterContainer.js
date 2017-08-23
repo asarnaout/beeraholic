@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import axios from 'axios'
 import config from '../config.js'
-import Filter from './Filter'
+import Filter from '../Components/Filter'
 
 class FilterContainer extends Component {
 
@@ -25,6 +25,11 @@ class FilterContainer extends Component {
     }
 
     componentWillMount(){
+        this.setState({
+            abvPlaceHolder: this.state.abv === ''? "ABV" : this.state.abv,
+            ibuPlaceHolder: this.state.ibu === ''? "IBU" : this.state.ibu,
+            beernamePlaceholder: this.state.beername === ''? "Name" : this.state.beername
+        });
         this.fetchAllBeer(this.state.page);
     }
 
@@ -100,11 +105,7 @@ class FilterContainer extends Component {
     }
 
     render(){
-        let beernamePlaceholder = this.state.beername === ''? "Name" : this.state.beername;
-        let abvPlaceHolder = this.state.abv === ''? "ABV" : this.state.abv;
-        let ibuPlaceHolder = this.state.ibu === ''? "IBU" : this.state.ibu;
-        
-        return <Filter beernamePlaceholder={beernamePlaceholder} abvPlaceHolder={abvPlaceHolder} ibuPlaceHolder={ibuPlaceHolder}
+        return <Filter beernamePlaceholder={this.state.beernamePlaceholder} abvPlaceHolder={this.state.abvPlaceHolder} ibuPlaceHolder={this.state.ibuPlaceHolder}
             handleKeyPress={this.handleKeyPress} handleSelectChange={this.handleSelectChange} yearOptions={this.getYears()}
             sortOptions={this.getSortingCriteria()} ibu={this.state.ibu} abv={this.state.abv} beername={this.state.beername} 
             year={this.state.year} sort={this.state.sort} searchBeers={this.fetchAllBeer} />

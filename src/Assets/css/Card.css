@@ -5,12 +5,16 @@
     border: 1px solid black;
 }
 
+input[type="text"], input[type="password"] {
+    border: 1px solid rgba(0, 0, 0, 0.15);
+}
+
 @media screen and (max-width: 767px){
     .card {
         padding-top: 160px;
         margin-top: 0;
         height: 100%;
-        background-image: url('../Assets/Images/mbg.gif');
+        background-image: url('../Images/mbg.gif');
         background-size: cover;
     }
     html, body, #root, #root>div { 

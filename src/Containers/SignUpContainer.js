@@ -1,10 +1,9 @@
 import React, { Component } from 'react';
-import Card from '../../Components/Card'
+import Card from '../Components/Card'
 import axios from 'axios'
-import config from '../../config.js'
-import './SignUp.css'
+import config from '../config.js'
 
-class SignUp extends Component{
+class SignUpContainer extends Component{
 
     constructor(props) {
         super(props);
@@ -34,7 +33,7 @@ class SignUp extends Component{
         });
         
         if(result.data.result === true) {
-            this.props.history.push('/dashboard')
+            this.props.history.push('/search')
         } else {
             this.setState({errorMessage: result.data.result})
         }
@@ -59,4 +58,4 @@ class SignUp extends Component{
     }
 }
 
-export default SignUp;
+export default SignUpContainer;
