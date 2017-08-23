@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import './Details.css'
 import '../../Assets/css/common.css'
-import Filter from '../../Components/Filter'
+import FilterContainer from '../../Components/FilterContainer'
 import axios from 'axios'
 import config from '../../config.js'
 import Button from '../../Components/Button'
@@ -63,7 +63,7 @@ class Details extends Component {
                 <div id="DetailsPage">
                     <div className="turquoise-bg">
                         <div className="container">
-                            <Filter searchHandler={this.searchHandler}/>
+                            <FilterContainer searchHandler={this.searchHandler}/>
                         </div>
                     </div>
                     <div className="container">

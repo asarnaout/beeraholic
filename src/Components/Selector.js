@@ -7,6 +7,9 @@ class Selector extends Component{
     constructor(props){
         super(props);
         this.handleSelectChange = this.handleSelectChange.bind(this);
+        this.state = {
+            options: this.getOptions()
+        }         
     }
     
     getOptions(){
@@ -20,10 +23,8 @@ class Selector extends Component{
     }
 
     render() {
-        var options = this.getOptions();
-
         return(
-            <select className="selector fs-14" id={this.props.id} onChange={this.handleSelectChange} value={this.selectedOption}>{options}</select>
+            <select className="selector fs-14" id={this.props.id} onChange={this.handleSelectChange} value={this.selectedOption}>{this.state.options}</select>
         );
     }
 }

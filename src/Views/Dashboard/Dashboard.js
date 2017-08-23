@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import BeerItem from '../../Components/BeerItem'
-import Filter from '../../Components/Filter'
+import FilterContainer from '../../Components/FilterContainer'
 import Button from '../../Components/Button'
 import config from '../../config.js'
 import '../../Assets/css/common.css'
@@ -97,7 +97,7 @@ class Dashboard extends Component {
             <div>
                 <div className="turquoise-bg">
                     <div className="container">
-                        <Filter updateItems={this.updateItems} page={this.state.page} 
+                        <FilterContainer updateItems={this.updateItems} page={this.state.page} 
                         searchHandler={this.searchHandler}
                         ibu={parsed.ibu} abv={parsed.abv} beername={parsed.beername} year={parsed.year} sort={parsed.sort}
                         />
