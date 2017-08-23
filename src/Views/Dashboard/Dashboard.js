@@ -37,7 +37,7 @@ class Dashboard extends Component {
         return this.state.items.map((beer) => {
             let thumbnail = beer.labels === undefined? '' : beer.labels.medium;
             let style = beer.style === undefined? 'Beer Style Not Available' : beer.style.name;
-            return (<div className="col-lg-4 col-sm-6 col-xs-12">
+            return (<div className="col-lg-4 col-sm-6 col-xs-12" key={beer.id}>
                         <BeerItem thumbnail={thumbnail} beername={beer.name} beerid={beer.id} beerstyle={style} />
                     </div>
               );

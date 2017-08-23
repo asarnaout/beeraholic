@@ -37,9 +37,6 @@ class Filter extends Component {
         let result = [{value: '', text: 'Year'}];
         for(let i = 2017; i >= 1900; i--) {
             let obj = {value: i, text: i};
-            if(i === this.state.year ) {       
-                obj.selected = true;
-            }
             result.push(obj)
         }
         return result;
@@ -114,10 +111,10 @@ class Filter extends Component {
         return(
             <div id="Filter">
                 <h1 className="black-text bold fs-50 no-margin white-text" id="SearchHeader">
-                        <Link to={'/dashboard'}>
+                        <Link to={'/home'}>
                             <img id="BeerIcon" width={55} height={55} />
                         </Link>
-                        <span>&nbsp;Keep Calm And Grab A Beer</span>                     
+                        <span className="white-text">&nbsp;Keep Calm And Grab A Beer</span>                     
                 </h1>
                 <div className="h30"/>
                 <div className="h15"/>
@@ -135,11 +132,11 @@ class Filter extends Component {
                     </div>
 
                     <div className="col-xs-12 col-md-2">
-                        <Selector options={this.getYears()} id="year" handleSelectChange={this.handleSelectChange} />
+                        <Selector options={this.getYears()} id="year" handleSelectChange={this.handleSelectChange} value={this.state.year} />
                     </div>
 
                     <div className="col-xs-12 col-md-2">
-                        <Selector id="sort" options={this.getSortingCriteria()} handleSelectChange={this.handleSelectChange} />
+                        <Selector id="sort" options={this.getSortingCriteria()} handleSelectChange={this.handleSelectChange} value={this.state.sort}/>
                     </div>
 
                     <div className="col-xs-12 col-md-2">

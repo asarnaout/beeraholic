@@ -11,7 +11,7 @@ class Selector extends Component{
     
     getOptions(){
         return this.props.options.map((item) => {
-            return (<option value={item.value} selected={item.selected}>{item.text}</option>)
+            return (<option value={item.value} key={item.value}>{item.text}</option>)
         });
     }
 
@@ -23,7 +23,7 @@ class Selector extends Component{
         var options = this.getOptions();
 
         return(
-            <select className="selector fs-14" id={this.props.id} onChange={this.handleSelectChange}>{options}</select>
+            <select className="selector fs-14" id={this.props.id} onChange={this.handleSelectChange} value={this.selectedOption}>{options}</select>
         );
     }
 }
