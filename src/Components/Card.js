@@ -57,7 +57,7 @@ class Card extends Component {
             <div>
                 <div className="row">
                     <div className="col-xs-10 col-xs-offset-1">
-                        <span className="red-text fs-20 padding-5">
+                        <span className="red-text fs-14">
                             {this.props.errorMessage}
                         </span>
                     </div>

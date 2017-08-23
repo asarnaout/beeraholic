@@ -34,7 +34,7 @@ function handleRoutes(express, accountService, beerService) {
 
     app.post('/account/signup', async (request, response) => {
         let result = await accountService.signUp(request.body);
-		response.send({success: result});
+		response.send({result});
     });
     
     app.post('/account/signin', async (request, response) => {

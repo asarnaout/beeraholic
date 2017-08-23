@@ -32,11 +32,11 @@ class SignUp extends Component{
             url: config.apiEndpoint + 'account/signUp',
             data: data
         });
-
-        if(result.data.success) {
+        
+        if(result.data.result === true) {
             this.props.history.push('/dashboard')
         } else {
-            this.setState({errorMessage: 'Email Already Exists'})
+            this.setState({errorMessage: result.data.result})
         }
     }
 
