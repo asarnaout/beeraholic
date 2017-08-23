@@ -89,7 +89,7 @@ describe('AccountService', function() {
         let randomString = (S4()+S4() + S4() + S4()).toString();
         testingUsers[1].emailAddress = randomString + testingUsers[1].emailAddress;
         let result = await accountService.signUp(testingUsers[1]);
-        assert.equal(result, true);
+        assert.equal(result.success, true);
       });
     });
 });
@@ -98,7 +98,7 @@ describe('AccountService', function() {
     describe('#signUp()', function() {
       it('should reject the sign up attempt and return false due to providing a duplicate email', async function() {
         let result = await accountService.signUp(testingUsers[0]);
-        assert.notEqual(result, true);
+        assert.notEqual(result.success, true);
       });
     });
 });
@@ -107,7 +107,7 @@ describe('AccountService', function() {
   describe('#signUp()', function() {
     it('should reject the sign up attempt and return false due to not providing the last name', async function() {
       let result = await accountService.signUp(testingUsers[2]);
-      assert.notEqual(result, true);
+      assert.notEqual(result.success, true);
     });
   });
 });
@@ -116,7 +116,7 @@ describe('AccountService', function() {
   describe('#signUp()', function() {
     it('should reject the sign up attempt and return false due to not providing the first name', async function() {
       let result = await accountService.signUp(testingUsers[3]);
-      assert.notEqual(result, true);
+      assert.notEqual(result.success, true);
     });
   });
 });
@@ -125,7 +125,7 @@ describe('AccountService', function() {
   describe('#signUp()', function() {
     it('should reject the sign up attempt and return false due to not providing the password', async function() {
       let result = await accountService.signUp(testingUsers[4]);
-      assert.notEqual(result, true);
+      assert.notEqual(result.success, true);
     });
   });
 });
@@ -134,7 +134,7 @@ describe('AccountService', function() {
   describe('#signUp()', function() {
     it('should reject the sign up attempt and return false due to not providing the email address', async function() {
       let result = await accountService.signUp(testingUsers[5]);
-      assert.notEqual(result, true);
+      assert.notEqual(result.success, true);
     });
   });
 });
@@ -143,7 +143,7 @@ describe('AccountService', function() {
   describe('#signUp()', function() {
     it('should reject the sign up attempt and return false due to providing a short password', async function() {
       let result = await accountService.signUp(testingUsers[6]);
-      assert.notEqual(result, true);
+      assert.notEqual(result.success, true);
     });
   });
 });
@@ -153,7 +153,7 @@ describe('AccountService', function() {
   describe('#signUp()', function() {
     it('should reject the sign up attempt and return false due to providing an invalid email address', async function() {
       let result = await accountService.signUp(testingUsers[7]);
-      assert.notEqual(result, true);
+      assert.notEqual(result.success, true);
     });
   });
 });

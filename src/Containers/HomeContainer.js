@@ -1,14 +1,16 @@
 import React, { Component } from 'react';
 import Card from '../Components/Card'
-import axios from 'axios'
 import config from '../config.js'
 import Background from '../Assets/Images/bg.jpg'
 import JoinNow from '../Components/JoinNow'
+import AuthenticationHelpers from '../Helpers/AuthenticationHelpers'
+import axios from 'axios'
 
 class HomeContainer extends Component {
 
     constructor(props) {
         super(props);
+        this.auth();
         this.login = this.login.bind(this);
         this.inputEntered = this.inputEntered.bind(this);
         this.state = {
@@ -18,24 +20,33 @@ class HomeContainer extends Component {
         };
     }
 
+    async auth(){
+        let authenticated = await AuthenticationHelpers.authenticateUser();
+        
+        if(authenticated) {
+            this.props.history.push('/search');
+        }
+    }
+
     componentWillMount(){
         document.body.style.backgroundImage = `url(${Background})`;
         document.body.style.backgroundSize = `cover`;
     }
 
     async login() {
-        var data = {
+        let data = {
             emailAddress: this.state.EmailAddress,
             password: this.state.Password
         };
 
-        var result = await axios({
+        let result = (await axios({
             method: 'post',
             url: config.apiEndpoint + 'account/signin',
             data: data
-        });
+        })).data;
 
-        if(result.data.success) {
+        if(result.success) {
+            AuthenticationHelpers.setAuthenticationCookie(result.userKey);
             this.props.history.push('/search');
         } else {
             this.setState({errorMessage: 'Invalid Login Credentials'})

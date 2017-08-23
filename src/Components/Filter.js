@@ -11,7 +11,7 @@ class Filter extends Component{
     render(){
         return (<div id="Filter">
                     <h1 className="black-text bold fs-50 no-margin white-text" id="SearchHeader">
-                            <Link to={'/home'}>
+                            <Link to={'/search'}>
                                 <img id="BeerIcon" width={55} height={55} />
                             </Link>
                             <span className="white-text">&nbsp;Keep Calm And Grab A Beer</span>                     

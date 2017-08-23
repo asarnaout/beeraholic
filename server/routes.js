@@ -34,12 +34,17 @@ function handleRoutes(express, accountService, beerService) {
 
     app.post('/account/signup', async (request, response) => {
         let result = await accountService.signUp(request.body);
-		response.send({result});
+		response.send(result);
     });
     
     app.post('/account/signin', async (request, response) => {
         var result = await accountService.signIn(request.body);
-		response.send({success: result});
+		response.send(result);
+    });
+    
+    app.post('/account/auth', async (request, response) => {
+        var result = await accountService.authenticateUser(request.body.key);
+		response.send(result);
 	});
 }
 

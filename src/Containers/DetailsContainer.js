@@ -2,11 +2,13 @@ import React, { Component } from 'react';
 import axios from 'axios'
 import config from '../config.js'
 import Details from '../Components/Details'
+import AuthenticationHelpers from '../Helpers/AuthenticationHelpers'
 
 class DetailsContainer extends Component {
 
     constructor(props){
         super(props);
+        this.auth();
         this.searchHandler = this.searchHandler.bind(this);
         this.state = {
             organic: '',
@@ -23,6 +25,14 @@ class DetailsContainer extends Component {
         }
     }
 
+    async auth(){
+        let authenticated = await AuthenticationHelpers.authenticateUser();
+        
+        if(!authenticated) {
+            this.props.history.push('/home');
+        }
+    }
+    
     componentWillMount(){
         (axios({
             method: 'get',

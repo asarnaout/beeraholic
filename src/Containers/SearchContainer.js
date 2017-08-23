@@ -2,12 +2,13 @@ import React, { Component } from 'react';
 import queryString from 'query-string';
 import config from '../config.js'
 import Search from '../Components/Search'
+import AuthenticationHelpers from '../Helpers/AuthenticationHelpers'
 
 class SearchContainer extends Component {
 
     constructor(props){
         super(props);    
-        
+        this.auth();
         this.updateItems = this.updateItems.bind(this);   
         this.nextPage = this.nextPage.bind(this);
         this.previousPage = this.previousPage.bind(this);
@@ -19,6 +20,14 @@ class SearchContainer extends Component {
             loading: false,
             numberOfPages : 0,
             parsedQueryString: queryString.parse(this.props.location.search)
+        }
+    }
+
+    async auth(){
+        let authenticated = await AuthenticationHelpers.authenticateUser();
+
+        if(!authenticated) {
+            this.props.history.push('/home');
         }
     }
 

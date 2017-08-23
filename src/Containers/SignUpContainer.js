@@ -2,11 +2,13 @@ import React, { Component } from 'react';
 import Card from '../Components/Card'
 import axios from 'axios'
 import config from '../config.js'
+import AuthenticationHelpers from '../Helpers/AuthenticationHelpers'
 
 class SignUpContainer extends Component{
 
     constructor(props) {
         super(props);
+        this.auth();
         this.signUp = this.signUp.bind(this);
         this.inputEntered = this.inputEntered.bind(this);
         this.state = {
@@ -18,24 +20,33 @@ class SignUpContainer extends Component{
         };
     }
 
+    async auth(){
+        let authenticated = await AuthenticationHelpers.authenticateUser();
+        
+        if(authenticated) {
+            this.props.history.push('/search');
+        }
+    }
+
     async signUp(){
-        var data = {
+        let data = {
             emailAddress: this.state.EmailAddress,
             password: this.state.Password,
             firstName: this.state.FirstName,
             lastName: this.state.LastName
         };
 
-        var result = await axios({
+        let result = await axios({
             method: 'post',
             url: config.apiEndpoint + 'account/signUp',
             data: data
         });
         
-        if(result.data.result === true) {
-            this.props.history.push('/search')
+        if(result.data.success === true) {
+            AuthenticationHelpers.setAuthenticationCookie(result.data.userKey);
+            this.props.history.push('/search');
         } else {
-            this.setState({errorMessage: result.data.result})
+            this.setState({errorMessage: result.data.message})
         }
     }
 
