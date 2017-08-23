@@ -5,7 +5,7 @@
 }
 
 .Select-placeholder{
-    color: grey;
+    color: grey !important;
     padding-top:3px;
 }
 
@@ -14,7 +14,7 @@
 }
 
 .Select-control{
-    height:40px;
+    height:41px;
     border: none;
     cursor:pointer;
 }
