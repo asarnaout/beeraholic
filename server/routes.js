@@ -3,10 +3,8 @@ const path = require('path');
 const config = require('./config.js');
 const bodyParser= require('body-parser');
 const favicon = require('serve-favicon');
-const url = require('url');
-const axios = require('axios');
 
-function handleRoutes(express, accountService) {
+function handleRoutes(express, accountService, beerService) {
     const app = express();
     app.use(cors());
 	app.use(bodyParser.json());
@@ -18,26 +16,13 @@ function handleRoutes(express, accountService) {
     app.use("/service-worker.js", express.static(__dirname + '/../build'));
 
     app.get('/beers', async function(req, res){
-        let url_parts = url.parse(req.url, true);
-        let query = url_parts.query;
-        let queryString = "?key=" + config.breweryApiKey + "&p=" + query.p + "&name=" + query.name + "&ibu=" + query.ibu + "&abv=" + query.abv + "&year=" + query.year + "&order=" + query.order;
-        let result = await (axios({
-            method: 'get',
-            url: config.breweryApiEndpoint + 'beers' + queryString,
-          }));
-    	res.send(result.data);
+        let result = await beerService.getAllBeers(req.url);
+    	res.send(result);
     });
 
     app.get('/beer', async function(req, res){
-        let url_parts = url.parse(req.url, true);
-        let query = url_parts.query;
-        let beerid = query.id;
-
-        let result = await (axios({
-            method: 'get',
-            url: config.breweryApiEndpoint + 'beer/' + beerid + "?key=" + config.breweryApiKey,
-          }));
-    	res.send(result.data);
+        let result = await beerService.getBeer(req.url);
+        res.send(result);
     });
 
     app.get('/', function(req, res) {
@@ -48,14 +33,12 @@ function handleRoutes(express, accountService) {
     app.listen(config.port, () => console.log('listening to connections on port: ' + config.port));
 
     app.post('/account/signup', async (request, response) => {
-        let body = request.body;
-        let result = await accountService.signUp(body);
+        let result = await accountService.signUp(request.body);
 		response.send({success: result});
     });
     
     app.post('/account/signin', async (request, response) => {
-        let body = request.body;
-        var result = await accountService.signIn(body);
+        var result = await accountService.signIn(request.body);
 		response.send({success: result});
 	});
 }

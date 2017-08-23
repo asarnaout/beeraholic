@@ -4,6 +4,7 @@ const config = require('../config');
 const axios = require('axios');
 const redisClient = new (require('../data-clients/redis-client'))(config);
 const accountService = new (require('../services/account-service'))(redisClient);
+const beerService = new (require('../services/beer-service'))(config);
 const testingBeerId = "ZsQEJt";
 const usersHashtableName = "usr";
 const testPassword = "testhash";
@@ -88,11 +89,9 @@ describe('AccountService', function() {
 describe('BrewryWebService', function() {
     describe('#queryBeers()', function() {
       it('should return one or more items', async function() {
-        let result = await (axios({
-            method: 'get',
-            url: config.breweryApiEndpoint + 'beers' + "?key=" + config.breweryApiKey,
-          }));
-          assert(result.data.data.length > 0, true);
+        this.timeout(2000);
+        let result = await beerService.getAllBeers("http://localhost?p=1&name=&ibu=&abv=&year=&order=");
+        assert(result.data.length > 1, true);
       });
     });
 });
@@ -101,11 +100,9 @@ describe('BrewryWebService', function() {
 describe('BrewryWebService', function() {
     describe('#queryBeers()', function() {
       it('should return the item after requesting it from the webservice', async function() {
-        let result = await (axios({
-            method: 'get',
-            url: config.breweryApiEndpoint + 'beer/' + testingBeerId + "?key=" + config.breweryApiKey,
-          }));
-          assert(result.data.data.id, testingBeerId);
+        this.timeout(1000);
+        let result = await beerService.getBeer("http://localhost?id=" + testingBeerId);
+        assert(result.data.id, testingBeerId);
       });
     });
 });
