@@ -164,3 +164,11 @@
 .pointer{
     cursor: pointer;
 }
+
+.component-loader{
+    margin-top:200px;
+}
+
+.component-loader-container{
+    overflow:hidden;
+}
