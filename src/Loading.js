@@ -9,11 +9,8 @@ function Loading(props) {
         return <div>Loader timed out!</div>;
       } else if (props.pastDelay) {
         // Display a loading screen after a set delay.
-        return (
-          <div className="container component-loader-container">
-              <img src={config.defaultLoaderCdn} className="loading-icon center-item component-loader" height={100} width={100} />
-          </div>);          
-      } else {               
+        return <div></div>;
+      } else {
         // Don't flash "Loading..." when we don't need to.
         return null;
       }
