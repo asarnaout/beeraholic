@@ -33,7 +33,7 @@ class FilterContainer extends Component {
     }
 
     getYears(){
-        let result = [{value: '', label: 'Year'}];
+        let result = [];
         for(let i = 2017; i >= 1900; i--) {
             let obj = {value: i, label: i};
             result.push(obj)
@@ -42,8 +42,7 @@ class FilterContainer extends Component {
     }
 
     getSortingCriteria(){
-        var criteria = [{value: "", label:"Sort By"}, 
-        {value: "name", label:"Name"}, 
+        let criteria = [{value: "name", label:"Name"}, 
         {value: "abv", label:"ABV"}, 
         {value: "ibu", label:"IBU"}, 
         {value: "createDate", label:"Creation Date"}, 

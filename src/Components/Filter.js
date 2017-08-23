@@ -33,11 +33,11 @@ class Filter extends Component{
                         </div>
 
                         <div className="col-xs-12 col-md-2">
-                            <Selector options={this.props.yearOptions} id="year" handleSelectChange={this.props.handleSelectChange} value={this.props.year} />
+                            <Selector placeholder="Year" options={this.props.yearOptions} id="year" handleSelectChange={this.props.handleSelectChange} value={this.props.year} />
                         </div>
 
                         <div className="col-xs-12 col-md-2">
-                            <Selector id="sort" options={this.props.sortOptions} handleSelectChange={this.props.handleSelectChange} value={this.props.sort}/>
+                            <Selector id="sort" placeholder="Sort" options={this.props.sortOptions} handleSelectChange={this.props.handleSelectChange} value={this.props.sort}/>
                         </div>
 
                         <div className="col-xs-12 col-md-2">
