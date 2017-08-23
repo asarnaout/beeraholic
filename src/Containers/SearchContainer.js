@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import queryString from 'query-string';
-import config from '../config.js'
 import Search from '../Components/Search'
 import AuthenticationHelpers from '../Helpers/AuthenticationHelpers'
 

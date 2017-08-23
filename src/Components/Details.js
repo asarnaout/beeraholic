@@ -34,7 +34,7 @@ class Details extends Component {
                             </div>
 
                             <div className ="col-sm-5 col-xs-12">
-                                <img src={this.props.thumbnail} className="center-item full-width"/>
+                                <img src={this.props.thumbnail} className="center-item full-width" alt={this.props.name} />
                             </div>
                             
                     </div>

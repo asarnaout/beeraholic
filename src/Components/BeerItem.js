@@ -1,9 +1,8 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import Button from './Button'
 import '../Assets/css/BeerItem.css'
 import '../Assets/css/common.css'
-import { BrowserRouter as Router, Link, Route } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 import config from '../config.js'
 
 class BeerItem extends Component {
@@ -16,7 +15,7 @@ class BeerItem extends Component {
                     <div className="row">
                         <div className="col-xs-12">
                             <span className="glyphicon glyphicon-heart-empty empty-ht"></span>
-                            <img src={thumbnail} className="full-width"/>
+                            <img src={thumbnail} className="full-width" alt={this.props.beername}/>
                         </div>
                     </div>
 

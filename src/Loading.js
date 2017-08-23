@@ -1,5 +1,4 @@
-import React, { Component } from 'react';
-import config from './config'
+import React from 'react';
 
 function Loading(props) {
     if (props.isLoading) {

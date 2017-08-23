@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import BeerItem from '../Components/BeerItem'
 import FilterContainer from '../Containers/FilterContainer'
-import Button from '../Components/Button'
 import config from '../config'
 import '../Assets/css/common.css'
 
@@ -23,18 +22,18 @@ class Search extends Component {
         let renderPreviousButton = this.props.page > 1;
 
         if(renderNextButton && !renderPreviousButton) {
-            return <img src={config.navArrowCdn} onClick={this.props.nextPage} width={40} height={40} className="center-item pointer"/>; 
+            return <img src={config.navArrowCdn} onClick={this.props.nextPage} width={40} height={40} className="center-item pointer" alt="next_page"/>; 
         }
 
         if(!renderNextButton && renderPreviousButton) {
-            return <img src={config.navArrowCdn} onClick={this.props.previousPage} width={40} height={40} className="center-item flip-Y pointer"/>; 
+            return <img src={config.navArrowCdn} onClick={this.props.previousPage} width={40} height={40} className="center-item flip-Y pointer" alt="previous_page"/>; 
         }
 
         if(renderNextButton && renderPreviousButton) {
             return (
                 <div className="center-text">
-                    <img src={config.navArrowCdn} onClick={this.props.previousPage} width={40} height={40} className="inline flip-Y pointer margin-15"/>
-                    <img src={config.navArrowCdn} onClick={this.props.nextPage} width={40} height={40} className="inline pointer margin-15"/>; 
+                    <img src={config.navArrowCdn} onClick={this.props.previousPage} width={40} height={40} className="inline flip-Y pointer margin-15" alt="previous_page"/>
+                    <img src={config.navArrowCdn} onClick={this.props.nextPage} width={40} height={40} className="inline pointer margin-15" alt="next_page"/>; 
                 </div>
             ); 
         }
@@ -43,7 +42,7 @@ class Search extends Component {
     render(){
         let items = this.getItems();
         let results = items.length === 0? (<div className="row no-margin"><div className="h30"/><span className="fs-30 col-xs-12 center-text">No Results Found, Try Changing The Search Criteria</span></div>) : items;
-        let content = this.props.loading? <div className="padding-20"><img src={config.defaultLoaderCdn} className="loading-icon center-item" height={100} width={100} /></div> : results;
+        let content = this.props.loading? <div className="padding-20"><img src={config.defaultLoaderCdn} className="loading-icon center-item" height={100} width={100} alt="loading" /></div> : results;
         let navButtons = this.props.loading? <div></div> : this.getNavButtons();
 
         return (

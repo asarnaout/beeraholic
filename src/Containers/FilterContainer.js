@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import PropTypes from 'prop-types';
 import axios from 'axios'
 import config from '../config.js'
 import Filter from '../Components/Filter'
@@ -56,6 +55,7 @@ class FilterContainer extends Component {
             if(this.state.sort === item.value){
                 item.selected = true;
             }
+            return item;
         });
         return criteria;
     }
@@ -73,7 +73,7 @@ class FilterContainer extends Component {
     }
 
     fetchAllBeer(page){
-        if(typeof(page) != 'number') {            
+        if(typeof(page) !== 'number') {            
             page = 1;
         }
 
@@ -98,7 +98,7 @@ class FilterContainer extends Component {
     }
 
     componentWillReceiveProps(nextProps){
-        if(nextProps.page != this.props.page) {
+        if(nextProps.page !== this.props.page) {
             this.setState({page: nextProps.state});
             this.fetchAllBeer(nextProps.page);
         }

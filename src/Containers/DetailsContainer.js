@@ -61,7 +61,7 @@ class DetailsContainer extends Component {
     }
 
     isProvided(value) {
-        return value !== undefined && value != '' && value != null;
+        return value !== undefined && value !== '' && value !== null;
     }
 
     render(){
