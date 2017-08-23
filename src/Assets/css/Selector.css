@@ -1,7 +1,27 @@
 .selector{
     width: 100%;
-    padding: 10px 10px 9px 10px;
-    color: grey;
     border: none;
     border-radius: 3px;
+}
+
+.Select-placeholder{
+    color: grey;
+    padding-top:3px;
+}
+
+.Select-arrow{
+    top:1px;
+}
+
+.Select-control{
+    height:40px;
+    border: none;
+}
+
+.Select-value{
+    top:3px !important;
+}
+
+.Select-clear-zone{
+    top: 2px;
 }

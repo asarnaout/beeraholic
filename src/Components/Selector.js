@@ -1,30 +1,31 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import Select from 'react-select';
+import 'react-select/dist/react-select.css';
 import '../Assets/css/Selector.css'
 
 class Selector extends Component{
 
     constructor(props){
         super(props);
-        this.handleSelectChange = this.handleSelectChange.bind(this);
-        this.state = {
-            options: this.getOptions()
-        }         
-    }
-    
-    getOptions(){
-        return this.props.options.map((item) => {
-            return (<option value={item.value} key={item.value}>{item.text}</option>)
-        });
+        this.handleSelectChange = this.handleSelectChange.bind(this);        
     }
 
     handleSelectChange(event){
-        this.props.handleSelectChange(event.target.value, this.props.id);
+        if(event === null) {
+            var initial = this.props.options[0].value;
+            this.props.handleSelectChange(initial, this.props.id);
+            this.selectedOption = initial;
+            return;
+        }
+
+        this.props.handleSelectChange(event.value, this.props.id);
+        this.selectedOption = event.value;
     }
 
     render() {
         return(
-            <select className="selector fs-14" id={this.props.id} onChange={this.handleSelectChange} value={this.selectedOption}>{this.state.options}</select>
+            <Select className="selector fs-14" onChange={this.handleSelectChange} value={this.selectedOption} options={this.props.options} />
         );
     }
 }

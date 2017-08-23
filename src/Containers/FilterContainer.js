@@ -34,23 +34,23 @@ class FilterContainer extends Component {
     }
 
     getYears(){
-        let result = [{value: '', text: 'Year'}];
+        let result = [{value: '', label: 'Year'}];
         for(let i = 2017; i >= 1900; i--) {
-            let obj = {value: i, text: i};
+            let obj = {value: i, label: i};
             result.push(obj)
         }
         return result;
     }
 
     getSortingCriteria(){
-        var criteria = [{value: "", text:"Sort By"}, 
-        {value: "name", text:"Name"}, 
-        {value: "abv", text:"ABV"}, 
-        {value: "ibu", text:"IBU"}, 
-        {value: "createDate", text:"Creation Date"}, 
-        {value: "glasswareId", text:"Glassware"}, 
-        {value: "availableId", text:"Availability"}, 
-        {value: "isOrganic", text:"Organic"}];
+        var criteria = [{value: "", label:"Sort By"}, 
+        {value: "name", label:"Name"}, 
+        {value: "abv", label:"ABV"}, 
+        {value: "ibu", label:"IBU"}, 
+        {value: "createDate", label:"Creation Date"}, 
+        {value: "glasswareId", label:"Glassware"}, 
+        {value: "availableId", label:"Availability"}, 
+        {value: "isOrganic", label:"Organic"}];
 
         criteria.map((item) => {
             if(this.state.sort === item.value){

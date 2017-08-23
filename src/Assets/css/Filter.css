@@ -14,7 +14,7 @@
         font-size:18px;
     }
 
-    input, select{
+    input, .selector{
         margin:10px 0;
     }
 }
