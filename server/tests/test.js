@@ -20,6 +20,41 @@ const testingUsers = [
     "password": "4bc75035d73f6083683e040fc31f28e0ec6d1cbce5cb0a5e2611eb89bceb6c16",
     "firstName": "Mocha Two",
     "lastName": "Test Two"
+},
+{
+  "emailAddress": "testing-mocha@testing.com",
+  "password": "123456",
+  "firstName": "Mocha",
+  "lastName": ""
+},
+{
+  "emailAddress": "testing-mocha@testing.com",
+  "password": "123456",
+  "firstName": "",
+  "lastName": "Test"
+},
+{
+  "emailAddress": "testing-mocha@testing.com",
+  "firstName": "Mocha",
+  "lastName": "Test",
+},
+{
+  "emailAddress": "",
+  "password": "123456",
+  "firstName": "Mocha",
+  "lastName": "Test"
+},
+{
+  "emailAddress": "testing-mocha@testing.com",
+  "password": "1",
+  "firstName": "Mocha",
+  "lastName": "Test"
+},
+{
+  "emailAddress": "testing",
+  "password": "123456",
+  "firstName": "Mocha",
+  "lastName": "Test"
 }];
 
 
@@ -63,9 +98,64 @@ describe('AccountService', function() {
     describe('#signUp()', function() {
       it('should reject the sign up attempt and return false due to providing a duplicate email', async function() {
         let result = await accountService.signUp(testingUsers[0]);
-        assert.equal(result, false);
+        assert.notEqual(result, true);
       });
     });
+});
+
+describe('AccountService', function() {
+  describe('#signUp()', function() {
+    it('should reject the sign up attempt and return false due to not providing the last name', async function() {
+      let result = await accountService.signUp(testingUsers[2]);
+      assert.notEqual(result, true);
+    });
+  });
+});
+
+describe('AccountService', function() {
+  describe('#signUp()', function() {
+    it('should reject the sign up attempt and return false due to not providing the first name', async function() {
+      let result = await accountService.signUp(testingUsers[3]);
+      assert.notEqual(result, true);
+    });
+  });
+});
+
+describe('AccountService', function() {
+  describe('#signUp()', function() {
+    it('should reject the sign up attempt and return false due to not providing the password', async function() {
+      let result = await accountService.signUp(testingUsers[4]);
+      assert.notEqual(result, true);
+    });
+  });
+});
+
+describe('AccountService', function() {
+  describe('#signUp()', function() {
+    it('should reject the sign up attempt and return false due to not providing the email address', async function() {
+      let result = await accountService.signUp(testingUsers[5]);
+      assert.notEqual(result, true);
+    });
+  });
+});
+
+describe('AccountService', function() {
+  describe('#signUp()', function() {
+    it('should reject the sign up attempt and return false due to providing a short password', async function() {
+      let result = await accountService.signUp(testingUsers[6]);
+      assert.notEqual(result, true);
+    });
+  });
+});
+
+
+describe('AccountService', function() {
+  describe('#signUp()', function() {
+    it('should reject the sign up attempt and return false due to providing an invalid email address', async function() {
+      let result = await accountService.signUp(testingUsers[7]);
+      assert.notEqual(result, true);
+    });
+  });
 });
 
 describe('AccountService', function() {
@@ -89,7 +179,7 @@ describe('AccountService', function() {
 describe('BrewryWebService', function() {
     describe('#queryBeers()', function() {
       it('should return one or more items', async function() {
-        this.timeout(2000);
+        this.timeout(5000);
         let result = await beerService.getAllBeers("http://localhost?p=1&name=&ibu=&abv=&year=&order=");
         assert(result.data.length > 1, true);
       });

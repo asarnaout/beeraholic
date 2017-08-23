@@ -8,11 +8,15 @@ class AccountService{
         this.redisClient = redisClient;
     }
 
+    isProvided(field) {
+        return field != '' && field != undefined && field != null;
+    }
+
     signUp(user) {
         user.createdOn = new Date();
         return new Promise((resolve, reject) => {
 
-            if(user.emailAddress === '' || user.password === '' || user.firstName === '' || user.lastName === '') {
+            if(!this.isProvided(user.emailAddress) || !this.isProvided(user.password) || !this.isProvided(user.firstName) || !this.isProvided(user.lastName)) {
                 return resolve("Please Enter all the Required Fields");
             }
 
