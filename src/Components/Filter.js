@@ -5,6 +5,7 @@ import Button from './Button'
 import Selector from './Selector'
 import '../Assets/css/common.css'
 import '../Assets/css/Filter.css'
+import BeerIconImage from '../Assets/Images/beer-icon.png'
 
 class Filter extends Component{
 
@@ -12,7 +13,7 @@ class Filter extends Component{
         return (<div id="Filter">
                     <h1 className="black-text bold fs-50 no-margin white-text" id="SearchHeader">
                             <Link to={'/search'}>
-                                <img id="BeerIcon" width={55} height={55} />
+                                <img id="BeerIcon" src={BeerIconImage} width={55} height={55} />
                             </Link>
                             <span className="white-text">&nbsp;Keep Calm And Grab A Beer</span>                     
                     </h1>
