@@ -15,7 +15,7 @@ class BeerItem extends Component {
                 <div className="beer-item white-bg">
                     <div className="row">
                         <div className="col-xs-12">
-                            <span className="glyphicon glyphicon-heart-empty empty-ht red-text"></span>
+                            <span className="glyphicon glyphicon-heart-empty empty-ht"></span>
                             <img src={thumbnail} className="full-width"/>
                         </div>
                     </div>
@@ -43,9 +43,6 @@ class BeerItem extends Component {
                             <span className="glyphicon glyphicon-menu-right fs-20 bold more grey-text"/>
                         </div>
                     </div>
-                    
-
-
                 </div>
             </Link>
         );
