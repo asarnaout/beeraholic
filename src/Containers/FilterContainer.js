@@ -7,11 +7,12 @@ class FilterContainer extends Component {
 
     constructor(props){
         super(props);
-        
+
         this.handleKeyPress = this.handleKeyPress.bind(this);
         this.handleSelectChange = this.handleSelectChange.bind(this);
         this.fetchAllBeer = this.fetchAllBeer.bind(this);
         this.toggleFilter = this.toggleFilter.bind(this);
+        this.reset = this.reset.bind(this);
 
         this.state = {
             items: [],
@@ -30,6 +31,21 @@ class FilterContainer extends Component {
             abvPlaceHolder: this.state.abv === ''? "ABV" : this.state.abv,
             ibuPlaceHolder: this.state.ibu === ''? "IBU" : this.state.ibu,
             beernamePlaceholder: this.state.beername === ''? "Name" : this.state.beername
+        });
+        this.fetchAllBeer(this.state.page);
+    }
+
+    async reset(){
+        await this.setState({
+            page: 1,
+            ibu: '',
+            abv: '',
+            beername: '',
+            year: '',
+            sort: '',
+            beernamePlaceholder: 'Name',
+            ibuPlaceHolder: 'IBU',
+            abvPlaceHolder: 'ABV'
         });
         this.fetchAllBeer(this.state.page);
     }
@@ -112,7 +128,7 @@ class FilterContainer extends Component {
     render(){
         return <Filter beernamePlaceholder={this.state.beernamePlaceholder} abvPlaceHolder={this.state.abvPlaceHolder} ibuPlaceHolder={this.state.ibuPlaceHolder}
             handleKeyPress={this.handleKeyPress} handleSelectChange={this.handleSelectChange} yearOptions={this.getYears()}
-            sortOptions={this.getSortingCriteria()} ibu={this.state.ibu} abv={this.state.abv} beername={this.state.beername} 
+            sortOptions={this.getSortingCriteria()} ibu={this.state.ibu} abv={this.state.abv} beername={this.state.beername} reset={this.reset}
             year={this.state.year} sort={this.state.sort} searchBeers={this.fetchAllBeer} toggleFilter={this.toggleFilter} filterCollapsed={this.state.filterCollapsed}  />
     }
 }
