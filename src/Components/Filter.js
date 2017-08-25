@@ -10,7 +10,7 @@ import BeerIconImage from '../Assets/Images/beer-icon.png'
 class Filter extends Component{
 
     render(){
-        let filterVisibilityClass = this.props.filterCollapsed? " hidden-xs " : "";
+        let filterVisibilityClass = this.props.filterCollapsed? " hidden-xs hidden-sm " : "";
 
         return (<div id="Filter">
                     <h1 className="black-text bold no-margin white-text">
@@ -20,13 +20,13 @@ class Filter extends Component{
                         <span className="white-text" id="SearchHeader">&nbsp;Keep Calm And Grab A Beer</span>
                     </h1>
 
-                    <div className="visible-xs padding-5 center-text" id="Filter-Toggle" onClick={this.props.toggleFilter}>
+                    <div className="visible-xs visible-sm padding-5 center-text" id="Filter-Toggle" onClick={this.props.toggleFilter}>
                         <span className="white-text">Search Your Favorite Beer &nbsp;</span>
                         <span className="glyphicon glyphicon-search fs-12 white-text" />                   
                     </div>
 
-                    <div className="h30 hidden-xs" />
-                    <div className="h15 hidden-xs" />
+                    <div className="h30 hidden-xs hidden-sm" />
+                    <div className="h15 hidden-xs hidden-sm" />
                     <div className={"row" + filterVisibilityClass} >
                         <div className="col-xs-12 col-md-2">
                             <InputText placeholder="Name" value={this.props.beername} id="beername" handleKeyPress={this.props.handleKeyPress}/>

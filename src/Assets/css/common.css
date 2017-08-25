@@ -18,6 +18,10 @@
     width: 100%;
 }
 
+.no-wrap{
+    white-space: nowrap;
+}
+
 .center-item{
     margin-right: auto;
     margin-left: auto;

@@ -18,7 +18,7 @@ class Details extends Component {
                     <div className="h20"/>
                     <div>
                             <div className ="col-sm-7 col-xs-12">
-                                <span className="fs-40 bold">{this.props.name}</span>
+                                <span className="fs-40 bold" id="DetailsBeerName">{this.props.name}</span>
                                 <div className="h10"/>
                                 <span className="fs-18"><i>{this.props.style}</i></span>
                                 <div className="h10"/>
@@ -43,9 +43,11 @@ class Details extends Component {
 
                     <div className="row">
                         <div className="col-sm-2 col-sm-offset-5 col-xs-12">
-                            <Link to={'/search'}>
-                                <Button background="red-bg" placeholder="Back" />
-                            </Link> 
+                            <div id="BackButtonDetails">
+                                <Link to={'/search'}>
+                                    <Button background="red-bg" placeholder="Back" />
+                                </Link> 
+                            </div>
                         </div>                            
                     </div>
                     <div className="h30"/>

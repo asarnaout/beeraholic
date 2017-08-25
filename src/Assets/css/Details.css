@@ -1,3 +1,13 @@
 #DetailsPage{
     background-color: #fff;
 }
+
+@media screen and (max-width: 767px) {
+    #BackButtonDetails {
+        padding-right: 15px;
+        padding-left: 15px;
+    }
+    #DetailsBeerName{
+        font-size:25px;
+    }
+}
