@@ -22,12 +22,15 @@ class Selector extends Component{
         this.selectedOption = event.value;
     }
 
+    componentWillUpdate(nextProps, nextState){
+        this.selectedOption = nextProps.value === ''? undefined : nextProps.value;
+    }
+
     render() {
         return(
             <Select className="selector fs-14" onChange={this.handleSelectChange} value={this.selectedOption} placeholder={this.props.placeholder} options={this.props.options} />
         );
     }
 }
-
 
 export default Selector;
