@@ -15,7 +15,7 @@ class Filter extends Component{
         return (<div id="Filter">
                     <h1 className="black-text bold no-margin white-text">
                         <Link to={'/search'}>
-                            <img id="BeerIcon" src={BeerIconImage} width={55} alt="beer_ico" onClick={this.props.searchBeers} />
+                            <img id="BeerIcon" src={BeerIconImage} width={55} alt="beer_ico" onClick={this.props.reset} />
                         </Link>
                         <span className="white-text" id="SearchHeader">&nbsp;Keep Calm And Grab A Beer</span>
                     </h1>
