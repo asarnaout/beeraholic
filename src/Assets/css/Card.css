@@ -45,4 +45,9 @@ input[type="text"], input[type="password"] {
         font-size:25px;
         font-weight: bold;
     }
+
+    #Card #ErrorMessage {
+        color: red;
+        font-size: 14px;
+    }
 }
