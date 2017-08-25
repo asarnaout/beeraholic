@@ -27,11 +27,6 @@ class FilterContainer extends Component {
     }
 
     componentWillMount(){
-        this.setState({
-            abvPlaceHolder: this.state.abv === ''? "ABV" : this.state.abv,
-            ibuPlaceHolder: this.state.ibu === ''? "IBU" : this.state.ibu,
-            beernamePlaceholder: this.state.beername === ''? "Name" : this.state.beername
-        });
         this.fetchAllBeer(this.state.page);
     }
 
@@ -42,10 +37,7 @@ class FilterContainer extends Component {
             abv: '',
             beername: '',
             year: '',
-            sort: '',
-            beernamePlaceholder: 'Name',
-            ibuPlaceHolder: 'IBU',
-            abvPlaceHolder: 'ABV'
+            sort: ''
         });
         this.fetchAllBeer(this.state.page);
     }
@@ -126,8 +118,7 @@ class FilterContainer extends Component {
     }
 
     render(){
-        return <Filter beernamePlaceholder={this.state.beernamePlaceholder} abvPlaceHolder={this.state.abvPlaceHolder} ibuPlaceHolder={this.state.ibuPlaceHolder}
-            handleKeyPress={this.handleKeyPress} handleSelectChange={this.handleSelectChange} yearOptions={this.getYears()}
+        return <Filter handleKeyPress={this.handleKeyPress} handleSelectChange={this.handleSelectChange} yearOptions={this.getYears()}
             sortOptions={this.getSortingCriteria()} ibu={this.state.ibu} abv={this.state.abv} beername={this.state.beername} reset={this.reset}
             year={this.state.year} sort={this.state.sort} searchBeers={this.fetchAllBeer} toggleFilter={this.toggleFilter} filterCollapsed={this.state.filterCollapsed}  />
     }
