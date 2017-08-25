@@ -14,7 +14,7 @@ class Card extends Component {
                 <div key={field.id}>
                     <div className="row">
                         <div className="col-xs-10 col-xs-offset-1">
-                            <InputText placeholder={field.value} password={field.password} id={field.id} handleKeyPress={this.props.handleKeyPress} />
+                            <InputText placeholder={field.value} value="" password={field.password} id={field.id} handleKeyPress={this.props.handleKeyPress} />
                         </div>
                     </div>
                     <div className="h10"/>

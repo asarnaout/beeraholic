@@ -11,9 +11,6 @@ class Filter extends Component{
 
     render(){
         let filterVisibilityClass = this.props.filterCollapsed? " hidden-xs " : "";
-        let abvPlaceHolder= this.props.abv === ''? "ABV" : this.props.abv;
-        let ibuPlaceHolder= this.props.ibu === ''? "IBU" : this.props.ibu;
-        let beernamePlaceholder= this.props.beername === ''? "Name" : this.props.beername;
 
         return (<div id="Filter">
                     <h1 className="black-text bold no-margin white-text">
@@ -32,15 +29,15 @@ class Filter extends Component{
                     <div className="h15 hidden-xs" />
                     <div className={"row" + filterVisibilityClass} >
                         <div className="col-xs-12 col-md-2">
-                            <InputText placeholder={beernamePlaceholder} id="beername" handleKeyPress={this.props.handleKeyPress}/>
+                            <InputText placeholder="Name" value={this.props.beername} id="beername" handleKeyPress={this.props.handleKeyPress}/>
                         </div>
                         
                         <div className="col-xs-12 col-md-2">
-                            <InputText placeholder={abvPlaceHolder} id="abv" handleKeyPress={this.props.handleKeyPress} />
+                            <InputText placeholder="ABV" value={this.props.abv} id="abv" handleKeyPress={this.props.handleKeyPress} />
                         </div>
 
                         <div className="col-xs-12 col-md-2">
-                            <InputText placeholder={ibuPlaceHolder} id="ibu" handleKeyPress={this.props.handleKeyPress} />
+                            <InputText placeholder="IBU" value={this.props.ibu} id="ibu" handleKeyPress={this.props.handleKeyPress} />
                         </div>
 
                         <div className="col-xs-12 col-md-2">
