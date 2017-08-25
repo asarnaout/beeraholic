@@ -34,7 +34,7 @@ class SignUpContainer extends Component{
             password: this.state.password,
             firstName: this.state.firstName,
             lastName: this.state.lastName
-        };
+        };        
 
         let result = await axios({
             method: 'post',
@@ -58,12 +58,11 @@ class SignUpContainer extends Component{
 
     render(){
         return (
-            <Card header="Join Us" firstName={this.state.firstName} lastName={this.state.lastName} emailAddress={this.state.emailAddress} 
-            password={this.state.password} fields={[
-                {value: 'First Name', password: false, id: "firstName"},
-                {value: 'Last Name', password: false, id: "lastName"}, 
-                {value: 'Email Address', password: false, id: "emailAddress"}, 
-                {value: 'Password', password: true, id:"password"}]} 
+            <Card header="Join Us" fields={[
+                {placeholder: 'First Name', value: this.state.firstName, password: false, id: "firstName"},
+                {placeholder: 'Last Name', value: this.state.lastName, password: false, id: "lastName"}, 
+                {placeholder: 'Email Address', value: this.state.emailAddress, password: false, id: "emailAddress"}, 
+                {placeholder: 'Password', value: this.state.password, password: true, id:"password"}]} 
                 actionButtonValue="Sign Up" actionButtonHandler={this.signUp} handleKeyPress={this.inputEntered} errorMessage={this.state.errorMessage}>
             </Card>
         );
