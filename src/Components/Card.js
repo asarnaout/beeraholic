@@ -24,19 +24,21 @@ class Card extends Component {
     }
 
     getActionButton(){
-        if(this.props.actionButtonValue === '') return;
+        if(this.props.buttons.length === 0) return;
 
-        return(
-            <div>
-                <div className="row">
-                    <div className="col-xs-10 col-xs-offset-1">
-                        <Button placeholder={this.props.actionButtonValue} clickHandler={this.props.actionButtonHandler} background="blue-bg" />
+        return this.props.buttons.map(item => {
+            return(
+                <div key={item.actionButtonValue}>
+                    <div className="row">
+                        <div className="col-xs-10 col-xs-offset-1">
+                            <Button placeholder={item.actionButtonValue} clickHandler={item.actionButtonHandler} background={item.backgroundClass} />
+                        </div>
                     </div>
-                </div>
-                                
-                <div className="h10"/>
-            </div>            
-        );
+                                    
+                    <div className="h10"/>
+                </div>            
+            );
+        });        
     }
 
     getErrorMessage(){

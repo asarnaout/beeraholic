@@ -55,8 +55,11 @@ class HomeContainer extends Component {
 
     render() {
         return (
-            <Card header="Craving Beer?" fields={[{value: this.state.emailAddress, placeholder:'Email Address', password: false, id: "emailAddress"}, {value: this.state.password, placeholder:"password", password: true, id:"password"}]} 
-                actionButtonValue="Login" actionButtonHandler={this.login} handleKeyPress={this.inputEntered} errorMessage={this.state.errorMessage}>
+            <Card header="Craving Beer?" fields={[
+                {value: this.state.emailAddress, placeholder:'Email Address', password: false, id: "emailAddress"}, 
+                {value: this.state.password, placeholder:"password", password: true, id:"password"}]}
+                buttons={[{actionButtonValue:"Login", actionButtonHandler:this.login, backgroundClass: "blue-bg"}]} 
+                handleKeyPress={this.inputEntered} errorMessage={this.state.errorMessage}>
                 <JoinNow/>
             </Card>
         );

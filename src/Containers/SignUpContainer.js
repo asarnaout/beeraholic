@@ -11,6 +11,7 @@ class SignUpContainer extends Component{
         this.auth();
         this.signUp = this.signUp.bind(this);
         this.inputEntered = this.inputEntered.bind(this);
+        this.handleBackButton = this.handleBackButton.bind(this);
         this.state = {
             firstName: '',
             lastName: '',
@@ -56,14 +57,22 @@ class SignUpContainer extends Component{
         this.setState(newState); 
     }
 
+    handleBackButton() {
+        this.props.history.push('/home');
+    }
+
     render(){
         return (
             <Card header="Join Us" fields={[
                 {placeholder: 'First Name', value: this.state.firstName, password: false, id: "firstName"},
                 {placeholder: 'Last Name', value: this.state.lastName, password: false, id: "lastName"}, 
                 {placeholder: 'Email Address', value: this.state.emailAddress, password: false, id: "emailAddress"}, 
-                {placeholder: 'Password', value: this.state.password, password: true, id:"password"}]} 
-                actionButtonValue="Sign Up" actionButtonHandler={this.signUp} handleKeyPress={this.inputEntered} errorMessage={this.state.errorMessage}>
+                {placeholder: 'Password', value: this.state.password, password: true, id:"password"}]}
+                buttons={[
+                    {actionButtonValue:"Sign Up", actionButtonHandler:this.signUp, backgroundClass: "blue-bg"},
+                    {actionButtonValue:"Back", actionButtonHandler:this.handleBackButton, backgroundClass: "red-bg"}
+                ]} 
+                handleKeyPress={this.inputEntered} errorMessage={this.state.errorMessage}>
             </Card>
         );
     }
