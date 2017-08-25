@@ -12,10 +12,10 @@ class SignUpContainer extends Component{
         this.signUp = this.signUp.bind(this);
         this.inputEntered = this.inputEntered.bind(this);
         this.state = {
-            FirstName: '',
-            LastName: '',
-            EmailAddress: '',
-            Password: '',
+            firstName: '',
+            lastName: '',
+            emailAddress: '',
+            password: '',
             errorMessage: ''
         };
     }
@@ -30,10 +30,10 @@ class SignUpContainer extends Component{
 
     async signUp(){
         let data = {
-            emailAddress: this.state.EmailAddress,
-            password: this.state.Password,
-            firstName: this.state.FirstName,
-            lastName: this.state.LastName
+            emailAddress: this.state.emailAddress,
+            password: this.state.password,
+            firstName: this.state.firstName,
+            lastName: this.state.lastName
         };
 
         let result = await axios({
@@ -58,11 +58,12 @@ class SignUpContainer extends Component{
 
     render(){
         return (
-            <Card header="Join Us" fields={[
-                {value: 'First Name', password: false, id: "FirstName"},
-                {value: 'Last Name', password: false, id: "LastName"}, 
-                {value: 'Email Address', password: false, id: "EmailAddress"}, 
-                {value: 'Password', password: true, id:"Password"}]} 
+            <Card header="Join Us" firstName={this.state.firstName} lastName={this.state.lastName} emailAddress={this.state.emailAddress} 
+            password={this.state.password} fields={[
+                {value: 'First Name', password: false, id: "firstName"},
+                {value: 'Last Name', password: false, id: "lastName"}, 
+                {value: 'Email Address', password: false, id: "emailAddress"}, 
+                {value: 'Password', password: true, id:"password"}]} 
                 actionButtonValue="Sign Up" actionButtonHandler={this.signUp} handleKeyPress={this.inputEntered} errorMessage={this.state.errorMessage}>
             </Card>
         );

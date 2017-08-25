@@ -13,8 +13,8 @@ class HomeContainer extends Component {
         this.login = this.login.bind(this);
         this.inputEntered = this.inputEntered.bind(this);
         this.state = {
-            EmailAddress: '',
-            Password: '',
+            emailAddress: '',
+            password: '',
             errorMessage : ''
         };
     }
@@ -29,8 +29,8 @@ class HomeContainer extends Component {
 
     async login() {
         let data = {
-            emailAddress: this.state.EmailAddress,
-            password: this.state.Password
+            emailAddress: this.state.emailAddress,
+            password: this.state.password
         };
 
         let result = (await axios({
@@ -55,7 +55,7 @@ class HomeContainer extends Component {
 
     render() {
         return (
-            <Card header="Craving Beer?" fields={[{value: 'Email Address', password: false, id: "EmailAddress"}, {value: 'Password', password: true, id:"Password"}]} 
+            <Card header="Craving Beer?" emailAddress={this.state.emailAddress} password={this.state.password} fields={[{value: 'Email Address', password: false, id: "emailAddress"}, {value: 'Password', password: true, id:"password"}]} 
                 actionButtonValue="Login" actionButtonHandler={this.login} handleKeyPress={this.inputEntered} errorMessage={this.state.errorMessage}>
                 <JoinNow/>
             </Card>
