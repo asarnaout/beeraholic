@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom'
 import InputText from './InputText'
 import Button from './Button'
-import Selector from './Selector'
+import SelectorContainer from '../Containers/SelectorContainer'
 import '../Assets/css/common.css'
 import '../Assets/css/Filter.css'
 import BeerIconImage from '../Assets/Images/beer-icon.png'
@@ -41,11 +41,11 @@ class Filter extends Component{
                         </div>
 
                         <div className="col-xs-12 col-md-2">
-                            <Selector placeholder="Year" options={this.props.yearOptions} id="year" handleSelectChange={this.props.handleSelectChange} value={this.props.year} />
+                            <SelectorContainer placeholder="Year" options={this.props.yearOptions} id="year" handleSelectChange={this.props.handleSelectChange} value={this.props.year} />
                         </div>
 
                         <div className="col-xs-12 col-md-2">
-                            <Selector id="sort" placeholder="Sort" options={this.props.sortOptions} handleSelectChange={this.props.handleSelectChange} value={this.props.sort}/>
+                            <SelectorContainer id="sort" placeholder="Sort" options={this.props.sortOptions} handleSelectChange={this.props.handleSelectChange} value={this.props.sort}/>
                         </div>
 
                         <div className="col-xs-12 col-md-2">
