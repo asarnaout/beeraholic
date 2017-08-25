@@ -6,12 +6,41 @@
 #BeerIcon{
     -webkit-filter: invert(100%);
     filter: invert(100%);
-    margin: -10px 0 0 -10px;
+}
+
+@media screen and (min-width: 992px) {
+    #SearchHeader{
+        font-size:50px;
+    }
+
+    #BeerIcon{
+        margin: -17px 0 0 -10px;
+    }
 }
 
 @media screen and (max-width: 991px) {
+ 
+    #Filter{
+        padding: 10px 15px;
+        margin:0;
+    }
+
+    #Filter-Toggle{
+        margin: 15px 0;
+        border-radius:2px;
+        border: none;
+        background-color: black;
+        opacity:0.4;
+    }
+
     #SearchHeader{
         font-size:18px;
+    }
+
+    #BeerIcon{
+        width: 27px;
+        vertical-align: bottom;
+        margin: 0 0 1px -4px;
     }
 
     input, .selector{

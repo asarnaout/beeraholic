@@ -10,16 +10,24 @@ import BeerIconImage from '../Assets/Images/beer-icon.png'
 class Filter extends Component{
 
     render(){
+        let filterVisibilityClass = this.props.filterCollapsed? " hidden-xs " : "";
+
         return (<div id="Filter">
-                    <h1 className="black-text bold fs-50 no-margin white-text" id="SearchHeader">
-                            <Link to={'/search'}>
-                                <img id="BeerIcon" src={BeerIconImage} width={55} height={55} alt="beer_ico" />
-                            </Link>
-                            <span className="white-text">&nbsp;Keep Calm And Grab A Beer</span>                     
+                    <h1 className="black-text bold no-margin white-text">
+                        <Link to={'/search'}>
+                            <img id="BeerIcon" src={BeerIconImage} width={55} alt="beer_ico" />
+                        </Link>
+                        <span className="white-text" id="SearchHeader">&nbsp;Keep Calm And Grab A Beer</span>
                     </h1>
-                    <div className="h30"/>
-                    <div className="h15"/>
-                    <div className="row">
+
+                    <div className="visible-xs padding-5 center-text" id="Filter-Toggle" onClick={this.props.toggleFilter}>
+                        <span className="white-text">Search Your Favorite Beer &nbsp;</span>
+                        <span className="glyphicon glyphicon-search fs-12 white-text" />                   
+                    </div>
+
+                    <div className="h30 hidden-xs" />
+                    <div className="h15 hidden-xs" />
+                    <div className={"row" + filterVisibilityClass} >
                         <div className="col-xs-12 col-md-2">
                             <InputText placeholder={this.props.beernamePlaceholder} id="beername" handleKeyPress={this.props.handleKeyPress}/>
                         </div>

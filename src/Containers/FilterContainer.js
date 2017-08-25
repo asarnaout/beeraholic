@@ -11,6 +11,7 @@ class FilterContainer extends Component {
         this.handleKeyPress = this.handleKeyPress.bind(this);
         this.handleSelectChange = this.handleSelectChange.bind(this);
         this.fetchAllBeer = this.fetchAllBeer.bind(this);
+        this.toggleFilter = this.toggleFilter.bind(this);
 
         this.state = {
             items: [],
@@ -19,7 +20,8 @@ class FilterContainer extends Component {
             abv: this.props.abv === undefined? '' : this.props.abv,
             beername: this.props.beername === undefined? '' : this.props.beername,
             year: this.props.year === undefined? '' : this.props.year,
-            sort: this.props.sort === undefined? '' : this.props.sort
+            sort: this.props.sort === undefined? '' : this.props.sort,
+            filterCollapsed: true
         }
     }
 
@@ -103,11 +105,15 @@ class FilterContainer extends Component {
         }
     }
 
+    toggleFilter() {
+        this.setState({filterCollapsed: !this.state.filterCollapsed})
+    }
+
     render(){
         return <Filter beernamePlaceholder={this.state.beernamePlaceholder} abvPlaceHolder={this.state.abvPlaceHolder} ibuPlaceHolder={this.state.ibuPlaceHolder}
             handleKeyPress={this.handleKeyPress} handleSelectChange={this.handleSelectChange} yearOptions={this.getYears()}
             sortOptions={this.getSortingCriteria()} ibu={this.state.ibu} abv={this.state.abv} beername={this.state.beername} 
-            year={this.state.year} sort={this.state.sort} searchBeers={this.fetchAllBeer} />
+            year={this.state.year} sort={this.state.sort} searchBeers={this.fetchAllBeer} toggleFilter={this.toggleFilter} filterCollapsed={this.state.filterCollapsed}  />
     }
 }
 

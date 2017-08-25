@@ -22,18 +22,18 @@ class Search extends Component {
         let renderPreviousButton = this.props.page > 1;
 
         if(renderNextButton && !renderPreviousButton) {
-            return <img src={config.navArrowCdn} onClick={this.props.nextPage} width={40} height={40} className="center-item pointer" alt="next_page"/>; 
+            return <img src={config.navArrowCdn} onClick={this.props.nextPage} width={40} height={40} className="center-item pointer" alt="next_page"/>
         }
 
         if(!renderNextButton && renderPreviousButton) {
-            return <img src={config.navArrowCdn} onClick={this.props.previousPage} width={40} height={40} className="center-item flip-Y pointer" alt="previous_page"/>; 
+            return <img src={config.navArrowCdn} onClick={this.props.previousPage} width={40} height={40} className="center-item flip-Y pointer" alt="previous_page"/>
         }
 
         if(renderNextButton && renderPreviousButton) {
             return (
                 <div className="center-text">
                     <img src={config.navArrowCdn} onClick={this.props.previousPage} width={40} height={40} className="inline flip-Y pointer margin-15" alt="previous_page"/>
-                    <img src={config.navArrowCdn} onClick={this.props.nextPage} width={40} height={40} className="inline pointer margin-15" alt="next_page"/>; 
+                    <img src={config.navArrowCdn} onClick={this.props.nextPage} width={40} height={40} className="inline pointer margin-15" alt="next_page"/>
                 </div>
             ); 
         }
