@@ -7,15 +7,26 @@ import config from '../config.js'
 
 class BeerItem extends Component {
 
+    constructor(props) {
+        super(props);
+        this.toggleFav = this.toggleFav.bind(this);
+    }
+
+    toggleFav() {
+        this.props.toggleFav(this.props.beerid)
+    }
+
     render() {
         let qs = `?ibu=${this.props.filterIbu}&abv=${this.props.filterAbv}&name=${this.props.filterName}&year=${this.props.filterYear}&order=${this.props.filterOrder}&page=${this.props.filterPage}`;
         let thumbnail = this.props.thumbnail === ''? config.defaultSearchItemIconCdn : this.props.thumbnail;
+        let heartClass = this.props.isFav? "glyphicon-heart full-ht" : "glyphicon-heart-empty empty-ht"
+        
         return(
             <Link to={'/details/' + this.props.beerid + qs}>
                 <div className="beer-item white-bg">
                     <div className="row">
                         <div className="col-xs-12">
-                            <span className="glyphicon glyphicon-heart-empty empty-ht"></span>
+                            <span className={"glyphicon heart " + heartClass} onClick={this.toggleFav}></span>
                             <img src={thumbnail} className="full-width" alt={this.props.beername}/>
                         </div>
                     </div>

@@ -3,11 +3,14 @@ import { connect } from 'react-redux'
 import { incrementPage, decrementPage, setPage, setNumberOfPages } from '../Actions/page-actions'
 import { setFilter } from '../Actions/filter-actions'
 import { setItems, toggleLoading } from '../Actions/item-actions'
-import { getAllBeers } from '../Helpers/ApiHelpers'
+import { getAllBeers, toggleFavoriteBeer } from '../Helpers/ApiHelpers'
+import AuthenticationHelpers from '../Helpers/AuthenticationHelpers'
+
+const cookie = AuthenticationHelpers.getAuthenticationCookie();
 
 const refreshItems = async (dispatch, page, beername, ibu, abv, year, order) =>{
     dispatch(toggleLoading());
-    let result = await getAllBeers(page, beername, ibu, abv, year, order);
+    let result = await getAllBeers(page, beername, ibu, abv, year, order, cookie);
     dispatch(toggleLoading());
     dispatch(setItems(result.items));
     dispatch(setNumberOfPages(result.numberOfPages));
@@ -48,6 +51,9 @@ const mapDispatchToProps = dispatch => {
             dispatch(setFilter(newFilter));
             setPage(newFilter.page);
             await refreshItems(dispatch, newFilter.page, newFilter.name, newFilter.ibu, newFilter.abv, newFilter.year, newFilter.order);
+        },
+        toggleFav: async(id) => {
+            toggleFavoriteBeer(cookie, id);
         }
     }
 }

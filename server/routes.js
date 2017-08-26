@@ -14,9 +14,14 @@ function handleRoutes(express, accountService, beerService) {
     app.use("/static/css/", express.static(__dirname + '/../build/static/css'));
     app.use("/static/js/", express.static(__dirname + '/../build/static/js'));
     app.use("/service-worker.js", express.static(__dirname + '/../build'));
-
-    app.get('/beers', async function(req, res){
-        let result = await beerService.getAllBeers(req.url);
+    
+    app.post('/beer/togglefav', async (request, response) => {
+        let result = await beerService.toggleFavorites(request.body);
+		response.send(result);
+    });
+    
+    app.post('/beers', async function(req, res){
+        let result = await beerService.getAllBeers(req.url, req.body);
     	res.send(result);
     });
 

@@ -4,6 +4,7 @@ import { getAllBeers } from '../Helpers/ApiHelpers'
 import { setName, setAbv, setIbu, setYear, setOrder, clearFilter, toggleFilter } from '../Actions/filter-actions'
 import { setNumberOfPages,  resetPage } from '../Actions/page-actions'
 import { setItems, toggleLoading } from '../Actions/item-actions'
+import AuthenticationHelpers from '../Helpers/AuthenticationHelpers'
 
 const getYears = () => {
     let result = [];
@@ -25,7 +26,8 @@ const getOrderingCriteria = (state) => {
 
 const refreshItems = async (dispatch, page, beername, ibu, abv, year, order) =>{
     dispatch(toggleLoading());
-    let result = await getAllBeers(page, beername, ibu, abv, year, order);
+    let cookie = AuthenticationHelpers.getAuthenticationCookie();
+    let result = await getAllBeers(page, beername, ibu, abv, year, order, cookie);
     dispatch(toggleLoading());
     dispatch(setItems(result.items));
     dispatch(setNumberOfPages(result.numberOfPages));

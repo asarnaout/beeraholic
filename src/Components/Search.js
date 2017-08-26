@@ -43,10 +43,11 @@ class Search extends Component {
         return this.props.items.map((beer) => {
             let thumbnail = beer.labels === undefined? '' : beer.labels.medium;
             let style = beer.style === undefined? 'Beer Style Not Available' : beer.style.name;
+
             return (<div className="col-lg-4 col-sm-6 col-xs-12" key={beer.id}>
-                        <BeerItem thumbnail={thumbnail} beername={beer.name} beerid={beer.id} beerstyle={style}
+                        <BeerItem thumbnail={thumbnail} beername={beer.name} beerid={beer.id} beerstyle={style} isFav={beer.isFav}
                             filterName={this.props.beername} filterAbv={this.props.abv} filterIbu={this.props.ibu}
-                            filterYear={this.props.year} filterOrder={this.props.order} filterPage={this.props.page} />
+                            filterYear={this.props.year} filterOrder={this.props.order} filterPage={this.props.page} toggleFav={this.props.toggleFav} />
                     </div>
               );
         });
