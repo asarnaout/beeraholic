@@ -6,6 +6,20 @@ import '../Assets/css/common.css'
 
 class Search extends Component {
 
+    constructor(props) {
+        super(props);
+        this.nextPage = this.nextPage.bind(this);
+        this.previousPage = this.previousPage.bind(this);
+    }
+
+    async nextPage() {
+        await this.props.nextPage(this.props.page + 1, this.props.beername, this.props.ibu, this.props.abv, this.props.year, this.props.order)
+    }
+
+    async previousPage() {
+        await this.props.previousPage(this.props.page - 1, this.props.beername, this.props.ibu, this.props.abv, this.props.year, this.props.order)
+    }
+
     getItems(){
         return this.props.items.map((beer) => {
             let thumbnail = beer.labels === undefined? '' : beer.labels.medium;
@@ -22,18 +36,18 @@ class Search extends Component {
         let renderPreviousButton = this.props.page > 1;
 
         if(renderNextButton && !renderPreviousButton) {
-            return <img src={config.navArrowCdn} onClick={this.props.nextPage} width={40} height={40} className="center-item pointer" alt="next_page"/>
+            return <img src={config.navArrowCdn} onClick={this.nextPage} width={40} height={40} className="center-item pointer" alt="next_page"/>
         }
 
         if(!renderNextButton && renderPreviousButton) {
-            return <img src={config.navArrowCdn} onClick={this.props.previousPage} width={40} height={40} className="center-item flip-Y pointer" alt="previous_page"/>
+            return <img src={config.navArrowCdn} onClick={this.previousPage} width={40} height={40} className="center-item flip-Y pointer" alt="previous_page"/>
         }
 
         if(renderNextButton && renderPreviousButton) {
             return (
                 <div className="center-text">
-                    <img src={config.navArrowCdn} onClick={this.props.previousPage} width={40} height={40} className="inline flip-Y pointer margin-15" alt="previous_page"/>
-                    <img src={config.navArrowCdn} onClick={this.props.nextPage} width={40} height={40} className="inline pointer margin-15" alt="next_page"/>
+                    <img src={config.navArrowCdn} onClick={this.previousPage} width={40} height={40} className="inline flip-Y pointer margin-15" alt="previous_page"/>
+                    <img src={config.navArrowCdn} onClick={this.nextPage} width={40} height={40} className="inline pointer margin-15" alt="next_page"/>
                 </div>
             ); 
         }
@@ -49,9 +63,7 @@ class Search extends Component {
             <div>
                 <div className="turquoise-bg">
                     <div className="container">
-                        <FilterContainer updateItems={this.props.updateItems} page={this.props.page} 
-                        searchHandler={this.props.searchHandler} ibu={this.props.ibu} abv={this.props.abv} beername={this.props.beername} 
-                        year={this.props.year} sort={this.props.sort} />
+                        <FilterContainer />
                     </div>
                 </div>
                 <div className="container">

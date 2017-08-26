@@ -1,127 +1,58 @@
-import React, { Component } from 'react';
-import axios from 'axios'
-import config from '../config.js'
 import Filter from '../Components/Filter'
+import { connect } from 'react-redux'
+import { getAllBeers } from '../Helpers/ApiHelpers'
+import { setName, setAbv, setIbu, setYear, setOrder, setItems, setNumberOfPages, clearFilter, setLoading } from '../Actions/actions'
 
-class FilterContainer extends Component {
-
-    constructor(props){
-        super(props);
-
-        this.handleKeyPress = this.handleKeyPress.bind(this);
-        this.handleSelectChange = this.handleSelectChange.bind(this);
-        this.fetchAllBeer = this.fetchAllBeer.bind(this);
-        this.toggleFilter = this.toggleFilter.bind(this);
-        this.reset = this.reset.bind(this);
-
-        this.state = {
-            items: [],
-            page: this.props.page,
-            ibu: this.props.ibu === undefined? '' : this.props.ibu,
-            abv: this.props.abv === undefined? '' : this.props.abv,
-            beername: this.props.beername === undefined? '' : this.props.beername,
-            year: this.props.year === undefined? '' : this.props.year,
-            sort: this.props.sort === undefined? '' : this.props.sort,
-            filterCollapsed: true
-        }
+const getYears = () => {
+    let result = [];
+    for(let i = 2017; i >= 1900; i--) {
+        result.push({value: i, label: i})
     }
+    return result;
+}
 
-    componentWillMount(){
-        this.fetchAllBeer(this.state.page);
-    }
+const getOrderingCriteria = (state) => {
+    return [{value: "name", label:"Name"}, 
+    {value: "abv", label:"ABV"}, 
+    {value: "ibu", label:"IBU"}, 
+    {value: "createDate", label:"Creation Date"}, 
+    {value: "glasswareId", label:"Glassware"}, 
+    {value: "availableId", label:"Availability"}, 
+    {value: "isOrganic", label:"Organic"}];
+}
 
-    async reset(){
-        await this.setState({
-            page: 1,
-            ibu: '',
-            abv: '',
-            beername: '',
-            year: '',
-            sort: ''
-        });
-        this.fetchAllBeer(this.state.page);
-    }
-
-    getYears(){
-        let result = [];
-        for(let i = 2017; i >= 1900; i--) {
-            let obj = {value: i, label: i};
-            result.push(obj)
-        }
-        return result;
-    }
-
-    getSortingCriteria(){
-        let criteria = [{value: "name", label:"Name"}, 
-        {value: "abv", label:"ABV"}, 
-        {value: "ibu", label:"IBU"}, 
-        {value: "createDate", label:"Creation Date"}, 
-        {value: "glasswareId", label:"Glassware"}, 
-        {value: "availableId", label:"Availability"}, 
-        {value: "isOrganic", label:"Organic"}];
-
-        criteria.map((item) => {
-            if(this.state.sort === item.value){
-                item.selected = true;
-            }
-            return item;
-        });
-        return criteria;
-    }
-
-    handleKeyPress(value, id){    
-        let newValue = {};
-        newValue[id] = value;
-        this.setState(newValue);
-    }
-
-    handleSelectChange(value, id){ //Decoupling the same logic into separate functions in case different logic will be introduced later on handling differnt types of input
-        let newValue = {};
-        newValue[id] = value;
-        this.setState(newValue);
-    }
-
-    fetchAllBeer(page){
-        if(typeof(page) !== 'number') {            
-            page = 1;
-        }
-
-        this.props.searchHandler();
-        
-        let queryString = "?p=" + page + "&name=" + this.state.beername + "&ibu=" + this.state.ibu + "&abv=" + this.state.abv + "&year=" + this.state.year + "&order=" + this.state.sort
-        ;(axios({
-            method: 'get',
-            url: config.apiEndpoint + 'beers' + queryString,
-          })).then(response => {
-              let beers = typeof (response.data.data) === 'undefined'? [] : response.data.data;
-              let pages = response.data.numberOfPages;
-              this.setState({items: beers});
-              this.updateParent(beers, pages);
-          }); 
-    }
-
-    updateParent(beers, pages){
-        if(!(typeof(this.props.updateItems) === 'undefined')) {
-            this.props.updateItems(beers, pages);
-        }
-    }
-
-    componentWillReceiveProps(nextProps){
-        if(nextProps.page !== this.props.page) {
-            this.setState({page: nextProps.state});
-            this.fetchAllBeer(nextProps.page);
-        }
-    }
-
-    toggleFilter() {
-        this.setState({filterCollapsed: !this.state.filterCollapsed})
-    }
-
-    render(){
-        return <Filter handleKeyPress={this.handleKeyPress} handleSelectChange={this.handleSelectChange} yearOptions={this.getYears()}
-            sortOptions={this.getSortingCriteria()} ibu={this.state.ibu} abv={this.state.abv} beername={this.state.beername} reset={this.reset}
-            year={this.state.year} sort={this.state.sort} searchBeers={this.fetchAllBeer} toggleFilter={this.toggleFilter} filterCollapsed={this.state.filterCollapsed}  />
+const mapStateToProps = state => {
+    return {
+      beername: state.filter.name,
+      abv: state.filter.abv,
+      ibu: state.filter.ibu,
+      year: state.filter.year,
+      order: state.filter.order,
+      items: state.filter.items,
+      page: state.page,
+      yearOptions: getYears(),
+      orderOptions: getOrderingCriteria(),
     }
 }
 
-export default FilterContainer;
+const mapDispatchToProps = dispatch => {
+    return {
+      onNameChange: value => dispatch(setName(value)),
+      onAbvChange: value => dispatch(setAbv(value)),
+      onIbuChange: value => dispatch(setIbu(value)),
+      onYearChange: value => dispatch(setYear(value)),
+      onOrderChange: value => dispatch(setOrder(value)),
+      reset: () => dispatch(clearFilter()),
+      getItems: async (page, beername, ibu, abv, year, order) =>{
+           dispatch(setLoading(true));
+           let result = await getAllBeers(page, beername, ibu, abv, year, order);
+           dispatch(setLoading(false));
+           dispatch(setItems(result.items));
+           dispatch(setNumberOfPages(result.numberOfPages));
+      }
+    }
+}
+
+const FilterContainer = connect(mapStateToProps, mapDispatchToProps)(Filter);
+  
+export default FilterContainer

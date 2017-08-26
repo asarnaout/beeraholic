@@ -2,7 +2,12 @@ import React, { Component } from 'react';
 import { BrowserRouter as Router, Route } from 'react-router-dom'
 import Loadable from 'react-loadable';
 import Loading from './Loading.js';
+import { Provider } from 'react-redux'
+import { createStore } from 'redux'
 import './App.css';
+import reducers from './Reducers/main-reducer'
+
+const store = createStore(reducers)
 
 const Home = Loadable({
   loader: () => import('./Containers/HomeContainer.js'),
@@ -27,15 +32,16 @@ const SignUp = Loadable({
 class App extends Component {
   render() {
     return (
-      <Router>
-        <div className="App">
-
-          <Route path="/home" component={Home} />
-          <Route path="/search" component={Search} />
-          <Route path="/signup" component={SignUp} />
-          <Route path="/details/:beerId" component={Details} />
-        </div>
-      </Router>
+      <Provider store={store}>
+        <Router>
+          <div className="App">
+            <Route path="/home" component={Home} />
+            <Route path="/search" component={Search} />
+            <Route path="/signup" component={SignUp} />
+            <Route path="/details/:beerId" component={Details} />
+          </div>
+        </Router>
+      </Provider>      
     );
   }
 }
