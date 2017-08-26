@@ -44,9 +44,9 @@ const mapDispatchToProps = dispatch => {
       onOrderChange: value => dispatch(setOrder(value)),
       reset: () => dispatch(clearFilter()),
       getItems: async (page, beername, ibu, abv, year, order) =>{
-           dispatch(toggleLoading(true));
+           dispatch(toggleLoading());
            let result = await getAllBeers(page, beername, ibu, abv, year, order);
-           dispatch(toggleLoading(false));
+           dispatch(toggleLoading());
            dispatch(setItems(result.items));
            dispatch(setNumberOfPages(result.numberOfPages));
       }

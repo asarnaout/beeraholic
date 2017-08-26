@@ -18,9 +18,9 @@ const mapStateToProps = state => {
 }
 
 const refreshItems = async (dispatch, page, beername, ibu, abv, year, order) =>{
-    dispatch(toggleLoading(true));
+    dispatch(toggleLoading());
     let result = await getAllBeers(page, beername, ibu, abv, year, order);
-    dispatch(toggleLoading(false));
+    dispatch(toggleLoading());
     dispatch(setItems(result.items));
     dispatch(setNumberOfPages(result.numberOfPages));
 }
