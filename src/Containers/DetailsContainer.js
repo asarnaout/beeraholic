@@ -21,7 +21,8 @@ class DetailsContainer extends Component {
             name: '',
             description:'',
             statusDisplay: '',
-            createDate:''
+            createDate:'',
+            query: this.props.location.search
         }
     }
 
@@ -65,7 +66,7 @@ class DetailsContainer extends Component {
         return <Details name={this.state.name} style={this.state.style} description={this.state.description}
             statusDisplay={this.state.statusDisplay} abv={this.state.abv} ibu={this.state.ibu} organic={this.state.organic}
             available={this.state.available} glass={this.state.glass} srm={this.state.srm} createDate={this.state.createDate}
-            thumbnail={this.state.thumbnail}/>
+            thumbnail={this.state.thumbnail} query={this.state.query} />
     }
 }
 

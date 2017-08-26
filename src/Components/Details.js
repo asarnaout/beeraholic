@@ -44,7 +44,7 @@ class Details extends Component {
                     <div className="row">
                         <div className="col-sm-2 col-sm-offset-5 col-xs-12">
                             <div id="BackButtonDetails">
-                                <Link to={'/search'}>
+                                <Link to={'/search' + this.props.query}>
                                     <Button background="red-bg" placeholder="Back" />
                                 </Link> 
                             </div>

@@ -8,9 +8,10 @@ import config from '../config.js'
 class BeerItem extends Component {
 
     render() {
+        let qs = `?ibu=${this.props.filterIbu}&abv=${this.props.filterAbv}&name=${this.props.filterName}&year=${this.props.filterYear}&order=${this.props.filterOrder}&page=${this.props.filterPage}`;
         let thumbnail = this.props.thumbnail === ''? config.defaultSearchItemIconCdn : this.props.thumbnail;
         return(
-            <Link to={'/details/' + this.props.beerid}>
+            <Link to={'/details/' + this.props.beerid + qs}>
                 <div className="beer-item white-bg">
                     <div className="row">
                         <div className="col-xs-12">
