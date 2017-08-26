@@ -1,7 +1,7 @@
 import Filter from '../Components/Filter'
 import { connect } from 'react-redux'
 import { getAllBeers } from '../Helpers/ApiHelpers'
-import { setName, setAbv, setIbu, setYear, setOrder, setItems, setNumberOfPages, clearFilter, toggleLoading } from '../Actions/actions'
+import { setName, setAbv, setIbu, setYear, setOrder, setItems, setNumberOfPages, clearFilter, toggleLoading, resetPage, toggleFilter } from '../Actions/actions'
 
 const getYears = () => {
     let result = [];
@@ -21,6 +21,14 @@ const getOrderingCriteria = (state) => {
     {value: "isOrganic", label:"Organic"}];
 }
 
+const refreshItems = async (dispatch, page, beername, ibu, abv, year, order) =>{
+    dispatch(toggleLoading());
+    let result = await getAllBeers(page, beername, ibu, abv, year, order);
+    dispatch(toggleLoading());
+    dispatch(setItems(result.items));
+    dispatch(setNumberOfPages(result.numberOfPages));
+}
+
 const mapStateToProps = state => {
     return {
       beername: state.filter.name,
@@ -32,6 +40,7 @@ const mapStateToProps = state => {
       page: state.page,
       yearOptions: getYears(),
       orderOptions: getOrderingCriteria(),
+      filterCollapsed: state.filter.collapsed
     }
 }
 
@@ -42,14 +51,15 @@ const mapDispatchToProps = dispatch => {
       onIbuChange: value => dispatch(setIbu(value)),
       onYearChange: value => dispatch(setYear(value)),
       onOrderChange: value => dispatch(setOrder(value)),
-      reset: () => dispatch(clearFilter()),
+      reset: async () => {
+          dispatch(resetPage());
+          dispatch(clearFilter());
+          await refreshItems(dispatch, 1, '', '', '', '', '');
+      },
       getItems: async (page, beername, ibu, abv, year, order) =>{
-           dispatch(toggleLoading());
-           let result = await getAllBeers(page, beername, ibu, abv, year, order);
-           dispatch(toggleLoading());
-           dispatch(setItems(result.items));
-           dispatch(setNumberOfPages(result.numberOfPages));
-      }
+           await refreshItems(dispatch, page, beername, ibu, abv, year, order);
+      },
+      toggleFilter: () => dispatch(toggleFilter())
     }
 }
 

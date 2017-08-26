@@ -1,6 +1,6 @@
-import { SET_NAME, SET_ABV, SET_IBU, SET_YEAR, SET_ORDER, CLEAR_FILTER } from '../Actions/action-types'
+import { SET_NAME, SET_ABV, SET_IBU, SET_YEAR, SET_ORDER, CLEAR_FILTER, TOGGLE_FILTER } from '../Actions/action-types'
 
-const INITIAL_FILTER = { name: '', abv: '', ibu: '', year: '', order: ''};
+const INITIAL_FILTER = { name: '', abv: '', ibu: '', year: '', order: '', collapsed: true};
 
 function filter(state = INITIAL_FILTER, action) {
     switch(action.type) {
@@ -10,6 +10,7 @@ function filter(state = INITIAL_FILTER, action) {
         case SET_YEAR: return Object.assign({}, state, {year: action.year});
         case SET_ORDER: return Object.assign({}, state, {order: action.order});
         case CLEAR_FILTER: return INITIAL_FILTER;
+        case TOGGLE_FILTER: return Object.assign({}, state, {collapsed: !state.collapsed});
         default: return state;
     }
 }

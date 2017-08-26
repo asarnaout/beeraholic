@@ -9,7 +9,9 @@ import {
     SET_ORDER,
     SET_ITEMS,
     CLEAR_FILTER,
-    TOGGLE_LOADING
+    TOGGLE_LOADING,
+    RESET_PAGE,
+    TOGGLE_FILTER
 } from './action-types'
 
 export function incrementPage() {
@@ -24,7 +26,13 @@ export function decrementPage() {
     }
 }
 
-export function setNumberOfPages(pages){
+export function resetPage(loading) {
+    return {
+        type: RESET_PAGE
+    }
+}
+
+export function setNumberOfPages(pages) {
     return {
         type: SET_NUMBER_OF_PAGES,
         pages
@@ -73,13 +81,19 @@ export function setItems(items) {
     }
 }
 
-export function clearFilter(){
+export function clearFilter() {
     return {
         type: CLEAR_FILTER
     }
 }
 
-export function toggleLoading(loading){
+export function toggleFilter() {
+    return {
+        type: TOGGLE_FILTER
+    }
+}
+
+export function toggleLoading(loading) {
     return {
         type: TOGGLE_LOADING,
         loading

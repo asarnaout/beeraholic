@@ -12,6 +12,7 @@ class Filter extends Component{
     constructor(props){
         super(props);
         this.getItems = this.getItems.bind(this);
+        this.reset = this.reset.bind(this);
     }
 
     async componentWillMount(){
@@ -22,13 +23,17 @@ class Filter extends Component{
         await this.props.getItems(this.props.page, this.props.beername, this.props.ibu, this.props.abv, this.props.year, this.props.order)
     }
 
+    async reset() {
+        await this.props.reset()
+    }
+
     render(){
         let filterVisibilityClass = this.props.filterCollapsed? " hidden-xs hidden-sm " : "";
 
         return (<div id="Filter">
                     <h1 className="black-text bold no-margin white-text">
                         <Link to={'/search'}>
-                            <img id="BeerIcon" src={BeerIconImage} width={55} alt="beer_ico" onClick={this.props.reset} />
+                            <img id="BeerIcon" src={BeerIconImage} width={55} alt="beer_ico" onClick={this.reset} />
                         </Link>
                         <span className="white-text" id="SearchHeader">&nbsp;Keep Calm And Grab A Beer</span>
                     </h1>

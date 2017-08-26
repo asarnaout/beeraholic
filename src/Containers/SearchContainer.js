@@ -3,6 +3,14 @@ import { connect } from 'react-redux'
 import { incrementPage, decrementPage, setItems, setNumberOfPages, toggleLoading } from '../Actions/actions'
 import { getAllBeers } from '../Helpers/ApiHelpers'
 
+const refreshItems = async (dispatch, page, beername, ibu, abv, year, order) =>{
+    dispatch(toggleLoading());
+    let result = await getAllBeers(page, beername, ibu, abv, year, order);
+    dispatch(toggleLoading());
+    dispatch(setItems(result.items));
+    dispatch(setNumberOfPages(result.numberOfPages));
+}
+
 const mapStateToProps = state => {
     return {
       page: state.page,
@@ -15,14 +23,6 @@ const mapStateToProps = state => {
       items: state.items,
       loading: state.loading.isLoading
     }
-}
-
-const refreshItems = async (dispatch, page, beername, ibu, abv, year, order) =>{
-    dispatch(toggleLoading());
-    let result = await getAllBeers(page, beername, ibu, abv, year, order);
-    dispatch(toggleLoading());
-    dispatch(setItems(result.items));
-    dispatch(setNumberOfPages(result.numberOfPages));
 }
 
 const mapDispatchToProps = dispatch => {
