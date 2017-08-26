@@ -11,7 +11,6 @@ class Search extends Component {
 
     constructor(props) {
         super(props);
-        document.body.style.backgroundImage = "none";
         this.nextPage = this.nextPage.bind(this);
         this.previousPage = this.previousPage.bind(this);
         this.onBackButtonEvent = this.onBackButtonEvent.bind(this);
@@ -22,6 +21,8 @@ class Search extends Component {
         let authenticated = await AuthenticationHelpers.authenticateUser();
         if(!authenticated) {
             this.props.history.push('/home');
+        } else {
+            document.body.style.backgroundImage = "none";
         }
     }
 
