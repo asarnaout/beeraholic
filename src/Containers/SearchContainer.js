@@ -1,6 +1,8 @@
 import Search from '../Components/Search'
 import { connect } from 'react-redux'
-import { incrementPage, decrementPage, setItems, setNumberOfPages, toggleLoading, setFilter, setPage } from '../Actions/actions'
+import { incrementPage, decrementPage, setPage, setNumberOfPages } from '../Actions/page-actions'
+import { setFilter } from '../Actions/filter-actions'
+import { setItems, toggleLoading } from '../Actions/item-actions'
 import { getAllBeers } from '../Helpers/ApiHelpers'
 
 const refreshItems = async (dispatch, page, beername, ibu, abv, year, order) =>{

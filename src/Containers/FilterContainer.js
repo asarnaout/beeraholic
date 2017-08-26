@@ -1,7 +1,9 @@
 import Filter from '../Components/Filter'
 import { connect } from 'react-redux'
 import { getAllBeers } from '../Helpers/ApiHelpers'
-import { setName, setAbv, setIbu, setYear, setOrder, setItems, setNumberOfPages, clearFilter, toggleLoading, resetPage, toggleFilter } from '../Actions/actions'
+import { setName, setAbv, setIbu, setYear, setOrder, clearFilter, toggleFilter } from '../Actions/filter-actions'
+import { setNumberOfPages,  resetPage } from '../Actions/page-actions'
+import { setItems, toggleLoading } from '../Actions/item-actions'
 
 const getYears = () => {
     let result = [];

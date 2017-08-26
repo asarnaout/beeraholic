@@ -1,52 +1,13 @@
 import {
-    INCREMENT_PAGE ,
-    DECREMENT_PAGE,
-    SET_NUMBER_OF_PAGES,
     SET_NAME,
     SET_ABV,
     SET_IBU,
     SET_YEAR,
     SET_ORDER,
-    SET_ITEMS,
     CLEAR_FILTER,
-    TOGGLE_LOADING,
-    RESET_PAGE,
     TOGGLE_FILTER,
     SET_FILTER,
-    SET_PAGE
 } from './action-types'
-
-export function incrementPage() {
-    return {
-      type: INCREMENT_PAGE,
-    }
-}
-
-export function decrementPage() {
-    return {
-      type: DECREMENT_PAGE,
-    }
-}
-
-export function setPage(page) {
-    return {
-      type: SET_PAGE,
-      page
-    }
-}
-
-export function resetPage() {
-    return {
-        type: RESET_PAGE
-    }
-}
-
-export function setNumberOfPages(pages) {
-    return {
-        type: SET_NUMBER_OF_PAGES,
-        pages
-    }
-}
 
 export function setName(name) {
     return {
@@ -83,13 +44,6 @@ export function setOrder(order) {
     }
 }
 
-export function setItems(items) {   
-    return {
-        type: SET_ITEMS,
-        items
-    }
-}
-
 export function clearFilter() {
     return {
         type: CLEAR_FILTER
@@ -106,12 +60,5 @@ export function setFilter(newFilter) {
     return {
         type: SET_FILTER,
         newFilter
-    }
-}
-
-export function toggleLoading(loading) {
-    return {
-        type: TOGGLE_LOADING,
-        loading
     }
 }
