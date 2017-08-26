@@ -30,6 +30,7 @@ const refreshItems = async (dispatch, page, beername, ibu, abv, year, order) =>{
 }
 
 const mapStateToProps = state => {
+    console.log(state);
     return {
       beername: state.filter.name,
       abv: state.filter.abv,
@@ -56,8 +57,8 @@ const mapDispatchToProps = dispatch => {
           dispatch(clearFilter());
           await refreshItems(dispatch, 1, '', '', '', '', '');
       },
-      getItems: async (page, beername, ibu, abv, year, order) =>{
-           await refreshItems(dispatch, page, beername, ibu, abv, year, order);
+      getItems: async (beername, page, ibu, abv, year, order) => {
+          await refreshItems(dispatch, page, beername, ibu, abv, year, order);
       },
       toggleFilter: () => dispatch(toggleFilter())
     }

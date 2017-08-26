@@ -20,7 +20,7 @@ class Filter extends Component{
     }
 
     async getItems(){
-        await this.props.getItems(this.props.page, this.props.beername, this.props.ibu, this.props.abv, this.props.year, this.props.order)
+        await this.props.getItems(this.props.beername, this.props.page, this.props.ibu, this.props.abv, this.props.year, this.props.order)
     }
 
     async reset() {

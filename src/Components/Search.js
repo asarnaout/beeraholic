@@ -3,6 +3,7 @@ import BeerItem from '../Components/BeerItem'
 import FilterContainer from '../Containers/FilterContainer'
 import config from '../config'
 import '../Assets/css/common.css'
+import { Link } from 'react-router-dom'
 
 class Search extends Component {
 
@@ -34,20 +35,21 @@ class Search extends Component {
     getNavButtons(){
         let renderNextButton = this.props.page < this.props.numberOfPages;
         let renderPreviousButton = this.props.page > 1;
+        let queryString = `?ibu=${this.props.ibu}&abv=${this.props.abv}&beername=${this.props.beername}&year=${this.props.year}&sort=${this.props.order}`;
 
         if(renderNextButton && !renderPreviousButton) {
-            return <img src={config.navArrowCdn} onClick={this.nextPage} width={40} height={40} className="center-item pointer" alt="next_page"/>
+            return <Link to={'/search' + queryString + `&page=${this.props.page + 1}`}><img src={config.navArrowCdn} onClick={this.nextPage} width={40} height={40} className="center-item pointer" alt="next_page"/></Link>
         }
 
         if(!renderNextButton && renderPreviousButton) {
-            return <img src={config.navArrowCdn} onClick={this.previousPage} width={40} height={40} className="center-item flip-Y pointer" alt="previous_page"/>
+            return <Link to={'/search' + queryString + `&page=${this.props.page - 1}`}><img src={config.navArrowCdn} onClick={this.previousPage} width={40} height={40} className="center-item flip-Y pointer" alt="previous_page"/></Link>
         }
 
         if(renderNextButton && renderPreviousButton) {
             return (
                 <div className="center-text">
-                    <img src={config.navArrowCdn} onClick={this.previousPage} width={40} height={40} className="inline flip-Y pointer margin-15" alt="previous_page"/>
-                    <img src={config.navArrowCdn} onClick={this.nextPage} width={40} height={40} className="inline pointer margin-15" alt="next_page"/>
+                    <Link to={'/search' + queryString + `&page=${this.props.page - 1}`}><img src={config.navArrowCdn} onClick={this.previousPage} width={40} height={40} className="inline flip-Y pointer margin-15" alt="previous_page"/></Link>
+                    <Link to={'/search' + queryString + `&page=${this.props.page + 1}`}><img src={config.navArrowCdn} onClick={this.nextPage} width={40} height={40} className="inline pointer margin-15" alt="next_page"/></Link>
                 </div>
             ); 
         }

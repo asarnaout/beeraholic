@@ -8,7 +8,7 @@ import config from '../config.js'
 class BeerItem extends Component {
 
     render() {
-        var thumbnail = this.props.thumbnail === ''? config.defaultSearchItemIconCdn : this.props.thumbnail;
+        let thumbnail = this.props.thumbnail === ''? config.defaultSearchItemIconCdn : this.props.thumbnail;
         return(
             <Link to={'/details/' + this.props.beerid}>
                 <div className="beer-item white-bg">

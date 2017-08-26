@@ -26,7 +26,7 @@ export function decrementPage() {
     }
 }
 
-export function resetPage(loading) {
+export function resetPage() {
     return {
         type: RESET_PAGE
     }
