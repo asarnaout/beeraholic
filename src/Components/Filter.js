@@ -12,7 +12,7 @@ class Filter extends Component{
     constructor(props){
         super(props);
         this.getItems = this.getItems.bind(this);
-        this.reset = this.reset.bind(this);
+        this.reset = this.reset.bind(this);        
     }
 
     async componentWillMount(){
@@ -67,7 +67,7 @@ class Filter extends Component{
                         </div>
 
                         <div className="col-xs-12 col-md-2">
-                            <Link to={'/search?ibu=' + this.props.ibu + "&abv=" + this.props.abv + "&beername=" + this.props.beername + "&year=" + this.props.year + "&sort="+ this.props.order}>
+                            <Link to={`/search?ibu=${this.props.ibu}&abv=${this.props.abv}&name=${this.props.beername}&year=${this.props.year}&order=${this.props.order}&page=1`}>
                                 <Button placeholder="Search" background="red-bg" clickHandler={this.getItems}/>
                             </Link>
                         </div>

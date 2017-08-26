@@ -1,6 +1,6 @@
 import Search from '../Components/Search'
 import { connect } from 'react-redux'
-import { incrementPage, decrementPage, setItems, setNumberOfPages, toggleLoading } from '../Actions/actions'
+import { incrementPage, decrementPage, setItems, setNumberOfPages, toggleLoading, setFilter, setPage } from '../Actions/actions'
 import { getAllBeers } from '../Helpers/ApiHelpers'
 
 const refreshItems = async (dispatch, page, beername, ibu, abv, year, order) =>{
@@ -35,6 +35,16 @@ const mapDispatchToProps = dispatch => {
             dispatch(decrementPage());
             await refreshItems(dispatch, page, beername, ibu, abv, year, order);
         },
+        setFilter: async (newFilter) => {
+            newFilter.name = newFilter.name || '';
+            newFilter.abv = newFilter.abv || '';
+            newFilter.ibu = newFilter.ibu || '';
+            newFilter.year = newFilter.year || '';
+            newFilter.order = newFilter.order || '';        
+            dispatch(setFilter(newFilter));
+            setPage(newFilter.page);
+            await refreshItems(dispatch, newFilter.page, newFilter.name, newFilter.ibu, newFilter.abv, newFilter.year, newFilter.order);
+        }
     }
 }
 

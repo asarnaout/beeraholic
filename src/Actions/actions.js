@@ -11,7 +11,9 @@ import {
     CLEAR_FILTER,
     TOGGLE_LOADING,
     RESET_PAGE,
-    TOGGLE_FILTER
+    TOGGLE_FILTER,
+    SET_FILTER,
+    SET_PAGE
 } from './action-types'
 
 export function incrementPage() {
@@ -23,6 +25,13 @@ export function incrementPage() {
 export function decrementPage() {
     return {
       type: DECREMENT_PAGE,
+    }
+}
+
+export function setPage(page) {
+    return {
+      type: SET_PAGE,
+      page
     }
 }
 
@@ -90,6 +99,13 @@ export function clearFilter() {
 export function toggleFilter() {
     return {
         type: TOGGLE_FILTER
+    }
+}
+
+export function setFilter(newFilter) {
+    return {
+        type: SET_FILTER,
+        newFilter
     }
 }
 

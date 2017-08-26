@@ -4,6 +4,7 @@ import FilterContainer from '../Containers/FilterContainer'
 import config from '../config'
 import '../Assets/css/common.css'
 import { Link } from 'react-router-dom'
+import queryString from 'query-string';
 
 class Search extends Component {
 
@@ -11,6 +12,13 @@ class Search extends Component {
         super(props);
         this.nextPage = this.nextPage.bind(this);
         this.previousPage = this.previousPage.bind(this);
+        this.onBackButtonEvent = this.onBackButtonEvent.bind(this);
+        window.onpopstate = this.onBackButtonEvent;
+    }
+
+    onBackButtonEvent(e){
+        let qs = queryString.parse(this.props.location.search);
+        this.props.setFilter(qs);
     }
 
     async nextPage() {
@@ -35,7 +43,7 @@ class Search extends Component {
     getNavButtons(){
         let renderNextButton = this.props.page < this.props.numberOfPages;
         let renderPreviousButton = this.props.page > 1;
-        let queryString = `?ibu=${this.props.ibu}&abv=${this.props.abv}&beername=${this.props.beername}&year=${this.props.year}&sort=${this.props.order}`;
+        let queryString = `?ibu=${this.props.ibu}&abv=${this.props.abv}&name=${this.props.beername}&year=${this.props.year}&order=${this.props.order}`;
 
         if(renderNextButton && !renderPreviousButton) {
             return <Link to={'/search' + queryString + `&page=${this.props.page + 1}`}><img src={config.navArrowCdn} onClick={this.nextPage} width={40} height={40} className="center-item pointer" alt="next_page"/></Link>
