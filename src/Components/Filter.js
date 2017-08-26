@@ -16,11 +16,11 @@ class Filter extends Component{
     }
 
     async componentWillMount(){
-        await this.getItems();
+        await this.getItems({}, {}, false);
     }
 
-    async getItems(){
-        await this.props.getItems(this.props.beername, this.props.page, this.props.ibu, this.props.abv, this.props.year, this.props.order)
+    async getItems(proxy, event, resetPage = true){
+        await this.props.getItems(this.props.beername, this.props.page, this.props.ibu, this.props.abv, this.props.year, this.props.order, resetPage)
     }
 
     async reset() {
