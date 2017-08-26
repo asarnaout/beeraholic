@@ -11,7 +11,7 @@ class Details extends Component {
             <div id="DetailsPage">
                 <div className="turquoise-bg">
                     <div className="container">
-                        <FilterContainer searchHandler={this.props.searchHandler}/>
+                        <FilterContainer />
                     </div>
                 </div>
                 <div className="container">

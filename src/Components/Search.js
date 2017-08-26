@@ -5,15 +5,24 @@ import config from '../config'
 import '../Assets/css/common.css'
 import { Link } from 'react-router-dom'
 import queryString from 'query-string';
+import AuthenticationHelpers from '../Helpers/AuthenticationHelpers'
 
 class Search extends Component {
 
     constructor(props) {
         super(props);
+        document.body.style.backgroundImage = "none";
         this.nextPage = this.nextPage.bind(this);
         this.previousPage = this.previousPage.bind(this);
         this.onBackButtonEvent = this.onBackButtonEvent.bind(this);
         window.onpopstate = this.onBackButtonEvent;
+    }
+
+    async componentWillMount(){
+        let authenticated = await AuthenticationHelpers.authenticateUser();
+        if(!authenticated) {
+            this.props.history.push('/home');
+        }
     }
 
     onBackButtonEvent(e){

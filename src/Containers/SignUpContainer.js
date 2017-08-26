@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
 import Card from '../Components/Card'
-import axios from 'axios'
-import config from '../config.js'
 import AuthenticationHelpers from '../Helpers/AuthenticationHelpers'
+import { register } from '../Helpers/ApiHelpers'
 
 class SignUpContainer extends Component{
 
@@ -29,7 +28,8 @@ class SignUpContainer extends Component{
         }
     }
 
-    async signUp(){
+    async signUp() {
+
         let data = {
             emailAddress: this.state.emailAddress,
             password: this.state.password,
@@ -37,11 +37,7 @@ class SignUpContainer extends Component{
             lastName: this.state.lastName
         };        
 
-        let result = await axios({
-            method: 'post',
-            url: config.apiEndpoint + 'account/signUp',
-            data: data
-        });
+        let result = await register(data);
         
         if(result.data.success === true) {
             AuthenticationHelpers.setAuthenticationCookie(result.data.userKey);

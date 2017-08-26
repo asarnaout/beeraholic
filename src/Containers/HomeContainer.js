@@ -1,9 +1,8 @@
 import React, { Component } from 'react';
 import Card from '../Components/Card'
-import config from '../config.js'
 import JoinNow from '../Components/JoinNow'
 import AuthenticationHelpers from '../Helpers/AuthenticationHelpers'
-import axios from 'axios'
+import { signIn } from '../Helpers/ApiHelpers'
 
 class HomeContainer extends Component {
 
@@ -33,11 +32,7 @@ class HomeContainer extends Component {
             password: this.state.password
         };
 
-        let result = (await axios({
-            method: 'post',
-            url: config.apiEndpoint + 'account/signin',
-            data: data
-        })).data;
+        let result = (await signIn(data)).data;
 
         if(result.success) {
             AuthenticationHelpers.setAuthenticationCookie(result.userKey);

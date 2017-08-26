@@ -3,10 +3,6 @@
     margin: 15px 0;
 }
 
-body {
-    background: none;
-}
-
 #BeerIcon{
     -webkit-filter: invert(100%);
     filter: invert(100%);

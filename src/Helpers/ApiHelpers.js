@@ -8,3 +8,34 @@ export async function getAllBeers(page, beername, ibu, abv, year, order) {
     let numberOfPages = getBeersRequest.data.numberOfPages;
     return { items, numberOfPages };
 }
+
+export async function getBeer(id) {        
+    return await (axios({
+        method: 'get',
+        url: config.apiEndpoint + 'beer?id=' + id,
+      }));
+}
+
+export async function signIn(data){
+    return await axios({
+        method: 'post',
+        url: config.apiEndpoint + 'account/signin',
+        data: data
+    });
+}
+
+export async function register(data){
+    return await axios({
+        method: 'post',
+        url: config.apiEndpoint + 'account/signUp',
+        data: data
+    });
+}
+
+export async function authenticate(cookie){
+    return await (axios({
+        method: 'post',
+        url: config.apiEndpoint + 'account/auth',
+        data: {key: cookie}
+    }));
+}

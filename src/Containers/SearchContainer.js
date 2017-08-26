@@ -13,6 +13,7 @@ const refreshItems = async (dispatch, page, beername, ibu, abv, year, order) =>{
     dispatch(setNumberOfPages(result.numberOfPages));
 }
 
+//Stating how props passed to the child component will be related to the state
 const mapStateToProps = state => {
     return {
       page: state.page,
@@ -27,6 +28,7 @@ const mapStateToProps = state => {
     }
 }
 
+//Declaring the function props which will (on getting called by the child component), dispatch actions that will modify the state
 const mapDispatchToProps = dispatch => {
     return {
         nextPage: async (page, beername, ibu, abv, year, order) =>{

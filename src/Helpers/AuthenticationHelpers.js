@@ -1,6 +1,6 @@
-import axios from 'axios'
 import config from '../config.js'
 import Cookies from 'universal-cookie';
+import { authenticate } from './ApiHelpers'
 
 const cookies = new Cookies();
 
@@ -8,11 +8,7 @@ const AuthenticationHelpers = {
     authenticateUser: async () => {
         let cookie = AuthenticationHelpers.getAuthenticationCookie();
         if(cookie !== undefined) {
-            let authenticated = await (axios({
-                method: 'post',
-                url: config.apiEndpoint + 'account/auth',
-                data: {key: cookie}
-            }));
+            let authenticated = await authenticate(cookie);
             return authenticated.data.success;
         }
     },
