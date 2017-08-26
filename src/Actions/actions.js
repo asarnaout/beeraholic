@@ -9,7 +9,7 @@ import {
     SET_ORDER,
     SET_ITEMS,
     CLEAR_FILTER,
-    SET_LOADING
+    TOGGLE_LOADING
 } from './action-types'
 
 export function incrementPage() {
@@ -79,9 +79,9 @@ export function clearFilter(){
     }
 }
 
-export function setLoading(loading){
+export function toggleLoading(loading){
     return {
-        type: SET_LOADING,
+        type: TOGGLE_LOADING,
         loading
     }
 }

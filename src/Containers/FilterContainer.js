@@ -1,7 +1,7 @@
 import Filter from '../Components/Filter'
 import { connect } from 'react-redux'
 import { getAllBeers } from '../Helpers/ApiHelpers'
-import { setName, setAbv, setIbu, setYear, setOrder, setItems, setNumberOfPages, clearFilter, setLoading } from '../Actions/actions'
+import { setName, setAbv, setIbu, setYear, setOrder, setItems, setNumberOfPages, clearFilter, toggleLoading } from '../Actions/actions'
 
 const getYears = () => {
     let result = [];
@@ -44,9 +44,9 @@ const mapDispatchToProps = dispatch => {
       onOrderChange: value => dispatch(setOrder(value)),
       reset: () => dispatch(clearFilter()),
       getItems: async (page, beername, ibu, abv, year, order) =>{
-           dispatch(setLoading(true));
+           dispatch(toggleLoading(true));
            let result = await getAllBeers(page, beername, ibu, abv, year, order);
-           dispatch(setLoading(false));
+           dispatch(toggleLoading(false));
            dispatch(setItems(result.items));
            dispatch(setNumberOfPages(result.numberOfPages));
       }

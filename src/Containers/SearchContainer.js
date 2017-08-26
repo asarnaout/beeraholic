@@ -1,6 +1,6 @@
 import Search from '../Components/Search'
 import { connect } from 'react-redux'
-import { incrementPage, decrementPage, setItems, setNumberOfPages, setLoading } from '../Actions/actions'
+import { incrementPage, decrementPage, setItems, setNumberOfPages, toggleLoading } from '../Actions/actions'
 import { getAllBeers } from '../Helpers/ApiHelpers'
 
 const mapStateToProps = state => {
@@ -13,14 +13,14 @@ const mapStateToProps = state => {
       year: state.filter.year,
       order: state.filter.order,
       items: state.items,
-      loading: state.loading
+      loading: state.loading.isLoading
     }
 }
 
 const refreshItems = async (dispatch, page, beername, ibu, abv, year, order) =>{
-    dispatch(setLoading(true));
+    dispatch(toggleLoading(true));
     let result = await getAllBeers(page, beername, ibu, abv, year, order);
-    dispatch(setLoading(false));
+    dispatch(toggleLoading(false));
     dispatch(setItems(result.items));
     dispatch(setNumberOfPages(result.numberOfPages));
 }
