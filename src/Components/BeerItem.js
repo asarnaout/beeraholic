@@ -12,8 +12,10 @@ class BeerItem extends Component {
         this.toggleFav = this.toggleFav.bind(this);
     }
 
-    toggleFav() {
-        this.props.toggleFav(this.props.beerid)
+    toggleFav(e) {
+        this.props.toggleFav(this.props.beerid);
+        e.preventDefault();
+        this.forceUpdate();
     }
 
     render() {

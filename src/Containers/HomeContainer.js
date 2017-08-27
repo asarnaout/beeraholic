@@ -52,7 +52,7 @@ class HomeContainer extends Component {
         return (
             <Card header="Craving Beer?" fields={[
                 {value: this.state.emailAddress, placeholder:'Email Address', password: false, id: "emailAddress"}, 
-                {value: this.state.password, placeholder:"password", password: true, id:"password"}]}
+                {value: this.state.password, placeholder:"Password", password: true, id:"password"}]}
                 buttons={[{actionButtonValue:"Login", actionButtonHandler:this.login, backgroundClass: "blue-bg"}]} 
                 handleKeyPress={this.inputEntered} errorMessage={this.state.errorMessage}>
                 <JoinNow/>
