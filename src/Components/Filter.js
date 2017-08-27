@@ -35,7 +35,7 @@ class Filter extends Component{
                     </h1>
 
                     <div className="visible-xs visible-sm padding-5 center-text" id="Filter-Toggle" onClick={this.props.toggleFilter}>
-                        <span className="white-text">Search Your Favorite Beer &nbsp;</span>
+                        <span className="white-text">Find Your Favorite Beer &nbsp;</span>
                         <span className="glyphicon glyphicon-search fs-12 white-text" />                   
                     </div>
 
