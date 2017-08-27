@@ -1,7 +1,8 @@
 import axios from 'axios'
 import config from '../config.js'
 
-export async function getAllBeers(page, beername, ibu, abv, year, order, cookie) {        
+export async function getAllBeers(page, beername, ibu, abv, year, order, cookie) {
+    if(cookie === undefined) return {items: [], numberOfPages: 0};
     let queryString = "?p=" + page + "&name=" + beername + "&ibu=" + ibu + "&abv=" + abv + "&year=" + year + "&order=" + order;
     let getBeersRequest = await axios({ method: 'post', url: config.apiEndpoint + 'beers' + queryString, data: {key: cookie} });
     let items = typeof (getBeersRequest.data.data) === 'undefined'? [] : getBeersRequest.data.data;
