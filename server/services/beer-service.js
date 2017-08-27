@@ -19,22 +19,21 @@ class BeerService {
             url: this.config.breweryApiEndpoint + 'beers' + queryString,
         }));
 
-        return new Promise((resolve, reject) => {
-            this.redisClient.getHashSetField(userFavoritesHashtableName, body.key, (err, obj) => {
-                if(obj === null) {
-                    resolve(result.data);
-                } else {
-                    let favs = obj.split(',');
-                    for(let i = 0; i < result.data.data.length; i++) {
-                        let beer = result.data.data[i];
-                        if(favs.includes(beer.id)){
-                            beer.isFav = "true";
-                        }
-                    }
-                    resolve(result.data);
-                }
-            })
+        let userFavorites = await this.redisClient.getHashSetField(userFavoritesHashtableName, body.key);
+        
+        if(userFavorites === null) {
+            return result.data;
+        } 
+
+        let favs = userFavorites.split(',');
+        
+        result.data.data.forEach(function(beer){
+            if(favs.includes(beer.id)){
+                beer.isFav = true;
+            }
         });
+
+        return result.data;
     }
 
     async getBeer(raw_url){
@@ -52,23 +51,20 @@ class BeerService {
 
     async toggleFavorites(details) {
         let key = details.key;
-        return new Promise((resolve, reject) => {
-            this.redisClient.getHashSetField(userFavoritesHashtableName, key, (err, obj) => {
-                let result = '';
-                if(obj === null) {
-                    result = details.beerId;
-                } else {
-                    let unfav = false;
-                    result = obj.split(',').map((fav) => {
-                        if(fav !== details.beerId) return fav; 
-                        else unfav = true;
-                    }).join();
-                    if(!unfav) result += `,${details.beerId}`;
-                }
-                this.redisClient.storeHashSetField(userFavoritesHashtableName, key, result);
-                resolve();
-            });
-        });
+        let favs = await this.redisClient.getHashSetField(userFavoritesHashtableName, key);
+        let result = '';
+
+        if(favs === null) {
+            result = details.beerId;
+        } else {
+            let unfav = false;
+            result = favs.split(',').map((fav) => {
+                if(fav !== details.beerId) return fav; 
+                else {unfav = true;}
+            }).filter(item => item).join();
+            if(!unfav) result += `,${details.beerId}`;
+        }
+        this.redisClient.storeHashSetField(userFavoritesHashtableName, key, result);
     }
 }
 

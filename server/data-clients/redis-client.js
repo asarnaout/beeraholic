@@ -12,16 +12,16 @@ class RedisClient {
 		this.client.hmset(key, field, value);
 	}
 	
-	getHashSetField(key, field, callback) {
-		return this.client.hget(key, field, callback);
+	getHashSetField(key, field) {
+		return new Promise((resolve, reject) => this.client.hget(key, field, (err, obj) => resolve(obj)));
 	}
 
 	addToSet(key, field) {
 		this.client.sadd(key, [field]);
 	}
 
-	fieldExistsInSet(key, field, callback) {
-		return this.client.sismember(key, field, callback);
+	fieldExistsInSet(key, field) {
+		return new Promise((resolve, reject) => this.client.sismember(key, field, (err, obj) => resolve(obj)));
 	}
 }
 

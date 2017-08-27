@@ -68,7 +68,7 @@ function generateRandomString() {
   let S4 = function() {
     return (((1+Math.random())*0x10000)|0).toString(16).substring(1);
   };
-  return (S4()+S4() + S4() + S4()).toString();
+  return (S4() + S4() + S4() + S4()).toString();
 }
 
 describe('Helpers', function() {
@@ -83,12 +83,8 @@ describe('RedisClient', function() {
     describe('#getHashSetField()', function() {
       it('should perform the read and write operations to redis successfully', async function() {	
           redisClient.storeHashSetField(usersHashtableName, testingUsers[0].emailAddress, JSON.stringify(testingUsers[0]));
-          let result = await (new Promise((resolve, reject) => {
-              redisClient.getHashSetField(usersHashtableName, testingUsers[0].emailAddress, (err, result) => {
-                resolve(JSON.parse(result));
-              })
-          }));
-          assert.equal(testingUsers[0].firstName, result.firstName);
+          let result = await redisClient.getHashSetField(usersHashtableName, testingUsers[0].emailAddress);
+          assert.equal(testingUsers[0].firstName, JSON.parse(result).firstName);
       });
     });
 });
@@ -207,18 +203,18 @@ describe('AccountService', function() {
   });
 });
 
-describe('BrewryWebService', function() {
+describe('BeerService', function() {
     describe('#queryBeers()', function() {
       it('should return one or more items', async function() {
         this.timeout(5000);
-        let result = await beerService.getAllBeers("http://localhost?p=1&name=&ibu=&abv=&year=&order=");
+        let result = await beerService.getAllBeers("http://localhost?p=1&name=&ibu=&abv=&year=&order=", {key: generateRandomString()});
         assert(result.data.length > 1, true);
       });
     });
 });
 
 
-describe('BrewryWebService', function() {
+describe('BeerService', function() {
     describe('#queryBeers()', function() {
       it('should return the item after requesting it from the webservice', async function() {
         this.timeout(1000);
@@ -226,4 +222,18 @@ describe('BrewryWebService', function() {
         assert(result.data.id, testingBeerId);
       });
     });
+});
+
+describe('BeerService', function() {
+  describe('#toggleFavorites()', function() {
+    it('should add the beer to the users favorite list', async function() {
+      this.timeout(6000);
+      let randomUserKey = generateRandomString();
+      let preFav = await beerService.getAllBeers("http://localhost?p=1&name=&ibu=&abv=&year=&order=", {key: randomUserKey});
+      let beerId = preFav.data[0].id;
+      await beerService.toggleFavorites({key: randomUserKey, beerId : beerId});
+      let postFav = await beerService.getAllBeers("http://localhost?p=1&name=&ibu=&abv=&year=&order=", {key: randomUserKey});
+      assert(postFav.data[0].isFav, true);
+    });
+  });
 });

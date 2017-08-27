@@ -13,59 +13,56 @@ class AccountService{
         return field != '' && field != undefined && field != null;
     }
 
-    signUp(user) {
+    async signUp(user) {
         user.createdOn = new Date();
-        return new Promise((resolve, reject) => {
 
-            if(!this.isProvided(user.emailAddress) || !this.isProvided(user.password) || !this.isProvided(user.firstName) || !this.isProvided(user.lastName)) {
-                return resolve({message: "Please Enter all the Required Fields"});
-            }
+        if(!this.isProvided(user.emailAddress) || !this.isProvided(user.password) || !this.isProvided(user.firstName) || !this.isProvided(user.lastName)) {
+            return {message: "Please Enter all the Required Fields"};
+        }
 
-            if(user.password.length < 6) {
-                return resolve({message: "Password should contain at least 6 characters"});
-            }
+        if(user.password.length < 6) {
+            return {message: "Password should contain at least 6 characters"};
+        }
 
-            user.password = helpers.hashData(user.password);           
+        user.password = helpers.hashData(user.password);           
 
-            if(!emailRegex.test(user.emailAddress)) {
-                return resolve({message: "Please Enter a Valid Email Address"});
-            }
+        if(!emailRegex.test(user.emailAddress)) {
+            return {message: "Please Enter a Valid Email Address"};
+        }
 
-            this.redisClient.getHashSetField(usersHashtableName, user.emailAddress, (err, obj) => {
-                if(obj != null) {
-                    return resolve({message: "Email Address Already Exists"});
-                }
-                user.userKey = helpers.generateGuid();
-                this.redisClient.storeHashSetField(usersHashtableName, user.emailAddress, JSON.stringify(user));
-                this.redisClient.addToSet(userKeysSetName, user.userKey);
-                return resolve({success: true, userKey: user.userKey});
-            });
+        let dbUser = await this.redisClient.getHashSetField(usersHashtableName, user.emailAddress);
 
-        });
+        if(dbUser != null) {
+            return {message: "Email Address Already Exists"};
+        }
+
+        user.userKey = helpers.generateGuid();
+        
+        this.redisClient.storeHashSetField(usersHashtableName, user.emailAddress, JSON.stringify(user));
+        this.redisClient.addToSet(userKeysSetName, user.userKey);
+        
+        return {success: true, userKey: user.userKey};
     }
 
-    signIn(credentials) {
+    async signIn(credentials) {
         const hashedPassword = helpers.hashData(credentials.password)
-        return new Promise((resolve, reject) => {
-            this.redisClient.getHashSetField(usersHashtableName, credentials.emailAddress, (err, obj) => {
-                if(obj === null) {
-                    return resolve({success:false});
-                }
-                let jsonObj = JSON.parse(obj);
-                if(jsonObj.password != hashedPassword){
-                    return resolve({success:false});
-                }
-                return resolve({success: true, userKey: jsonObj.userKey});
-            });
-        });
+        let user = await this.redisClient.getHashSetField(usersHashtableName, credentials.emailAddress);
+
+        if(user === null) {
+            return {success:false};
+        }
+
+        let jsonUser = JSON.parse(user);
+        
+        if(jsonUser.password != hashedPassword){
+            return {success:false};
+        }
+        return {success: true, userKey: jsonUser.userKey};
     }
 
-    authenticateUser(key) {
-        return new Promise((resolve, reject) => {
-            this.redisClient.fieldExistsInSet(userKeysSetName, key, (err, obj) => {
-                return resolve({success: obj});
-            });
-        });
+    async authenticateUser(key) {
+        let result = await this.redisClient.fieldExistsInSet(userKeysSetName, key)
+        return {success: result};
     }
 }
 

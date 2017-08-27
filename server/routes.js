@@ -16,8 +16,8 @@ function handleRoutes(express, accountService, beerService) {
     app.use("/service-worker.js", express.static(__dirname + '/../build'));
     
     app.post('/beer/togglefav', async (request, response) => {
-        let result = await beerService.toggleFavorites(request.body);
-		response.send(result);
+        await beerService.toggleFavorites(request.body);
+		response.send("OK");
     });
     
     app.post('/beers', async function(req, res){
