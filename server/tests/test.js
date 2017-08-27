@@ -208,18 +208,27 @@ describe('BeerService', function() {
       it('should return one or more items', async function() {
         this.timeout(5000);
         let result = await beerService.getAllBeers("http://localhost?p=1&name=&ibu=&abv=&year=&order=", {key: generateRandomString()});
-        assert(result.data.length > 1, true);
+        assert.equal(result.data.length > 1, true);
       });
     });
 });
 
+describe('BeerService', function() {
+  describe('#queryBeers()', function() {
+    it('should return no items', async function() {
+      this.timeout(5000);
+      let result = await beerService.getAllBeers("http://localhost?p=1&name=&ibu=&abv=&year=999&order=", {key: generateRandomString()});
+      assert.equal(result.data, undefined);
+    });
+  });
+});
 
 describe('BeerService', function() {
     describe('#queryBeers()', function() {
       it('should return the item after requesting it from the webservice', async function() {
         this.timeout(1000);
         let result = await beerService.getBeer("http://localhost?id=" + testingBeerId);
-        assert(result.data.id, testingBeerId);
+        assert.equal(result.data.id, testingBeerId);
       });
     });
 });
@@ -233,7 +242,7 @@ describe('BeerService', function() {
       let beerId = preFav.data[0].id;
       await beerService.toggleFavorites({key: randomUserKey, beerId : beerId});
       let postFav = await beerService.getAllBeers("http://localhost?p=1&name=&ibu=&abv=&year=&order=", {key: randomUserKey});
-      assert(postFav.data[0].isFav, true);
+      assert.equal(postFav.data[0].isFav, true);
     });
   });
 });
