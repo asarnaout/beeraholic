@@ -15,7 +15,6 @@ class BeerItem extends Component {
     toggleFav(e) {
         this.props.toggleFav(this.props.beerid);
         e.preventDefault();
-        this.forceUpdate();
     }
 
     render() {
@@ -75,4 +74,3 @@ BeerItem.propTypes = {
  };
    
  export default BeerItem;
-   

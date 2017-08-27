@@ -2,7 +2,7 @@ import Search from '../Components/Search'
 import { connect } from 'react-redux'
 import { incrementPage, decrementPage, setPage, setNumberOfPages } from '../Actions/page-actions'
 import { setFilter } from '../Actions/filter-actions'
-import { setItems, toggleLoading } from '../Actions/item-actions'
+import { setItems, toggleLoading, toggleFavorite } from '../Actions/item-actions'
 import { getAllBeers, toggleFavoriteBeer } from '../Helpers/ApiHelpers'
 import AuthenticationHelpers from '../Helpers/AuthenticationHelpers'
 
@@ -54,6 +54,7 @@ const mapDispatchToProps = dispatch => {
         },
         toggleFav: async(id) => {
             toggleFavoriteBeer(cookie, id);
+            dispatch(toggleFavorite(id));
         }
     }
 }

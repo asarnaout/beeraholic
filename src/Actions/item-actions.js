@@ -1,6 +1,7 @@
 import {
     SET_ITEMS,
-    TOGGLE_LOADING    
+    TOGGLE_LOADING,
+    TOGGLE_FAV    
 } from './action-types'
 
 
@@ -15,5 +16,12 @@ export function toggleLoading(loading) {
     return {
         type: TOGGLE_LOADING,
         loading
+    }
+}
+
+export function toggleFavorite(beerId) {
+    return {
+        type: TOGGLE_FAV,
+        beerId
     }
 }
