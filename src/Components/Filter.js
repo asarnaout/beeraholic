@@ -15,10 +15,6 @@ class Filter extends Component{
         this.reset = this.reset.bind(this);        
     }
 
-    async componentWillMount(){
-        await this.getItems({}, {}, false);
-    }
-
     async getItems(proxy, event, resetPage = true){
         await this.props.getItems(this.props.beername, this.props.page, this.props.ibu, this.props.abv, this.props.year, this.props.order, resetPage)
     }

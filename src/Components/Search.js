@@ -13,22 +13,18 @@ class Search extends Component {
         super(props);
         this.nextPage = this.nextPage.bind(this);
         this.previousPage = this.previousPage.bind(this);
-        this.onBackButtonEvent = this.onBackButtonEvent.bind(this);
         window.onpopstate = this.onBackButtonEvent;
     }
 
     async componentWillMount(){
+        let qs = queryString.parse(this.props.location.search);
+        this.props.setFilter(qs);
         let authenticated = await AuthenticationHelpers.authenticateUser();
         if(!authenticated) {
             this.props.history.push('/home');
         } else {
             document.body.style.backgroundImage = "none";
         }
-    }
-
-    onBackButtonEvent(e){
-        let qs = queryString.parse(this.props.location.search);
-        this.props.setFilter(qs);
     }
 
     async nextPage() {

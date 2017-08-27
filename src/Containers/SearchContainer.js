@@ -47,9 +47,10 @@ const mapDispatchToProps = dispatch => {
             newFilter.abv = newFilter.abv || '';
             newFilter.ibu = newFilter.ibu || '';
             newFilter.year = newFilter.year || '';
-            newFilter.order = newFilter.order || '';        
-            dispatch(setFilter(newFilter));
-            setPage(newFilter.page);
+            newFilter.order = newFilter.order || ''; 
+            newFilter.page = newFilter.page || 1; 
+            dispatch(setFilter(newFilter));    
+            dispatch(setPage(newFilter.page));
             await refreshItems(dispatch, newFilter.page, newFilter.name, newFilter.ibu, newFilter.abv, newFilter.year, newFilter.order);
         },
         toggleFav: async(id) => {
