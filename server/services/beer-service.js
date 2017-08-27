@@ -27,6 +27,8 @@ class BeerService {
 
         let favs = userFavorites.split(',');
         
+        if(!result.data.data) return result.data;
+
         result.data.data.forEach(function(beer){
             if(favs.includes(beer.id)){
                 beer.isFav = true;
