@@ -4,6 +4,11 @@ import { authenticate } from './ApiHelpers'
 
 const cookies = new Cookies();
 
+const getCookieExpiryDate = () =>{
+    let today = new Date();
+    return new Date(today.getFullYear(), today.getMonth() + 1, today.getDate());
+}
+
 const AuthenticationHelpers = {
     authenticateUser: async () => {
         let cookie = AuthenticationHelpers.getAuthenticationCookie();
@@ -14,7 +19,7 @@ const AuthenticationHelpers = {
     },
 
     setAuthenticationCookie: (key) => {
-        cookies.set(config.authCookieName, key, { path: '/' });
+        cookies.set(config.authCookieName, key, { path: '/', expires: getCookieExpiryDate() });
     },
 
     getAuthenticationCookie: () => {
