@@ -6,9 +6,9 @@ import { setItems, toggleLoading, toggleFavorite } from '../Actions/item-actions
 import { getAllBeers, toggleFavoriteBeer } from '../Helpers/ApiHelpers'
 import AuthenticationHelpers from '../Helpers/AuthenticationHelpers'
 
-const cookie = AuthenticationHelpers.getAuthenticationCookie();
 
 const refreshItems = async (dispatch, page, beername, ibu, abv, year, order) =>{
+    const cookie = AuthenticationHelpers.getAuthenticationCookie(); //Defined within the function to handle the case where the cookie's availability changes
     dispatch(toggleLoading());
     let result = await getAllBeers(page, beername, ibu, abv, year, order, cookie);
     dispatch(toggleLoading());
@@ -53,6 +53,7 @@ const mapDispatchToProps = dispatch => {
             await refreshItems(dispatch, newFilter.page, newFilter.name, newFilter.ibu, newFilter.abv, newFilter.year, newFilter.order);
         },
         toggleFav: async(id) => {
+            const cookie = AuthenticationHelpers.getAuthenticationCookie();
             toggleFavoriteBeer(cookie, id);
             dispatch(toggleFavorite(id));
         }
