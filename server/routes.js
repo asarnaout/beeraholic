@@ -42,6 +42,11 @@ function handleRoutes(express, accountService, beerService) {
 		response.send(result);
     });
     
+    app.post('/account/fbsignin', async (request, response) => {
+        var result = await accountService.facebookSignIn(request.body);
+		response.send(result);
+    });
+
     app.post('/account/signin', async (request, response) => {
         var result = await accountService.signIn(request.body);
 		response.send(result);

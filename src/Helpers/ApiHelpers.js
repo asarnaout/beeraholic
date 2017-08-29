@@ -33,6 +33,14 @@ export async function register(data){
     });
 }
 
+export async function fbLogin(data){
+    return await axios({
+        method: 'post',
+        url: config.apiEndpoint + 'account/fbsignin',
+        data: data
+    });
+}
+
 export async function authenticate(cookie){
     return await (axios({
         method: 'post',

@@ -1,5 +1,6 @@
 const usersHashtableName = "usr";
-const userKeysSetName = "usr_keys_set";
+const userEmailKeyMappingHashtableName = "usr_mail_key";
+const userFacebookIdKeyMappingHashtableName = "usr_fbid_key";
 const helpers = require('./helpers');
 const emailRegex = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
 
@@ -30,39 +31,68 @@ class AccountService{
             return {message: "Please Enter a Valid Email Address"};
         }
 
-        let dbUser = await this.redisClient.getHashSetField(usersHashtableName, user.emailAddress);
+        let existingEmail = await this.redisClient.getHashSetField(userEmailKeyMappingHashtableName, user.emailAddress);
 
-        if(dbUser != null) {
+        if(existingEmail != null) {
             return {message: "Email Address Already Exists"};
         }
 
         user.userKey = helpers.generateGuid();
         
-        this.redisClient.storeHashSetField(usersHashtableName, user.emailAddress, JSON.stringify(user));
-        this.redisClient.addToSet(userKeysSetName, user.userKey);
+        this.redisClient.storeHashSetField(usersHashtableName, user.userKey, JSON.stringify(user));
+        this.redisClient.storeHashSetField(userEmailKeyMappingHashtableName, user.emailAddress, user.userKey);
         
+        if(this.isProvided(user.facebookId)) {
+            this.redisClient.storeHashSetField(userFacebookIdKeyMappingHashtableName, user.facebookId, user.userKey);
+        }
+
         return {success: true, userKey: user.userKey};
     }
 
-    async signIn(credentials) {
-        const hashedPassword = helpers.hashData(credentials.password)
-        let user = await this.redisClient.getHashSetField(usersHashtableName, credentials.emailAddress);
-
-        if(user === null) {
-            return {success:false};
+    async signIn(credentials) {        
+        if(!this.isProvided(credentials.password) || !this.isProvided(credentials.emailAddress)) {
+            return {success: false};
         }
 
-        let jsonUser = JSON.parse(user);
+        const hashedPassword = helpers.hashData(credentials.password);
         
-        if(jsonUser.password != hashedPassword){
+        let key = await this.redisClient.getHashSetField(userEmailKeyMappingHashtableName, credentials.emailAddress);
+        
+        if(key === null) {
             return {success:false};
         }
-        return {success: true, userKey: jsonUser.userKey};
+
+        let user = JSON.parse(await this.redisClient.getHashSetField(usersHashtableName, key));
+
+        
+        if(user.password != hashedPassword){
+            return {success:false};
+        }
+
+        return {success: true, userKey: user.userKey};
+    }
+
+    async facebookSignIn(credentials) {        
+        if(!this.isProvided(credentials.facebookId)) {
+            return {success: false};
+        }
+        
+        let key = await this.redisClient.getHashSetField(userFacebookIdKeyMappingHashtableName, credentials.facebookId);
+
+        if(key === null) {
+            return {success:false};
+        }
+
+        return {success: true, userKey: key};
     }
 
     async authenticateUser(key) {
-        let result = await this.redisClient.fieldExistsInSet(userKeysSetName, key)
-        return {success: result};
+        if(!this.isProvided(key)) {
+            return {success: false};
+        }
+        
+        let result = await this.redisClient.getHashSetField(usersHashtableName, key);
+        return {success: result !== null};
     }
 }
 

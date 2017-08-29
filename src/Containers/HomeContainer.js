@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
 import Card from '../Components/Card'
 import JoinNow from '../Components/JoinNow'
+import FBLogin from '../Components/FBLogin'
 import AuthenticationHelpers from '../Helpers/AuthenticationHelpers'
-import { signIn } from '../Helpers/ApiHelpers'
+import { signIn, register, fbLogin } from '../Helpers/ApiHelpers'
 
 class HomeContainer extends Component {
 
@@ -11,10 +12,14 @@ class HomeContainer extends Component {
         this.auth();
         this.login = this.login.bind(this);
         this.inputEntered = this.inputEntered.bind(this);
+        this.loginWithFaceBook = this.loginWithFaceBook.bind(this);
+        this.onAuthenticationSuccess = this.onAuthenticationSuccess.bind(this);
+        this.fbLoginClicked = this.fbLoginClicked.bind(this);
         this.state = {
             emailAddress: '',
             password: '',
-            errorMessage : ''
+            errorMessage : '',
+            fbLoginClicked: false
         };
     }
 
@@ -26,6 +31,11 @@ class HomeContainer extends Component {
         }
     }
 
+    onAuthenticationSuccess(key){
+        AuthenticationHelpers.setAuthenticationCookie(key);
+        this.props.history.push('/search');
+    }
+
     async login() {
         let data = {
             emailAddress: this.state.emailAddress,
@@ -35,8 +45,7 @@ class HomeContainer extends Component {
         let result = (await signIn(data)).data;
 
         if(result.success) {
-            AuthenticationHelpers.setAuthenticationCookie(result.userKey);
-            this.props.history.push('/search');
+            this.onAuthenticationSuccess(result.userKey);
         } else {
             this.setState({errorMessage: 'Invalid Login Credentials'})
         }
@@ -47,6 +56,30 @@ class HomeContainer extends Component {
         newState[id] = value;
         this.setState(newState); 
     }
+    
+    generateRandomPassword(){
+        let S4 = function() {
+            return (((1+Math.random())*0x10000)|0).toString(16).substring(1);
+        };
+        return (S4() + S4() + S4() + S4()).toString();
+    }
+
+    async loginWithFaceBook(response) {       
+        if(!this.state.fbLoginClicked) return;
+        let fbSignInResult = await fbLogin({facebookId: response.id});
+        if(fbSignInResult.data.success) {
+            this.onAuthenticationSuccess(fbSignInResult.data.userKey);
+        } else {
+            let signUpResult = await register({firstName: response.first_name, lastName: response.last_name, emailAddress: response.email, password: this.generateRandomPassword(), facebookId: response.id});        
+            if(signUpResult.data.success) {
+                this.onAuthenticationSuccess(signUpResult.data.userKey);
+            }
+        }
+    }
+
+    fbLoginClicked(){
+        this.setState({fbLoginClicked: true});
+    }
 
     render() {
         return (
@@ -55,6 +88,7 @@ class HomeContainer extends Component {
                 {value: this.state.password, placeholder:"Password", password: true, id:"password"}]}
                 buttons={[{actionButtonValue:"Login", actionButtonHandler:this.login, backgroundClass: "blue-bg"}]} 
                 handleKeyPress={this.inputEntered} errorMessage={this.state.errorMessage}>
+                <FBLogin loginWithFaceBook={this.loginWithFaceBook} fbLoginClicked={this.fbLoginClicked} />
                 <JoinNow/>
             </Card>
         );

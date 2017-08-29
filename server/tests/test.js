@@ -6,7 +6,7 @@ const redisClient = new (require('../data-clients/redis-client'))(config);
 const accountService = new (require('../services/account-service'))(redisClient);
 const beerService = new (require('../services/beer-service'))(config, redisClient);
 const testingBeerId = "ZsQEJt";
-const usersHashtableName = "usr";
+const testingHashtableName = "tst";
 const testPassword = "testhash";
 const testingUsers = [
 {
@@ -61,6 +61,13 @@ const testingUsers = [
   "password": "123456",
   "firstName": "Mocha",
   "lastName": "Test"  
+},
+{
+  "emailAddress": "testingmochafb@mocha.com",
+  "password": "123456",
+  "firstName": "Mocha",
+  "lastName": "Test",
+  "facebookId": "testingfbId"
 }];
 
 
@@ -82,11 +89,24 @@ describe('Helpers', function() {
 describe('RedisClient', function() {
     describe('#getHashSetField()', function() {
       it('should perform the read and write operations to redis successfully', async function() {	
-          redisClient.storeHashSetField(usersHashtableName, testingUsers[0].emailAddress, JSON.stringify(testingUsers[0]));
-          let result = await redisClient.getHashSetField(usersHashtableName, testingUsers[0].emailAddress);
-          assert.equal(testingUsers[0].firstName, JSON.parse(result).firstName);
+          let key = generateRandomString();
+          let testingObj = {firstName: generateRandomString()};
+          redisClient.storeHashSetField(testingHashtableName, key, JSON.stringify(testingObj));
+          let result = await redisClient.getHashSetField(testingHashtableName, key);
+          assert.equal(testingObj.firstName, JSON.parse(result).firstName);
       });
     });
+});
+
+describe('AccountService', function() {
+  describe('#signUp()', function() {
+    it('should reject the sign up attempt and return false due to providing a duplicate email', async function() {
+      testingUsers[0].password = testPassword;
+      let attempt1 = await accountService.signUp(testingUsers[0]);
+      let attempt2 = await accountService.signUp(testingUsers[0]);
+      assert.notEqual(attempt2.success, true);
+    });
+  });
 });
 
 describe('AccountService', function() {
@@ -96,15 +116,6 @@ describe('AccountService', function() {
         testingUsers[1].emailAddress = randomString + testingUsers[1].emailAddress;
         let result = await accountService.signUp(testingUsers[1]);
         assert.equal(result.success, true);
-      });
-    });
-});
-
-describe('AccountService', function() {
-    describe('#signUp()', function() {
-      it('should reject the sign up attempt and return false due to providing a duplicate email', async function() {
-        let result = await accountService.signUp(testingUsers[0]);
-        assert.notEqual(result.success, true);
       });
     });
 });
@@ -183,9 +194,36 @@ describe('AccountService', function() {
 });
 
 describe('AccountService', function() {
+  describe('#signIn()', function() {
+    it('should reject the sign in attempt and return false due to not providing the email address', async function() {
+      let result = await accountService.signIn({password: testPassword});
+      assert.equal(result.success, false);
+    });
+  });
+});
+
+describe('AccountService', function() {
+  describe('#signIn()', function() {
+    it('should reject the sign in attempt and return false due to not providing the password', async function() {
+      let result = await accountService.signIn({emailAddress: testingUsers[0].emailAddress});
+      assert.equal(result.success, false);
+    });
+  });
+});
+
+describe('AccountService', function() {
   describe('#authenticateUser()', function() {
     it('should not authenticate the user since the provided key is not an authentic key', async function() {
       let result = await accountService.authenticateUser(generateRandomString());
+      assert.equal(result.success, false);
+    });
+  });
+});
+
+describe('AccountService', function() {
+  describe('#authenticateUser()', function() {
+    it('should not authenticate the user since the key is not provided', async function() {
+      let result = await accountService.authenticateUser();
       assert.equal(result.success, false);
     });
   });
@@ -199,6 +237,36 @@ describe('AccountService', function() {
       let signUpResult = await accountService.signUp(testingUsers[8]);
       let authenticationResult = await accountService.authenticateUser(signUpResult.userKey);
       assert.equal(authenticationResult.success, true);
+    });
+  });
+});
+
+describe('AccountService', function() {
+  describe('#facebookSignIn()', function() {
+    it('should sign in the user using the facebook id', async function() {
+      testingUsers[9].emailAddress = generateRandomString() + testingUsers[9].emailAddress;
+      testingUsers[9].facebookId += generateRandomString();
+      await accountService.signUp(testingUsers[9]);
+      let fbSignInResult = await accountService.facebookSignIn({facebookId: testingUsers[9].facebookId});
+      assert.equal(fbSignInResult.success, true);
+    });
+  });
+});
+
+describe('AccountService', function() {
+  describe('#facebookSignIn()', function() {
+    it('should reject the facebook sign in attempt due to not providing a facebook id', async function() {
+      let fbSignInResult = await accountService.facebookSignIn({facebookId: ""});
+      assert.equal(fbSignInResult.success, false);
+    });
+  });
+});
+
+describe('AccountService', function() {
+  describe('#facebookSignIn()', function() {
+    it('should reject the facebook sign in attempt due to providing an invalid facebook id', async function() {
+      let fbSignInResult = await accountService.facebookSignIn({facebookId: generateRandomString()});
+      assert.equal(fbSignInResult.success, false);
     });
   });
 });
