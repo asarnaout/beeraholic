@@ -20,7 +20,7 @@ class HomeContainer extends Component {
             password: '',
             errorMessage : '',
             fbLoginClicked: false
-        };
+        };        
     }
 
     async auth(){
@@ -73,6 +73,8 @@ class HomeContainer extends Component {
             let signUpResult = await register({firstName: response.first_name, lastName: response.last_name, emailAddress: response.email, password: this.generateRandomPassword(), facebookId: response.id});        
             if(signUpResult.data.success) {
                 this.onAuthenticationSuccess(signUpResult.data.userKey);
+            } else {
+                this.props.history.push(`/signup?firstName=${response.first_name}&lastName=${response.last_name}&emailAddress=${response.email}&facebookId=${response.id}`);
             }
         }
     }

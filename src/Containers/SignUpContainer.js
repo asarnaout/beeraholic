@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import Card from '../Components/Card'
 import AuthenticationHelpers from '../Helpers/AuthenticationHelpers'
 import { register } from '../Helpers/ApiHelpers'
+import queryString from 'query-string';
 
 class SignUpContainer extends Component{
 
@@ -11,13 +12,20 @@ class SignUpContainer extends Component{
         this.signUp = this.signUp.bind(this);
         this.inputEntered = this.inputEntered.bind(this);
         this.handleBackButton = this.handleBackButton.bind(this);
+        let qs = queryString.parse(this.props.location.search);
+        
         this.state = {
-            firstName: '',
-            lastName: '',
-            emailAddress: '',
+            firstName: this.isProvided(qs.firstName) ? qs.firstName : '',
+            lastName: this.isProvided(qs.lastName) ? qs.lastName : '',
+            emailAddress: this.isProvided(qs.emailAddress) ? qs.emailAddress : '',
+            facebookId: this.isProvided(qs.facebookId)? qs.facebookId : '',
             password: '',
             errorMessage: ''
         };
+    }
+
+    isProvided(value) {
+        return value !== undefined && value !== null && value !== '' && value !== 'undefined'
     }
 
     async auth(){
@@ -34,7 +42,8 @@ class SignUpContainer extends Component{
             emailAddress: this.state.emailAddress,
             password: this.state.password,
             firstName: this.state.firstName,
-            lastName: this.state.lastName
+            lastName: this.state.lastName,
+            facebookId: this.state.facebookId
         };        
 
         let result = await register(data);
