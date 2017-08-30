@@ -57,7 +57,6 @@ class Home extends Component {
                     <div className="h10"/>
                 </div>      
 
-
                 <div>
                     <div className="row">
                         <div className="col-xs-10 col-xs-offset-1">

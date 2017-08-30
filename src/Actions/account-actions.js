@@ -5,6 +5,7 @@ import {
     SET_ACCOUNT_LASTNAME,
     SET_ACCOUNT_FACEBOOKID,
     SET_LOGIN_ERROR_MESSAGE,
+    SET_SIGNUP_ERROR_MESSAGE
 } from './action-types'
 
 
@@ -46,6 +47,13 @@ export function setAccountFacebookId(facebookId) {
 export function setLoginErrorMessage(message) {
     return {
         type: SET_LOGIN_ERROR_MESSAGE,
+        message
+    }
+}
+
+export function setSignUpErrorMessage(message) {
+    return {
+        type: SET_SIGNUP_ERROR_MESSAGE,
         message
     }
 }

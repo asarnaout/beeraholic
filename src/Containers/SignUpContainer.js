@@ -1,86 +1,49 @@
-import React, { Component } from 'react';
-import Card from '../Components/Card'
-import AuthenticationHelpers from '../Helpers/AuthenticationHelpers'
+import { connect } from 'react-redux'
 import { register } from '../Helpers/ApiHelpers'
-import queryString from 'query-string';
+import AuthenticationHelpers from '../Helpers/AuthenticationHelpers'
+import SignUp from '../Components/SignUp'
+import { setAccountFirstName, setAccountLastName, setAccountMail, setAccountPassword, setAccountFacebookId, setSignUpErrorMessage } from '../Actions/account-actions'
 
-class SignUpContainer extends Component{
-
-    constructor(props) {
-        super(props);
-        this.auth();
-        this.signUp = this.signUp.bind(this);
-        this.inputEntered = this.inputEntered.bind(this);
-        this.handleBackButton = this.handleBackButton.bind(this);
-        let qs = queryString.parse(this.props.location.search);
+const signUpUser = async (history, dispatch, firstName, lastName, emailAddress, password, facebookId) => {
+    let result = await register({
+        firstName,
+        lastName,
+        emailAddress,
+        password,
+        facebookId
+    });
         
-        this.state = {
-            firstName: this.isProvided(qs.firstName) ? qs.firstName : '',
-            lastName: this.isProvided(qs.lastName) ? qs.lastName : '',
-            emailAddress: this.isProvided(qs.emailAddress) ? qs.emailAddress : '',
-            facebookId: this.isProvided(qs.facebookId)? qs.facebookId : '',
-            password: '',
-            errorMessage: ''
-        };
-    }
-
-    isProvided(value) {
-        return value !== undefined && value !== null && value !== '' && value !== 'undefined'
-    }
-
-    async auth(){
-        let authenticated = await AuthenticationHelpers.authenticateUser();
-        
-        if(authenticated) {
-            this.props.history.push('/search');
-        }
-    }
-
-    async signUp() {
-
-        let data = {
-            emailAddress: this.state.emailAddress,
-            password: this.state.password,
-            firstName: this.state.firstName,
-            lastName: this.state.lastName,
-            facebookId: this.state.facebookId
-        };        
-
-        let result = await register(data);
-        
-        if(result.data.success === true) {
-            AuthenticationHelpers.setAuthenticationCookie(result.data.userKey);
-            this.props.history.push('/search');
-        } else {
-            this.setState({errorMessage: result.data.message})
-        }
-    }
-
-    inputEntered(value, id){
-        let newState = {};
-        newState[id] = value;
-        this.setState(newState); 
-    }
-
-    handleBackButton() {
-        this.props.history.push('/home');
-    }
-
-    render(){
-        return (
-            <Card header="Join Us" fields={[
-                {placeholder: 'First Name', value: this.state.firstName, password: false, id: "firstName"},
-                {placeholder: 'Last Name', value: this.state.lastName, password: false, id: "lastName"}, 
-                {placeholder: 'Email Address', value: this.state.emailAddress, password: false, id: "emailAddress"}, 
-                {placeholder: 'Password', value: this.state.password, password: true, id:"password"}]}
-                buttons={[
-                    {actionButtonValue:"Sign Up", actionButtonHandler:this.signUp, backgroundClass: "blue-bg"},
-                    {actionButtonValue:"Back", actionButtonHandler:this.handleBackButton, backgroundClass: "red-bg"}
-                ]} 
-                handleKeyPress={this.inputEntered} errorMessage={this.state.errorMessage}>
-            </Card>
-        );
+    if(result.data.success === true) {
+        AuthenticationHelpers.setAuthenticationCookie(result.data.userKey);
+        history.push('/search');
+    } else {
+        dispatch(setSignUpErrorMessage(result.data.message))
     }
 }
 
-export default SignUpContainer;
+const mapStateToProps = state => {    
+    return {
+        firstName: state.account.firstName,
+        lastName: state.account.lastName,
+        emailAddress: state.account.emailAddress,
+        password: state.account.password,
+        facebookId: state.account.facebookId,
+        errorMessage: state.signUpErrorMessage.value
+    }
+}
+
+const mapDispatchToProps = dispatch => {
+    return {
+        onFirstNameChange: value => dispatch(setAccountFirstName(value)),
+        onLastNameChange: value => dispatch(setAccountLastName(value)),
+        onEmailChange: value => dispatch(setAccountMail(value)),
+        onPasswordChange: value => dispatch(setAccountPassword(value)),
+        onFacebookIdChange: value => dispatch(setAccountFacebookId(value)),
+        onBackButtonClick: history => history.push('/home'),
+        onSignUp: (history, firstName, lastName, emailAddress, password, facebookId) =>  signUpUser(history, dispatch, firstName, lastName, emailAddress, password, facebookId)
+    }
+}
+
+const SignUpContainer = connect(mapStateToProps, mapDispatchToProps)(SignUp);
+
+export default SignUpContainer

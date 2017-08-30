@@ -16,6 +16,10 @@ const onAuthenticationSuccess = (key, history) => {
 }
 
 const login = async(emailAddress, password, history, dispatch) => {
+    if(!emailAddress || !password) {
+        dispatch(setLoginErrorMessage('Please Enter All Required Fields'));
+        return;
+    }
     let data = { emailAddress, password };
     let result = (await signIn(data)).data;
     if(result.success) {
