@@ -1,11 +1,7 @@
 import React, { Component } from 'react';
-import PropTypes from 'prop-types';
-
 import '../Assets/css/InputText.css'
 
 class InputText extends Component {
-
-  
     constructor(props) {
       super(props);
       this.updateInputValue = this.updateInputValue.bind(this);
@@ -16,29 +12,14 @@ class InputText extends Component {
     }
 
     updateInputValue(event){
-      this.props.handleKeyPress(event.target.value, this.props.id)
-    }
-
-    resetInput(event){
-      this.props.handleKeyPress('', event.target.id)
+      this.props.handleKeyPress(event.target.value)
     }
 
     render() {
       return (
-        <input type={this.getInputType()} placeholder={this.props.placeholder} value={this.props.value} className="input-text" id={this.props.id} onChange={this.updateInputValue} />
+        <input type={this.getInputType()} placeholder={this.props.placeholder} value={this.props.value} className="input-text" onChange={this.updateInputValue} />
       );
     }
 }
   
-InputText.propTypes = {
-   placeholder: PropTypes.string,
-   password: PropTypes.bool
-};
-
-InputText.defaultProps = { 
-  placeholder: '',
-  password: false
-};
-  
 export default InputText;
-  
