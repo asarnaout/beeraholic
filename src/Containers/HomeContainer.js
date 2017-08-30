@@ -3,6 +3,7 @@ import AuthenticationHelpers from '../Helpers/AuthenticationHelpers'
 import { signIn, register, fbLogin } from '../Helpers/ApiHelpers'
 import { setAccountMail, setAccountPassword, setLoginErrorMessage } from '../Actions/account-actions'
 import Home from '../Components/Home'
+import config from '../config'
 
 const auth = async (history) => {
     if(await AuthenticationHelpers.authenticateUser()) {
@@ -55,6 +56,7 @@ const mapStateToProps = state => {
         emailAddress: state.account.emailAddress,
         password: state.account.password,
         errorMessage: state.loginErrorMessage.value,
+        facebookAppId: config.facebookAppId
     }
 }
 
