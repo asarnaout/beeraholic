@@ -39,72 +39,74 @@ class SignUp extends Component {
     render() {
         return (
             <div className="card col-lg-offset-4 col-lg-4 col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2 col-xs-12" id="Card">
-                <h1 className="black-text center-text no-margin">Join Us</h1>
-                <div className="h20" />            
                 <div>
-                    <div className="row">
-                        <div className="col-xs-10 col-xs-offset-1">
-                            <InputText placeholder="First Name" value={this.props.firstName} handleKeyPress={this.props.onFirstNameChange} />
+                    <h1 className="black-text center-text no-margin">Join Us</h1>
+                    <div className="h20" />            
+                    <div>
+                        <div className="row">
+                            <div className="col-xs-10 col-xs-offset-1">
+                                <InputText placeholder="First Name" value={this.props.firstName} handleKeyPress={this.props.onFirstNameChange} />
+                            </div>
                         </div>
-                    </div>
-                    <div className="h10"/>
-                </div>         
-                
-                <div>
-                    <div className="row">
-                        <div className="col-xs-10 col-xs-offset-1">
-                            <InputText placeholder="Last Name" value={this.props.lastName} handleKeyPress={this.props.onLastNameChange} />
+                        <div className="h10"/>
+                    </div>         
+                    
+                    <div>
+                        <div className="row">
+                            <div className="col-xs-10 col-xs-offset-1">
+                                <InputText placeholder="Last Name" value={this.props.lastName} handleKeyPress={this.props.onLastNameChange} />
+                            </div>
                         </div>
-                    </div>
-                    <div className="h10"/>
-                </div>      
+                        <div className="h10"/>
+                    </div>      
 
-                <div>
-                    <div className="row">
-                        <div className="col-xs-10 col-xs-offset-1">
-                            <InputText placeholder="Email Address" value={this.props.emailAddress} handleKeyPress={this.props.onEmailChange} />
+                    <div>
+                        <div className="row">
+                            <div className="col-xs-10 col-xs-offset-1">
+                                <InputText placeholder="Email Address" value={this.props.emailAddress} handleKeyPress={this.props.onEmailChange} />
+                            </div>
                         </div>
-                    </div>
-                    <div className="h10"/>
-                </div>      
+                        <div className="h10"/>
+                    </div>      
 
-                <div>
-                    <div className="row">
-                        <div className="col-xs-10 col-xs-offset-1">
-                            <InputText placeholder="Password" value={this.props.password} handleKeyPress={this.props.onPasswordChange} password={true} />
+                    <div>
+                        <div className="row">
+                            <div className="col-xs-10 col-xs-offset-1">
+                                <InputText placeholder="Password" value={this.props.password} handleKeyPress={this.props.onPasswordChange} password={true} />
+                            </div>
                         </div>
-                    </div>
-                    <div className="h10"/>
-                </div>      
-                
-                <div>
-                    <div className="row">
-                        <div className="col-xs-10 col-xs-offset-1">
-                            <span className="red-text fs-14" id="ErrorMessage">
-                                {this.props.errorMessage}
-                            </span>
+                        <div className="h10"/>
+                    </div>      
+                    
+                    <div>
+                        <div className="row">
+                            <div className="col-xs-10 col-xs-offset-1">
+                                <span className="red-text fs-14" id="ErrorMessage">
+                                    {this.props.errorMessage}
+                                </span>
+                            </div>
                         </div>
+                        <div className="h10"/>
                     </div>
-                    <div className="h10"/>
+
+                    <div>
+                        <div className="row">
+                            <div className="col-xs-10 col-xs-offset-1">
+                                <Button placeholder="Sign Up" clickHandler={this.signUp} background="blue-bg" />
+                            </div>
+                        </div>                                    
+                        <div className="h10"/>
+                    </div>  
+
+                    <div>
+                        <div className="row">
+                            <div className="col-xs-10 col-xs-offset-1">
+                                <Button placeholder="Back" clickHandler={this.onBackButtonClick} background="red-bg" />
+                            </div>
+                        </div>                                    
+                        <div className="h10"/>
+                    </div>  
                 </div>
-
-                <div>
-                    <div className="row">
-                        <div className="col-xs-10 col-xs-offset-1">
-                            <Button placeholder="Sign Up" clickHandler={this.signUp} background="blue-bg" />
-                        </div>
-                    </div>                                    
-                    <div className="h10"/>
-                </div>  
-
-                <div>
-                    <div className="row">
-                        <div className="col-xs-10 col-xs-offset-1">
-                            <Button placeholder="Back" clickHandler={this.onBackButtonClick} background="red-bg" />
-                        </div>
-                    </div>                                    
-                    <div className="h10"/>
-                </div>  
             </div>);
     }
 }

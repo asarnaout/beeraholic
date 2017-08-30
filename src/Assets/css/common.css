@@ -186,11 +186,18 @@
 
 @media screen and (max-width: 767px){
     .card {
-        padding-top: 140px;
         height: 100%;
         position: relative;
         background: linear-gradient(rgba(255,255,255,.7), rgba(255,255,255,.7)), url('../Images/mbg.jpg');
         background-size: cover;
+    }
+
+    .card>div{
+        position: relative;
+        top: 50%;
+        -webkit-transform: translateY(-50%);
+        -ms-transform: translateY(-50%);
+        transform: translateY(-50%);
     }
 
     .card h1 {
