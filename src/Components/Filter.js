@@ -12,7 +12,14 @@ class Filter extends Component{
     constructor(props){
         super(props);
         this.getItems = this.getItems.bind(this);
-        this.reset = this.reset.bind(this);        
+        this.reset = this.reset.bind(this);         
+    }
+
+    componentDidMount(){
+        document.body.style.height = "auto";
+        document.body.parentElement.style.height = "auto"
+        document.body.children[1].style.height = "auto"
+        document.body.children[1].children[0].style.height = "auto"
     }
 
     async getItems(proxy, event, resetPage = true){
