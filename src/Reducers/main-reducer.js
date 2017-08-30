@@ -1,14 +1,11 @@
 import { combineReducers } from 'redux'
-import { page, numberOfPages } from './page-reducer'
-import { items, loading } from './items-reducer'
+import { search, loading } from './search-reducer'
 import { account, loginErrorMessage, signUpErrorMessage } from './account-reducer'
 import filter from './filter-reducer'
 
 const reducers = combineReducers({
-    page,
-    numberOfPages,
     filter,
-    items,
+    search,
     loading,
     account,
     loginErrorMessage,

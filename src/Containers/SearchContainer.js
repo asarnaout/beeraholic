@@ -1,8 +1,7 @@
 import Search from '../Components/Search'
 import { connect } from 'react-redux'
-import { incrementPage, decrementPage, setPage, setNumberOfPages } from '../Actions/page-actions'
 import { setFilter } from '../Actions/filter-actions'
-import { setItems, toggleLoading, toggleFavorite } from '../Actions/item-actions'
+import { setItems, toggleLoading, toggleFavorite, incrementPage, decrementPage, setPage, setNumberOfPages } from '../Actions/search-actions'
 import { getAllBeers, toggleFavoriteBeer } from '../Helpers/ApiHelpers'
 import AuthenticationHelpers from '../Helpers/AuthenticationHelpers'
 
@@ -18,15 +17,16 @@ const refreshItems = async (dispatch, page, beername, ibu, abv, year, order) =>{
 
 //Stating how props passed to the child component will be related to the state
 const mapStateToProps = state => {
+    console.log(state);
     return {
-      page: state.page,
-      numberOfPages: state.numberOfPages,
+      page: state.search.page,
+      numberOfPages: state.search.numberOfPages,
       beername: state.filter.name,
       abv: state.filter.abv,
       ibu: state.filter.ibu,
       year: state.filter.year,
       order: state.filter.order,
-      items: state.items,
+      items: state.search.items,
       loading: state.loading.isLoading
     }
 }

@@ -1,10 +1,35 @@
 import {
+    SET_ITEMS,
+    TOGGLE_LOADING,
+    TOGGLE_FAV,
     INCREMENT_PAGE ,
     DECREMENT_PAGE,
     SET_PAGE,
     RESET_PAGE,
     SET_NUMBER_OF_PAGES
 } from './action-types'
+
+
+export function setItems(items) {   
+    return {
+        type: SET_ITEMS,
+        items
+    }
+}
+
+export function toggleLoading(loading) {
+    return {
+        type: TOGGLE_LOADING,
+        loading
+    }
+}
+
+export function toggleFavorite(beerId) {
+    return {
+        type: TOGGLE_FAV,
+        beerId
+    }
+}
 
 export function incrementPage() {
     return {

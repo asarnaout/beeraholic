@@ -2,8 +2,7 @@ import Filter from '../Components/Filter'
 import { connect } from 'react-redux'
 import { getAllBeers } from '../Helpers/ApiHelpers'
 import { setName, setAbv, setIbu, setYear, setOrder, clearFilter, toggleFilter } from '../Actions/filter-actions'
-import { setNumberOfPages,  resetPage } from '../Actions/page-actions'
-import { setItems, toggleLoading } from '../Actions/item-actions'
+import { setItems, toggleLoading, setNumberOfPages,  resetPage } from '../Actions/search-actions'
 import AuthenticationHelpers from '../Helpers/AuthenticationHelpers'
 
 const getYears = () => {
@@ -40,8 +39,7 @@ const mapStateToProps = state => {
       ibu: state.filter.ibu,
       year: state.filter.year,
       order: state.filter.order,
-      items: state.filter.items,
-      page: state.page,
+      page: state.search.page,
       yearOptions: getYears(),
       orderOptions: getOrderingCriteria(),
       filterCollapsed: state.filter.collapsed
