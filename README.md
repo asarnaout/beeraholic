@@ -8,23 +8,25 @@ Beeraholic will help you find your favorite beer, search Beeraholic's huge direc
 
 # Structure:
 
-/server: Holds the server side code for serving the frontend application.
+**/server**: Holds the server side code for serving the frontend application.
 
-/src: Holds the frontend react code.
+**/src**: Holds the frontend react code.
 
-/src/Components: These represent the presentational layer, i.e: Dumb components which contain no logic/state. The purpose of these components is pure UI rendering and should contain minimum/no logic at all.An ideal react component should contain the render() method only.
+**/src/Components**: These represent the presentational layer, i.e: Dumb components which contain no logic/state. The purpose of these components is pure UI rendering and should contain minimum/no logic at all.An ideal react component should contain the render() method only.
 
-/src/Containers: These represent the stateful components which perform logic (Communicating with APIs/Maintaining state/etc). A container should not perform any UI functionality and should return a single UI Component.
+**/src/Containers**: These represent the stateful components which perform logic (Communicating with APIs/Maintaining state/etc). A container should not perform any UI functionality and should return a single UI Component.
 
 # React-Redux:
 
-### State is generally managed through redux.
+## State:
+
+Redux stores the state of your whole application in an object tree within a single store.
 
 ## A react container should contain the following two methods:
 
--mapStateToProps: Specifies the prop values that will be sent to the presentational component and ties them to the state.
+**mapStateToProps**: Specifies the prop values that will be sent to the presentational component and ties them to the state.
 
--mapDispatchToProps: Specifies the prop functions that will be sent to the presentational component and dispatches actions (explained below) to update the redux state.
+**mapDispatchToProps**: Specifies the prop functions that will be sent to the presentational component and dispatches actions (explained below) to update the redux state.
 
 ## Action Creators:
 
@@ -36,13 +38,16 @@ Reducers are located in /src/Reducers, these define functions that will respond 
 
 Reducers must be combined via the combineReducers function to generate the state and its reducer. This could be found in /src/Reducers/main-reducer.
 
+
 ### The redux state is read as follows:
 
 ![alt text](https://raw.githubusercontent.com/asarnaout/beeraholic/master/ReadState.png)
 
+
 ### The redux state is updated as follows:
 
 ![alt text](https://raw.githubusercontent.com/asarnaout/beeraholic/master/UpdateState.png)
+
 
 ### The flow of the application and the infrastructure is illustrated in the following figure:
 
