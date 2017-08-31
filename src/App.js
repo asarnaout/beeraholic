@@ -29,6 +29,31 @@ const SignUp = Loadable({
   loading: Loading,
 });
 
+const PrivacyPolicy = Loadable({
+  loader: () => import ('./Containers/PrivacyPolicyContainer.js'),
+  loading: Loading,
+});
+
+const TermsOfService = Loadable({
+  loader: () => import ('./Containers/TermsOfServiceContainer.js'),
+  loading: Loading,
+});
+
+const ContactUs = Loadable({
+  loader: () => import ('./Containers/ContactUsContainer.js'),
+  loading: Loading,
+});
+
+const AboutUs = Loadable({
+  loader: () => import ('./Containers/AboutUsContainer.js'),
+  loading: Loading,
+});
+
+const CookiePolicy = Loadable({
+  loader: () => import ('./Containers/CookiePolicyContainer.js'),
+  loading: Loading,
+});
+
 class App extends Component {
   render() {
     return (
@@ -39,6 +64,11 @@ class App extends Component {
             <Route path="/search" component={Search} />
             <Route path="/signup" component={SignUp} />
             <Route path="/details/:beerId" component={Details} />
+            <Route path="/privacypolicy" component={PrivacyPolicy} />
+            <Route path="/termsofservice" component={TermsOfService} />
+            <Route path="/contactus" component={ContactUs} />
+            <Route path="/aboutus" component={AboutUs} />
+            <Route path="/cookiepolicy" component={CookiePolicy} />
           </div>
         </Router>
       </Provider>      

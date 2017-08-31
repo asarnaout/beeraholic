@@ -17,7 +17,6 @@ const refreshItems = async (dispatch, page, beername, ibu, abv, year, order) =>{
 
 //Stating how props passed to the child component will be related to the state
 const mapStateToProps = state => {
-    console.log(state);
     return {
       page: state.search.page,
       numberOfPages: state.search.numberOfPages,

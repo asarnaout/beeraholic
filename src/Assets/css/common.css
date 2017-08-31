@@ -180,8 +180,40 @@
     border: 1px solid black;
 }
 
-.card input[type="text"], .card input[type="password"] {
+.card input[type="text"], .card input[type="password"], .contact-us input[type="text"] {
     border: 1px solid rgba(0, 0, 0, 0.15);
+}
+
+.footer {
+    background-color: #000;
+    opacity: 0.82;
+    padding: 20px 0;
+}
+
+.footer .footer-item, .contactus-item {
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+
+.tos, .privacy-policy, .cookie-policy, .contact-us, .about-us {
+    padding-top: 15px;
+    padding-bottom: 15px;
+}
+
+.footer #BeerIcon {
+    margin: -7px 0 0 0;
+}
+
+.footer span:hover{
+    color: #1180FF;
+}
+
+.footer span.tm:hover{
+    color: #fff;
+}
+
+.contact-us textarea{
+    border-radius: 3px;
 }
 
 @media screen and (max-width: 767px){
