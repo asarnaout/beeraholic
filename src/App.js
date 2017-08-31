@@ -4,7 +4,6 @@ import Loadable from 'react-loadable';
 import Loading from './Loading.js';
 import { Provider } from 'react-redux'
 import { createStore } from 'redux'
-import './App.css';
 import reducers from './Reducers/main-reducer'
 import Footer from './Components/Footer.js'
 
