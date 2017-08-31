@@ -45,7 +45,8 @@ class AccountService{
         if(this.isProvided(user.facebookId)) {
             this.redisClient.storeHashSetField(userFacebookIdKeyMappingHashtableName, user.facebookId, user.userKey);
         }
-
+        
+        helpers.sendSignUpConfirmationMail(user);
         return {success: true, userKey: user.userKey};
     }
 

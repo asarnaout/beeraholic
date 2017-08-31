@@ -5,7 +5,7 @@ const bodyParser= require('body-parser');
 const favicon = require('serve-favicon');
 const helpers = require('./services/helpers');
 
-function handleRoutes(express, accountService, beerService, mailer) {
+function handleRoutes(express, accountService, beerService) {
     const app = express();
     app.use(cors());
 	app.use(bodyParser.json());
@@ -36,7 +36,7 @@ function handleRoutes(express, accountService, beerService, mailer) {
     });
 
     app.post('/contactus', async (request, response) => {
-        await helpers.sendContactUsRequest(mailer, config, request.body);
+        await helpers.sendContactUsRequest(request.body);
 		response.send("OK");
 	});
 
