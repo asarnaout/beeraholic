@@ -80,7 +80,7 @@ class Search extends Component {
 
     render(){
         let items = this.getItems();
-        let results = items.length === 0? (<div className="row no-margin"><div className="h30"/><span className="fs-30 col-xs-12 center-text">No Results Found, Try Changing The Search Criteria</span></div>) : items;
+        let results = items.length === 0? (<div className="row no-margin"><div className="h30"/><span className="fs-30 col-xs-12 center-text no-results">No Results Found, Try Changing The Search Criteria</span></div>) : items;
         let content = this.props.loading? <div className="padding-20"><img src={config.defaultLoaderCdn} className="loading-icon center-item" height={100} width={100} alt="loading" /></div> : results;
         let navButtons = this.props.loading? <div></div> : this.getNavButtons();
 

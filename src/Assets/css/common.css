@@ -218,7 +218,17 @@
     border-radius: 3px;
 }
 
+.no-results{
+    margin-bottom:230px;
+}
+
 @media screen and (max-width: 767px){
+    
+    .no-results{
+        margin-bottom:0;
+        font-size:22px;
+    }
+
     .card {
         height: 100%;
         position: relative;
@@ -256,12 +266,19 @@
         margin-top: 320px;
         margin-bottom: 320px;
     }
+    
+    .no-results{
+        margin-bottom:660px;
+    }
 }
 
 @media screen and (min-width: 992px) and (max-width: 1199px) {
     .loading-icon{
         margin-top: 145px;
         margin-bottom: 145px;
+    }
+    .no-results{
+        margin-bottom:355px;
     }
 }
 
