@@ -5,7 +5,11 @@ const config = {
     redisPassword: "K$PFwSSt{_3Eu/K[",
     breweryApiKey: "fbf1e5deafdc3351b619a984ca6fb94c",
     breweryApiEndpoint: "http://api.brewerydb.com/v2/",
-    redisDatabaseIndex: 0
+    redisDatabaseIndex: 0,
+    mailerServer: "gmail",
+	mailerAddress: "<Email>",
+    mailerPassword: "<Password>",
+    contactUsMail: "<ContactUsEmail>"
 }
 
 module.exports = config;

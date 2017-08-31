@@ -3,8 +3,9 @@ const path = require('path');
 const config = require('./config.js');
 const bodyParser= require('body-parser');
 const favicon = require('serve-favicon');
+const helpers = require('./services/helpers');
 
-function handleRoutes(express, accountService, beerService) {
+function handleRoutes(express, accountService, beerService, mailer) {
     const app = express();
     app.use(cors());
 	app.use(bodyParser.json());
@@ -34,6 +35,11 @@ function handleRoutes(express, accountService, beerService) {
         res.redirect('/home');
     });
 
+    app.post('/contactus', async (request, response) => {
+        await helpers.sendContactUsRequest(mailer, config, request.body);
+		response.send("OK");
+	});
+
     app.get('/*', function (req, res) { res.sendFile(path.join(__dirname, '/../build', 'index.html')); });
     app.listen(config.port, () => console.log('listening to connections on port: ' + config.port));
 
@@ -55,7 +61,7 @@ function handleRoutes(express, accountService, beerService) {
     app.post('/account/auth', async (request, response) => {
         var result = await accountService.authenticateUser(request.body.key);
 		response.send(result);
-	});
+    });
 }
 
 module.exports = handleRoutes;
