@@ -214,12 +214,21 @@
     color: #fff;
 }
 
-.contact-us textarea{
+textarea{
     border-radius: 3px;
+    border: 1px solid rgba(0,0,0,.15);
+}
+
+input, textarea {
+    -webkit-appearance: none;
 }
 
 .no-results{
     margin-bottom:230px;
+}
+
+a:hover {
+    text-decoration: none;
 }
 
 @media screen and (max-width: 767px){
