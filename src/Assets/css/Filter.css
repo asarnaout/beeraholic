@@ -3,11 +3,6 @@
     margin: 15px 0;
 }
 
-#BeerIcon{
-    -webkit-filter: invert(100%);
-    filter: invert(100%);
-}
-
 @media screen and (min-width: 992px) {
     #SearchHeader{
         font-size:50px;

@@ -198,10 +198,10 @@ body {
     border: 1px solid rgba(0, 0, 0, 0.15);
 }
 
-.footer {
+.footer>div{
+    padding: 20px 0;
     background-color: #000;
     opacity: 0.82;
-    padding: 20px 0;
 }
 
 .footer .footer-item, .contactus-item {
@@ -216,6 +216,11 @@ body {
 
 .footer #BeerIcon {
     margin: -7px 0 0 0;
+}
+
+#BeerIcon{
+    -webkit-filter: invert(100%);
+    filter: invert(100%);
 }
 
 .footer span:hover{
