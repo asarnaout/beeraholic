@@ -43,7 +43,7 @@
         margin: 0 0 1px -4px;
     }
 
-    input, .selector{
+    #Filter input, #Filter .selector{
         margin:10px 0;
     }
 }
