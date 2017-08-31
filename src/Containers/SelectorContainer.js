@@ -30,8 +30,14 @@ class SelectorContainer extends Component{
         this.setState({selectedOption: nextProps.value === ''? undefined : nextProps.value});
     }
 
+    getSelectedValue(val) {
+        let intVal = parseInt(val);
+        return isNaN(intVal)? val : intVal;
+    }
+
     render() {
-        return <Selector handleSelectChange={this.handleSelectChange} selectedOption={this.state.selectedOption} placeholder={this.props.placeholder} options={this.props.options}/>        
+        let selected = this.getSelectedValue(this.state.selectedOption);
+        return <Selector handleSelectChange={this.handleSelectChange} selectedOption={selected} placeholder={this.props.placeholder} options={this.props.options}/>        
     }
 }
 
