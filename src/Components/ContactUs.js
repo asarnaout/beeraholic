@@ -34,6 +34,12 @@ class ContactUs extends Component {
                                 <Button placeholder="Submit" background="red-bg" clickHandler={this.props.onContactUsSubmit}/>
                             </div>
                         </div>
+
+                        <div className="row contactus-item">
+                            <div className="col-xs-12">
+                                <span className="red-text">{this.props.statusMessage}</span>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>

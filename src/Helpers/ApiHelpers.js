@@ -56,3 +56,11 @@ export async function toggleFavoriteBeer(userKey, id){
         data: {key: userKey, beerId: id}
     }));
 }
+
+export async function sendContactUsRequest(data){
+    return await (axios({
+        method: 'post',
+        url: config.apiEndpoint + 'contactus',
+        data: data
+    }));
+}
