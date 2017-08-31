@@ -4,13 +4,13 @@ import '../Assets/css/common.css'
 
 class PrivacyPolicy extends Component {
     render(){
-        let filter = this.props.authenticated? (<div className="turquoise-bg"><div className="container"><FilterContainer /></div></div>) : <div></div>;
-
         return(
             <div>
-                {filter}
+                <div className="turquoise-bg"><div className="container"><FilterContainer /></div></div>
                 <div className="white-bg">
                     <div className="container privacy-policy">
+                        <div className="col-xs-12"><h4 className="blue-text bold">Privacy Policy</h4></div>
+
                         <div className="col-xs-12">
                             <p>This Privacy Policy governs the manner in which Beeraholic collects, uses, maintains and discloses information collected from users (each, a "User") of the Beeraholic website ("Site").</p>
 

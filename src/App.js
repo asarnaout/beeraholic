@@ -6,6 +6,7 @@ import { Provider } from 'react-redux'
 import { createStore } from 'redux'
 import './App.css';
 import reducers from './Reducers/main-reducer'
+import Footer from './Components/Footer.js'
 
 const store = createStore(reducers)
 
@@ -59,16 +60,19 @@ class App extends Component {
     return (
       <Provider store={store}>
         <Router>
-          <div className="App">
-            <Route path="/home" component={Home} />
-            <Route path="/search" component={Search} />
-            <Route path="/signup" component={SignUp} />
-            <Route path="/details/:beerId" component={Details} />
-            <Route path="/privacypolicy" component={PrivacyPolicy} />
-            <Route path="/termsofservice" component={TermsOfService} />
-            <Route path="/contactus" component={ContactUs} />
-            <Route path="/aboutus" component={AboutUs} />
-            <Route path="/cookiepolicy" component={CookiePolicy} />
+          <div>
+            <div className="App">
+              <Route path="/home" component={Home} />
+              <Route path="/search" component={Search} />
+              <Route path="/signup" component={SignUp} />
+              <Route path="/details/:beerId" component={Details} />
+              <Route path="/privacypolicy" component={PrivacyPolicy} />
+              <Route path="/termsofservice" component={TermsOfService} />
+              <Route path="/contactus" component={ContactUs} />
+              <Route path="/aboutus" component={AboutUs} />
+              <Route path="/cookiepolicy" component={CookiePolicy} />
+            </div>
+            <Footer/>
           </div>
         </Router>
       </Provider>      

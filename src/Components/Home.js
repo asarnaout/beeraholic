@@ -31,6 +31,7 @@ class Home extends Component {
         document.body.parentElement.style.height = "100%"
         document.body.children[1].style.height = "100%"
         document.body.children[1].children[0].style.height = "100%"
+        document.body.children[1].children[0].children[0].style.height = "100%"
     }
 
     render() {

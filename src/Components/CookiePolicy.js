@@ -4,16 +4,14 @@ import '../Assets/css/common.css'
 
 class CookiePolicy extends Component {
     render(){
-        let filter = this.props.authenticated? (<div className="turquoise-bg"><div className="container"><FilterContainer /></div></div>) : <div></div>;
-        
         return (
             <div>
-                {filter}
+                <div className="turquoise-bg"><div className="container"><FilterContainer /></div></div>
                 <div className="white-bg">
                     <div className="container cookie-policy">
-                    <div className="col-xs-12">
-                        <h1>Cookie Policy for Beeraholic</h1>
+                    <div className="col-xs-12"><h4 className="blue-text bold">Cookie Policy:</h4></div>
 
+                    <div className="col-xs-12">
                         <h2>What Are Cookies</h2>
 
                         <p>As is common practice with almost all professional websites this site uses cookies, which are tiny files that are downloaded to your computer, to improve your experience. This page describes what information they gather, how we use it and why we sometimes need to store these cookies. We will also share how you can prevent these cookies from being stored however this may downgrade or 'break' certain elements of the sites functionality.</p>

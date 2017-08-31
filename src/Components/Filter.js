@@ -20,6 +20,7 @@ class Filter extends Component{
         document.body.parentElement.style.height = "auto"
         document.body.children[1].style.height = "auto"
         document.body.children[1].children[0].style.height = "auto"
+        document.body.children[1].children[0].children[0].style.height = "auto"
     }
 
     async getItems(proxy, event, resetPage = true){

@@ -5,12 +5,14 @@ import Button from './Button'
 
 class ContactUs extends Component {
     render() {
-        let filter = this.props.authenticated? (<div className="turquoise-bg"><div className="container"><FilterContainer /></div></div>) : <div></div>;
-        
-        return (<div>
-            {filter}
+        return (
+        <div>
+            <div className="turquoise-bg"><div className="container"><FilterContainer /></div></div>
             <div className="white-bg">
                 <div className="container contact-us">
+                    <div className="col-xs-12"><h4 className="no-margin blue-text bold">Contact Us</h4></div>
+                    <div className="col-xs-12 contactus-item"><span className="bold">We'd love to hear your opinion</span></div>
+                    
                     <div className="col-xs-12 col-sm-8">
                         <textarea placeholder="Enter Your Inquiry Here..." value={this.props.message} className="full-width" rows={15} onChange={this.props.onMessageChange}/>
                     </div>

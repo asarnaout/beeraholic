@@ -5,15 +5,14 @@ import '../Assets/css/common.css'
 class TermsOfService extends Component {
 
     render(){
-        let filter = this.props.authenticated? (<div className="turquoise-bg"><div className="container"><FilterContainer /></div></div>) : <div></div>;
-        
         return (
             <div>
-                {filter}
+                <div className="turquoise-bg"><div className="container"><FilterContainer /></div></div>
                 <div className="white-bg">
                     <div className="container tos">
+                        <div className="col-xs-12"><h4 className="blue-text bold">Terms Of Service:</h4></div>
+
                         <div className="col-xs-12">
-                            <h1>Terms of Service ("Terms")</h1>
 
                             <p>Last updated: August 30, 2017</p>
 
