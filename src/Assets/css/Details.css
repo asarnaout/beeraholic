@@ -2,6 +2,10 @@
     background-color: #fff;
 }
 
+#BackButtonDetails{
+    margin: 10px 0;
+}
+
 @media screen and (max-width: 767px) {
     #BackButtonDetails {
         padding-right: 15px;
