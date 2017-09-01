@@ -49,6 +49,10 @@ Reducers must be combined via the combineReducers function to generate the state
 ![alt text](https://raw.githubusercontent.com/asarnaout/beeraholic/master/UpdateState.png)
 
 
+## When to use Redux?
+
+A container should store its data in the Redux store only if this data has to be shared among other containers/components, otherwise, the setState() API should sufficient enough for the container to manage its own state. An example for this is found in /src/Containers/ContactUsContainer where there is no gain from sharing the container's state among other containers/components and thus the setState() API was used in this case.
+
 ### The flow of the application and the infrastructure is illustrated in the following figure:
 
 ![alt text](https://raw.githubusercontent.com/asarnaout/beeraholic/master/Infrastructure.png)
